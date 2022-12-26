@@ -22,7 +22,6 @@ const LoginForm = () => {
         loginInfo.email,
         loginInfo.password
       );
-      console.log(logger);
     } catch (error) {
       setErrorFinder(error.message);
     }
