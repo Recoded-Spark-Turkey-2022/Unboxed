@@ -5,6 +5,7 @@ import { auth } from '../../firebaseFile';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
+  const [errorFinder, setErrorFinder] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,14 +17,14 @@ const LoginForm = () => {
 
   const login = async () => {
     try {
-      const logger = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         loginInfo.email,
         loginInfo.password
       );
       console.log(logger);
     } catch (error) {
-      console.log(error);
+      setErrorFinder(error.message);
     }
   };
 
@@ -63,6 +64,7 @@ const LoginForm = () => {
         </div>
       </form>
       <LoginButtons />
+      {errorFinder}
     </div>
   );
 };
