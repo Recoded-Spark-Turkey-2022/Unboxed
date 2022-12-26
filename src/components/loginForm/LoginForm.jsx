@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import {
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import LoginButtons from '../google&facebook/LoginButtons';
-import {auth} from '../../firebaseFile';
-
-
-
+import { auth } from '../../firebaseFile';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
@@ -33,7 +28,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-1/3 sm:w-10/12">
+    <div data-testid="loginForm" className="w-1/3 sm:w-10/12">
       <form className="flex flex-col gap-8 shadow-xl h-60 justify-center items-center ">
         <input
           className="w-3/4 h-1/5 border-2 border-gray-200 p-2"
@@ -67,7 +62,7 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
-        <LoginButtons />
+      <LoginButtons />
     </div>
   );
 };
