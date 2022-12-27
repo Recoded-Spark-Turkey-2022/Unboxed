@@ -1,6 +1,6 @@
 // import React from 'react';
 import { useState } from 'react';
-// import { firestore } from '../../firebase';
+import { db } from '../../firebaseFile';
 
 function Subscribe() {
   const [email, setEmail] = useState('');
@@ -15,9 +15,9 @@ function Subscribe() {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (emailRegex.test(email)) {
-      // firestore().
-      handleChange.collection('emails').addMessage('Thank you massage')({
-        email,
+      db.collection('newsletter').add('Thank you massage')({
+        newsletter: email,
+        // time: firestore.FieldValue.serverTimeSamp(),
       });
     } else {
       setError('Invalid email');
