@@ -1,29 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
 import googleIcon from './Google.svg';
 import facebookIcon from './Facebook.svg';
 
 const LoginButtons = () => {
-  const OrHeader = styled.h2`
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #2dd3e3;
-    line-height: 0.1em;
-    margin: 10px 0 20px;
-  `;
-  const OrSpan = styled.span`
-    background: #fff;
-    padding: 0 10px;
-  `;
-
   return (
-    <div data-testid = "LoginButtons" className="flex flex-col items-center mt-6">
-      <OrHeader>
-        <OrSpan>Or</OrSpan>
-      </OrHeader>
+    <div data-testid="LoginButtons" className="flex flex-col items-center mt-6">
+      <h2 className="w-full text-center border-b-2 border-cyan-400 mt-2.5 mb-5 leading-[0.1em]">
+        <span className="px-2 bg-white">Or</span>
+      </h2>
       <div className="flex gap-10">
-        <img src={googleIcon} alt="Google Icon" />
         <img src={facebookIcon} alt="Google Icon" />
+        <img src={googleIcon} alt="Google Icon" />
       </div>
     </div>
   );
