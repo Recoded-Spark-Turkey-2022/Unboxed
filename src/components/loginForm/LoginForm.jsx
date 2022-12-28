@@ -15,7 +15,7 @@ const LoginForm = () => {
     }));
   };
 
-  const login = async () => {
+  const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(
         auth,
@@ -43,6 +43,7 @@ const LoginForm = () => {
           className={`${styles.input} ${
             errorFinder ? 'border-red-300' : 'null'
           }`}
+          data-testid="emailInput"
           type="text"
           placeholder="Your Email"
           name="email"
@@ -53,6 +54,7 @@ const LoginForm = () => {
           className={`${styles.input} ${
             errorFinder ? 'border-red-300' : 'null'
           }`}
+          data-testid="passwordInput"
           type="password"
           placeholder="Your Password"
           name="password"
@@ -60,13 +62,14 @@ const LoginForm = () => {
           onChange={handleChange}
         />
         {errorFinder ? (
-          <p className=" text-red-400 -my-4">Invalid email or password</p>
+          <p data-testid="loginError" className=" text-red-400 -my-4">Invalid email or password</p>
         ) : null}
         <div className="flex gap-5 w-full justify-center">
           <button
+            data-testid="loginButton"
             className={`${styles.loginButton}`}
             type="button"
-            onClick={login}
+            onClick={handleLogin}
           >
             Login
           </button>

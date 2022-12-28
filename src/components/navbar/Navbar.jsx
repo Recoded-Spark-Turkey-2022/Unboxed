@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { NavLink } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import { auth } from '../../firebaseFile';
+
 
 const Navbar = () => {
   const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
+    act(()=> setUser(currentUser))
+    
   });
 
   const handleLogout = async () => {
@@ -26,7 +29,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div>
-        <p> Current User: {user?.email}</p>
+        <p data-testid="currentUser"> Current User: {user?.email}</p>
         <button className="bg-red-600" type="button" onClick={handleLogout}>
           Log out
         </button>
