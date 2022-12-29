@@ -4,7 +4,7 @@ import TicketCard from './TicketCard';
 
 function Ticket() {
   return (
-    <div className="flex-col-2 gap-40 px-40 pt-24">
+    <div className="flex-col-2 gap-40 px-40 pt-24 font-[Poppins]">
       <div className="flex-col pb-6">
         <h1 className="text-5xl mb-2">PURCHASE TICKETS</h1>
         <p className="text-3xl mb-2">
