@@ -1,0 +1,7 @@
+.text {
+  display: flex;
+  flex-direction: column;
+  background-color: pink;
+  border-bottom: 2px solid green;
+  padding-bottom: 28px;
+}
