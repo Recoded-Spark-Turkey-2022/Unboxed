@@ -14,7 +14,7 @@ function TicketCard({ ticketNumber, ticketPrice }) {
         <Link to="/#">
           {' '}
           <button
-            className="w-52 h-16 self-center rounded-md bg-[#2DD3E3] text-2xl text-center leading-9 text-black "
+            className="w-52 h-16 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] text-2xl text-center leading-9 text-black "
             type="button"
           >
             PURCHASE

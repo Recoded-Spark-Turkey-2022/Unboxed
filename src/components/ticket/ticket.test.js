@@ -1,6 +1,12 @@
 import { render, screen, cleanup } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+
 import Ticket from './Ticket';
 
 test('should render Ticket component', () => {
-  render(<Ticket />);
+  <BrowserRouter>
+    render(
+    <Ticket />
+    );
+  </BrowserRouter>;
 });
