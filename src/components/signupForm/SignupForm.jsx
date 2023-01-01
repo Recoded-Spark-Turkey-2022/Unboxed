@@ -6,8 +6,7 @@ import {
   FacebookAuthProvider,
 } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth, db } from './firebaseFile';
-import StyledSignUpForm from './StyledSignUpForm';
+import { auth, db } from '../../firebaseFile';
 
 const SignupForm = () => {
   const [userName, setUserName] = useState('');
@@ -55,19 +54,22 @@ const SignupForm = () => {
     }
   };
   return (
-    <StyledSignUpForm>
-      <section className="twoInput">
+    <div className="flex flex-col mt-20 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)]">
+      <section className="flex gap-5">
         <input
           type="text"
           value={userName}
           onChange={handleState(setUserName)}
           placeholder="Name"
+          className="rounded-md w-1/2 mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
         />
+
         <input
           type="text"
           value={userSurname}
           onChange={handleState(setUserSurname)}
           placeholder="Surname"
+          className="rounded-md w-1/2 mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
         />
       </section>
 
@@ -76,55 +78,78 @@ const SignupForm = () => {
         value={userEmail}
         onChange={handleState(setUserEmail)}
         placeholder="Email"
+        className="rounded-md mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
       />
       <input
         type="email"
         value={userConfirmEmail}
         onChange={handleState(setUserConfirmEmail)}
         placeholder="Confirm Email"
+        className="rounded-md mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
       />
-      <section className="twoInput">
+      <section className="flex gap-5">
         <input
           type="password"
           value={userPassword}
           onChange={handleState(setUserPassword)}
           placeholder="Password"
+          className="rounded-md mb-3 h-12 w-1/2 pl-2 border border-solid border-[#D1DBE3]"
         />
         <input
           type="password"
           value={userConfirmPassword}
           onChange={handleState(setUserConfirmPassword)}
           placeholder="Confirm Password"
+          className="rounded-md mb-3 h-12 w-1/2 pl-2 border border-solid border-[#D1DBE3]"
         />
       </section>
 
-      <div className="birthday">
-        <p>Birth Date</p>
+      <div className="flex gap-5">
+        <p className="rounded-md mb-3 h-12 w-2/5 text-center flex justify-center items-center	">
+          Birth Date
+        </p>
         <input
           type="text"
           value={userBirthDay}
           onChange={handleState(setUserBirthDay)}
           placeholder="DD"
+          className="rounded-md mb-3 h-12 w-1/5 pl-2 border border-solid border-[#D1DBE3]"
         />
         <input
           type="text"
           value={userBirthMonth}
           onChange={handleState(setUserBirthMonth)}
           placeholder="MM"
+          className="rounded-md mb-3 h-12 w-1/5 pl-2 border border-solid border-[#D1DBE3]"
         />
         <input
           type="text"
           value={userBirthYear}
           onChange={handleState(setUserBirthYear)}
           placeholder="YYYY"
+          className="rounded-md mb-3 h-12 w-2/5 pl-2 border border-solid border-[#D1DBE3]"
         />
       </div>
+      <section className="flex justify-center gap-10 font-medium mt-5">
+        <button
+          type="submit"
+          className="h-16 w-1/3	rounded-md border border-solid border-[#2DD3E3] text-2xl text-[#2DD3E3]"
+        >
+          Login
+        </button>
+        <button
+          type="submit"
+          className="h-16	w-1/3	rounded-md bg-[#2DD3E3] text-2xl text-black shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+          onClick={register}
+        >
+          Signup
+        </button>
+      </section>
 
-      <button type="submit" onClick={register}>
-        Login
+      <button type="submit" onClick={signInFacebook}>
+        Facebook
       </button>
-      <button type="submit">Signup</button>
-    </StyledSignUpForm>
+    </div>
   );
 };
 export default SignupForm;
