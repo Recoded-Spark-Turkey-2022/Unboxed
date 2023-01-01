@@ -11,5 +11,3 @@ test('Footer is rendering', () => {
   const footerElement = screen.getByTestId('Footer');
   expect(footerElement).toMatchSnapshot();
 });
-
-
