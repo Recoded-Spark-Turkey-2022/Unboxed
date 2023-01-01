@@ -9,8 +9,8 @@ const LoginButtons = ({googleLogin,facebookLogin}) => {
         <span className="px-2 bg-white">Or</span>
       </h2>
       <div className="flex gap-10">
-        <button data-testid="googleButton" type='button' onClick={facebookLogin}><img src={facebookIcon} alt="Google Icon" /></button>
-        <button type='button' onClick={googleLogin}><img  src={googleIcon} alt="Google Icon" /></button>
+        <button type='button' onClick={facebookLogin}><img src={facebookIcon} alt="Google Icon" /></button>
+        <button data-testid="googleButton" type='button' onClick={googleLogin}><img  src={googleIcon} alt="Google Icon" /></button>
       </div>
     </div>
   );

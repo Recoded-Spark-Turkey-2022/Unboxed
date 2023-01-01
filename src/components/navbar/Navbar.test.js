@@ -14,6 +14,6 @@ test('Navabr renders', ()=>{
             <Navbar />
         </BrowserRouter>
     ))
-    const currentUser = screen.getByTestId("currentUser")
-    expect(currentUser).toBeInTheDocument()
+    const navElement = screen.getByTestId("nav")
+    expect(navElement).toBeInTheDocument()
 })
