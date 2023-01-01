@@ -4,7 +4,7 @@ import Subscribe from './Subscribe';
 
 const Footer = () => {
   return (
-    <div className="grid sm:grid-flow-row md:grid-flow-row  lg:grid-flow-col   auto-cols-[minmax(0,_2fr)] pb-10 mn-h-[15rem]   w-[80rem ] left-0 rounded-none absolute right-0 bottom-0 bg-[#FEE89E] f">
+    <div className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col h-auto py-10 sm:p-6 md:py-10 md:px-8 left-0  absolute  right-0 bottom-0 bg-[#FEE89E]  space-x-3 md:space-x-6">
       <div data-testId="Footer" className="">
         <h3 className="pb-4 mt-10 ml-20 text-3xl font-normal ">Subscribe</h3>
         <p className="pb-6 ml-20 text-[#718096] font-normal  ">
@@ -13,7 +13,7 @@ const Footer = () => {
         <Subscribe className="pb-10 ml-20 " />
       </div>
       <div className="   ">
-        <div className="pb-5   mt-24  sm: ml-24 md:ml-24  xl:ml-36 grid-flow-row  text-[#718096] text-xl    inline-flex  space-x-3 md:space-x-6">
+        <div className="pb-5   mt-24  sm: ml-24 md:ml-24  xl:ml-36    text-[#718096] text-xl    inline-flex  space-x-3 md:space-x-6">
           <a href="/" src="Ho me">
             Home
           </a>
@@ -26,7 +26,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className=" ml-40 md:ml-44  xl:ml-48 flex space-x-4 md:space-x-8  grid-flow-row  ">
+        <div className=" ml-40 md:ml-44  xl:ml-48 flex space-x-4 md:space-x-8    ">
           <BsTwitter style={{ fontSize: '25px' }} />
           <BsInstagram style={{ fontSize: '25px' }} />
           <BsFacebook style={{ fontSize: '25px' }} />
