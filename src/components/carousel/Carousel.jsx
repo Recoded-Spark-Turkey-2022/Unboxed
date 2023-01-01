@@ -9,11 +9,16 @@ import next from './rightsquare.svg';
 function Carousel() {
   const [sliderRef, setSliderRef] = useState(null);
 
+  const handleClick = () => {
+    console.log('Clicked');
+  };
+
   const recentBlogs = blogs.map((blog) => {
     return (
       <div key={blog.id}>
-        <h3>{blog.title}</h3>
-        <img src={blog.image} alt={blog.title} />
+        <button onClick={handleClick} type="button">
+          <img src={blog.image} alt={blog.title} />
+        </button>
       </div>
     );
   });
@@ -22,7 +27,7 @@ function Carousel() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
   };
   return (
