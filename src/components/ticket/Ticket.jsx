@@ -1,6 +1,6 @@
 import React from 'react';
 import TicketCard from './TicketCard';
-// <div className=" flex flex-col sm:justify-start pb-2"></div>
+
 function Ticket() {
   return (
     <div className="flex flex-row px-2 sm:justify-center font-poppins">
