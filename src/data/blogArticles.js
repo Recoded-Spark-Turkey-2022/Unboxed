@@ -1,8 +1,7 @@
 const blogs = [
   {
     id: '1',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/8/8f/Example_image.svg',
+    image: './firstimg.svg',
     title: 'MENTAL HEALTH AND TECHNOLOGY',
     article:
       'Technology and mental well-being might seem like profoundly antagonistic terms. However, there are excellent digital tools to help you reach mindfulness and to practice meditation. You can even use smartphone apps, virtual reality solutions and digital devices as a form of relieving stressing and achieving digital detox – as, after a while, you will be able to practice all types of anti-anxiety skills on your own. So, let The Medical Futurist show you how you can enhance your mental and emotional health with the help of technology.',
