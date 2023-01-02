@@ -1,13 +1,21 @@
-import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { act, cleanup, render, screen } from '@testing-library/react';
 import Footer from './Footer';
 
-test('Footer is rendering', () => {
-  render(<Footer />);
-  const footerElement = screen.getByTestId('Footer');
-  expect(footerElement).toBeInTheDocument();
+afterEach(() => {
+  cleanup();
 });
-test('Footer is rendering', () => {
-  render(<footer />);
-  const footerElement = screen.getByTestId('Footer');
-  expect(footerElement).toMatchSnapshot();
+
+test('Navabr renders', () => {
+  act(() =>
+    render(
+      <BrowserRouter>
+        <Footer />
+      </BrowserRouter>
+    )
+  );
+  const footerElement = screen.getByTestId('FooterTest');
+  expect(footerElement).toBeInTheDocument();
 });
