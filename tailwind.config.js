@@ -5,7 +5,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
+      screens: {
+        sm: { max: '639px' },
+        lg: { max: '1024px' },
       },
     },
   },
