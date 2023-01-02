@@ -25,6 +25,7 @@ const Navbar = () => {
 
   const styles = {
     li: 'text-lg hover:text-amber-400 sm:text-sm',
+    aboutLi: 'border-b-2 border-b-slate-300 hover:text-amber-400 ',
   };
 
   return (
@@ -64,9 +65,11 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li
-            className={`${styles.li} `}
+            className={`${styles.li} ${
+              location.pathname === '/blogs' ? 'text-amber-400' : null
+            } `}
           >
-            Blogs
+            <NavLink to="blogs">Blogs</NavLink>
           </li>
           <li
             className="text-lg flex flex-col sm:text-sm"
@@ -82,13 +85,25 @@ const Navbar = () => {
                 aboutDropdown ? 'visible' : 'invisible'
               }`}
             >
-              <li className="border-b-2 border-b-slate-300 hover:text-amber-400 ">
-                Overview
+              <li
+                className={`${styles.aboutLi} ${
+                  location.pathname === '/about/overview'
+                    ? 'text-amber-400'
+                    : null
+                } `}
+              >
+                <NavLink to="about/overview">Overview</NavLink>
               </li>
-              <li className="border-b-2 border-b-slate-300 hover:text-amber-400 ">
-                Meet the Team
+              <li
+                className={`${styles.aboutLi} ${
+                  location.pathname === '/about/team' ? 'text-amber-400' : null
+                } `}
+              >
+                <NavLink to="about/team">Meet the Team</NavLink>
               </li>
-              <li className="hover:text-amber-400 ">Careers Page</li>
+              <li className={`hover:text-amber-400 ${location.pathname === '/about/careers' ? 'text-amber-400' : null}`}>
+                <NavLink to="about/careers">Careers</NavLink>
+              </li>
             </ul>
 
             {/* {aboutDropdown ?
@@ -106,8 +121,10 @@ const Navbar = () => {
             <option>Careers Page</option>
           </select> */}
           </li>
-          <li className="text-lg hover:text-amber-400 sm:text-sm">
-            Contact Us
+          <li className={`${styles.li} ${
+              location.pathname === '/contact' ? 'text-amber-400' : null
+            }`}>
+            <NavLink to="contact">Contact Us</NavLink>
           </li>
           {user ? (
             <li
@@ -116,15 +133,25 @@ const Navbar = () => {
               onMouseLeave={() => setuserDropdown(false)}
             >
               {' '}
-              <div className='flex'>{user.email} <FaRegUserCircle /></div>
-              <ul className={` absolute mt-6 bg-[#EAF8F9] ${
-                userDropdown ? 'visible' : 'invisible'
-              }`}>
+              <div className="flex">
+                {user.email} <FaRegUserCircle />
+              </div>
+              <ul
+                className={` absolute mt-6 bg-[#EAF8F9] ${
+                  userDropdown ? 'visible' : 'invisible'
+                }`}
+              >
                 <li>Booking Info</li>
-                <li>Buy Tirckets</li>
+                <li>Buy Tickets</li>
                 <li>Profile Info</li>
-                <li> <button className=" hover:text-red-700" type="button" onClick={handleLogout}>
-                  Log out
+                <li>
+                  {' '}
+                  <button
+                    className=" hover:text-red-700"
+                    type="button"
+                    onClick={handleLogout}
+                  >
+                    Log out
                   </button>
                 </li>
               </ul>
