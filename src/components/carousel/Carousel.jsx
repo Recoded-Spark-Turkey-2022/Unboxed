@@ -34,17 +34,26 @@ function Carousel() {
     slidesToScroll: 1,
   };
   return (
-    <div>
-      <button onClick={sliderRef?.slickPrev} type="button">
-        <img src={previous} alt="previous button" />
-      </button>
+    <div className="bg-[#EAF8F9] font-poppins border-4 border-green-900 ">
+      <h1 className="text-5xl p-8">RECENT BLOGS</h1>
+      <div className="flex flex-row w-full border-2 justify-center border-pink-500">
+        <div className="self-center ">
+          <button onClick={sliderRef?.slickPrev} type="button">
+            <img src={previous} alt="previous button" />
+          </button>
+        </div>
 
-      <Slider ref={setSliderRef} {...settings}>
-        {recentBlogs}
-      </Slider>
-      <button onClick={sliderRef?.slickNext} type="button">
-        <img src={next} alt="next button" />
-      </button>
+        <div className="w-11/12 space-y-4 border-2 border-blue-500">
+          <Slider ref={setSliderRef} {...settings}>
+            {recentBlogs}
+          </Slider>
+        </div>
+        <div className="self-center  ">
+          <button onClick={sliderRef?.slickNext} type="button">
+            <img src={next} alt="next button" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
