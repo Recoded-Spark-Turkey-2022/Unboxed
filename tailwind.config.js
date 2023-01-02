@@ -10,6 +10,8 @@ module.exports = {
       screens: {
         sm: { max: '639px' },
         lg: { max: '1024px' },
+        tablet: '640px',
+        laptop: '1024px',
       },
     },
   },
