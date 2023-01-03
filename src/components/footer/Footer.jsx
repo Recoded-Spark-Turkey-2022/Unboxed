@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div
       data-testid="FooterTest"
-      className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col h-auto py-10 sm:p-6 md:py-10 md:px-8 left-0  absolute  right-0 bottom-0 bg-[#FEE89E]  space-x-3 md:space-x-6"
+      className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col h-auto py-10 sm:p-6 md:py-10 md:px-8  bg-[#FEE89E]  space-x-3 md:space-x-6"
     >
       <div className="">
         <h3 className="pb-4 mt-10 ml-20 text-3xl font-normal ">Subscribe</h3>
