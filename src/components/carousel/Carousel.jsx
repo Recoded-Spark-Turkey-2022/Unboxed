@@ -51,10 +51,10 @@ function Carousel() {
 
   return (
     <div className="flex flex-col justify-center bg-[#EAF8F9] font-poppins ">
-      <h1 className="text-xl font-semibold tablet:text-5xl tablet: pl-2 laptop:pl-28">
+      <h1 className="text-xl font-semibold tablet:text-5xl tablet: py-2 laptop:pl-28 laptop:py-16">
         RECENT BLOGS
       </h1>
-      <div className="flex flex-row justify-center">
+      <div className="flex flex-row justify-center tablet:pb-10 laptop: pb-28">
         <div className="self-center">
           <button onClick={sliderRef?.slickPrev} type="button">
             <img src={previous} alt="previous button" />
