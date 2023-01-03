@@ -18,9 +18,11 @@ const Navbar = () => {
     <div className="flex justify-around">
       <ul className="flex gap-2">
         <li>
+          {' '}
           <NavLink to="/">To Home</NavLink>
         </li>
         <li>
+          {' '}
           <NavLink to="login">To login</NavLink>
         </li>
       </ul>

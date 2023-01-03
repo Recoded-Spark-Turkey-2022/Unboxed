@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
-    "autoprefixer": "^10.4.12",
+    "autoprefixer": "^10.4.13",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -58,9 +58,10 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.5.1",
+    "jest": "^27.5.1",
     "postcss": "^8.4.17",
     "prettier": "2.7.1",
     "react-test-renderer": "^18.2.0",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.2.4"
   }
 }
