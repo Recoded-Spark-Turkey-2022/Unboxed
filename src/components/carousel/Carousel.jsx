@@ -28,6 +28,7 @@ function Carousel() {
   // these settings come with the Slick library- controls styling of the Slider component
   const settings = {
     dots: false,
+    arrows: false,
     infinite: false,
     speed: 200,
     slidesToShow: 3,
@@ -35,7 +36,9 @@ function Carousel() {
   };
   return (
     <div className="bg-[#EAF8F9] font-poppins ">
-      <h1 className="text-xl tablet:text-5xl tablet:p-8">RECENT BLOGS</h1>
+      <h1 className="text-xl font-semibold tablet:text-5xl tablet:p-8">
+        RECENT BLOGS
+      </h1>
       <div className="flex flex-row justify-center">
         <div className="self-center">
           <button onClick={sliderRef?.slickPrev} type="button">
