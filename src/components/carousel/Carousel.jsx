@@ -33,10 +33,25 @@ function Carousel() {
     speed: 200,
     slidesToShow: 3,
     slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
+
   return (
-    <div className="bg-[#EAF8F9] font-poppins ">
-      <h1 className="text-xl font-semibold tablet:text-5xl tablet:p-8">
+    <div className="flex flex-col justify-center bg-[#EAF8F9] font-poppins ">
+      <h1 className="text-xl font-semibold tablet:text-5xl tablet: pl-2 laptop:pl-28">
         RECENT BLOGS
       </h1>
       <div className="flex flex-row justify-center">
@@ -46,7 +61,7 @@ function Carousel() {
           </button>
         </div>
 
-        <div className="flex flex-col w-10/12 m-1 tablet:m-4">
+        <div className="flex flex-col w-5/6 m-1 tablet:m-4">
           <div>
             <Slider ref={setSliderRef} {...settings}>
               {recentBlogs}
