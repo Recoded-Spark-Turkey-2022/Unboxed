@@ -26,12 +26,10 @@ const blogs = [
   },
   {
     id: '4',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/8/8f/Example_image.svg',
+    image: secondImg,
     title: 'TELL ME ALL I NEED TO KNOW ABOUT ANXIETY',
     article:
       'Etiam elit purus, vulputate ac turpis sed, maximus auctor turpis. Aliquam erat volutpat. Ut pretium in nisi et dapibus. Mauris ac neque pretium, tincidunt odio vel, vehicula leo. Nunc tempor nulla velit, quis aliquet erat volutpat sit amet. Cras ac faucibus est. Sed tempus mollis elit ut vestibulum. Phasellus eu diam pretium, bibendum tellus vel, fermentum ipsum. Etiam aliquet mauris sed mi malesuada convallis. Donec aliquam dictum nisi quis pretium. Integer tempus, metus quis fringilla ullamcorper, leo est viverra neque, id semper ex purus ut velit. Praesent vitae quam luctus, egestas metus ac, elementum mi. Phasellus nec porttitor metus.',
-    targetURL: 'https://stackoverflow.com/',
   },
 ];
 

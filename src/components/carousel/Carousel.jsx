@@ -28,27 +28,27 @@ function Carousel() {
   // these settings come with the Slick library- controls styling of the Slider component
   const settings = {
     dots: false,
-    infinite: true,
-    speed: 500,
+    infinite: false,
+    speed: 200,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
   };
   return (
     <div className="bg-[#EAF8F9] font-poppins border-4 border-green-900 ">
       <h1 className="text-5xl p-8">RECENT BLOGS</h1>
-      <div className="flex flex-row w-full border-2 justify-center border-pink-500">
-        <div className="self-center ">
+      <div className="flex flex-row border-2 justify-center border-pink-500">
+        <div className="self-center">
           <button onClick={sliderRef?.slickPrev} type="button">
             <img src={previous} alt="previous button" />
           </button>
         </div>
 
-        <div className="w-11/12 space-y-4 border-2 border-blue-500">
+        <div className="flex flex-col w-10/12 border-2 m-4 border-blue-500">
           <Slider ref={setSliderRef} {...settings}>
             {recentBlogs}
           </Slider>
         </div>
-        <div className="self-center  ">
+        <div className="self-center">
           <button onClick={sliderRef?.slickNext} type="button">
             <img src={next} alt="next button" />
           </button>
