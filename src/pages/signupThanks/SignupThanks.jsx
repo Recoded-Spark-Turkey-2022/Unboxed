@@ -6,7 +6,7 @@ const SignupThanks = () => {
 
   return (
     <div
-      data-testid="signup"
+      data-testid="signupThanks"
       className="flex flex-col mx-20 mt-12 gap-5 sm:mx-5"
     >
       <div className="text-5xl">THANK YOU!</div>
