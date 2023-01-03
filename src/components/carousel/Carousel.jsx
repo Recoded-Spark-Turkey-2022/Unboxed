@@ -34,16 +34,16 @@ function Carousel() {
     slidesToScroll: 3,
   };
   return (
-    <div className="bg-[#EAF8F9] font-poppins border-4 border-green-900 ">
+    <div className="bg-[#EAF8F9] font-poppins ">
       <h1 className="text-xl tablet:text-5xl tablet:p-8">RECENT BLOGS</h1>
-      <div className="flex flex-row border-2 justify-center border-pink-500">
+      <div className="flex flex-row justify-center">
         <div className="self-center">
           <button onClick={sliderRef?.slickPrev} type="button">
             <img src={previous} alt="previous button" />
           </button>
         </div>
 
-        <div className="flex flex-col w-10/12 border-2 m-1 tablet:m-4 border-blue-500">
+        <div className="flex flex-col w-10/12 m-1 tablet:m-4">
           <div>
             <Slider ref={setSliderRef} {...settings}>
               {recentBlogs}
