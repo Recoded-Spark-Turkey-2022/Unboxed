@@ -17,7 +17,7 @@ function Carousel() {
       <div key={blog.id}>
         <Link to={`/blogs/${blog.id}`}>
           {' '}
-          <button type="button">
+          <button className="mx-1" type="button">
             <img src={blog.image} alt={blog.title} />
           </button>
         </Link>
@@ -35,7 +35,7 @@ function Carousel() {
   };
   return (
     <div className="bg-[#EAF8F9] font-poppins border-4 border-green-900 ">
-      <h1 className="text-5xl p-8">RECENT BLOGS</h1>
+      <h1 className="text-xl tablet:text-5xl tablet:p-8">RECENT BLOGS</h1>
       <div className="flex flex-row border-2 justify-center border-pink-500">
         <div className="self-center">
           <button onClick={sliderRef?.slickPrev} type="button">
@@ -43,10 +43,12 @@ function Carousel() {
           </button>
         </div>
 
-        <div className="flex flex-col w-10/12 border-2 m-4 border-blue-500">
-          <Slider ref={setSliderRef} {...settings}>
-            {recentBlogs}
-          </Slider>
+        <div className="flex flex-col w-10/12 border-2 m-1 tablet:m-4 border-blue-500">
+          <div>
+            <Slider ref={setSliderRef} {...settings}>
+              {recentBlogs}
+            </Slider>
+          </div>
         </div>
         <div className="self-center">
           <button onClick={sliderRef?.slickNext} type="button">
