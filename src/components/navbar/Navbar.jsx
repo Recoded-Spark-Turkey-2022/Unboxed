@@ -101,7 +101,13 @@ const Navbar = () => {
               >
                 <NavLink to="about/team">Meet the Team</NavLink>
               </li>
-              <li className={`hover:text-amber-400 ${location.pathname === '/about/careers' ? 'text-amber-400' : null}`}>
+              <li
+                className={`hover:text-amber-400 ${
+                  location.pathname === '/about/careers'
+                    ? 'text-amber-400'
+                    : null
+                }`}
+              >
                 <NavLink to="about/careers">Careers</NavLink>
               </li>
             </ul>
@@ -121,9 +127,11 @@ const Navbar = () => {
             <option>Careers Page</option>
           </select> */}
           </li>
-          <li className={`${styles.li} ${
+          <li
+            className={`${styles.li} ${
               location.pathname === '/contact' ? 'text-amber-400' : null
-            }`}>
+            }`}
+          >
             <NavLink to="contact">Contact Us</NavLink>
           </li>
           {user ? (
