@@ -13,6 +13,12 @@ module.exports = {
         tablet: '640px',
         laptop: '1024px',
       },
+      colors: {
+        lightBlack: 'rgba(0, 0, 0, 0.5)',
+        Clr94AFB6: '#94AFB6',
+        Cyan: '#2DD3E3',
+        LightBlue: ' #2DD3E3',
+      },
     },
   },
 };
