@@ -62,7 +62,7 @@ function Carousel() {
         </div>
 
         <div className="flex flex-col w-5/6 m-1 tablet:m-4">
-          <div>
+          <div data-testid="blogImage">
             <Slider ref={setSliderRef} {...settings}>
               {recentBlogs}
             </Slider>
