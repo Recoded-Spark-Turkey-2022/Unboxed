@@ -3,7 +3,7 @@ import TicketCard from './TicketCard';
 
 function Ticket() {
   return (
-    <div className="flex flex-row px-2 tablet:justify-center font-poppins">
+    <div className=" p-[4rem] flex flex-row px-2 tablet:justify-center font-poppins">
       <div className="tablet:space-y-4">
         <h1 className="text-2xl font-medium tablet:font-normal tablet:text-5xl ">
           PURCHASE TICKETS
