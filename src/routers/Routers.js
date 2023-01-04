@@ -4,6 +4,7 @@ import Counsler from '../components/Counsler/Counsler';
 import Homepage from '../pages/homepage/Homepage';
 import Login from '../pages/login/Login';
 import Thanks from '../pages/Thankyou/Thanks';
+import Contact from '../pages/contact/Contact';
 
 const Routers = () => {
   return (
@@ -13,6 +14,7 @@ const Routers = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="login" element={<Login />} />
         <Route path="/Counsler" element={<Counsler />} />
+        <Route path="contact" element={<Contact />} />
       </Routes>
     </div>
   );
