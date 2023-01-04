@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
-import Navbar from './Navbar';
+import Counsler from './Counsler';
 import { BrowserRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 
@@ -7,14 +7,14 @@ afterEach(() => {
   cleanup();
 });
 
-test('Navabr renders', () => {
+test('Counsler renders', () => {
   act(() =>
     render(
       <BrowserRouter>
-        <Navbar />
+        <Counsler />
       </BrowserRouter>
     )
   );
-  const currentUser = screen.getByTestId('currentUser');
-  expect(currentUser).toBeInTheDocument();
+  const CounslerRendering = screen.getByTestId('counselor');
+  expect(CounslerRendering).toBeInTheDocument();
 });
