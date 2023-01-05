@@ -42,7 +42,7 @@ const SignupForm = () => {
   };
 
   return (
-    <div data-testid="signup">
+    <form data-testid="signup">
       <div className="flex flex-col mt-20 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)]">
         <section className="flex gap-5">
           <input
@@ -151,7 +151,7 @@ const SignupForm = () => {
       {newError && <div>{newError}</div>}
       <LoginButtons setNewError={setNewError} />
       {navigate && <Navigate to="/signup-thanks" />}
-    </div>
+    </form>
   );
 };
 export default SignupForm;
