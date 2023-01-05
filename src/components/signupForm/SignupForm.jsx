@@ -41,6 +41,14 @@ const SignupForm = () => {
     }).catch((error) => setNewError(error));
   };
 
+  // This would only work with onSubmit
+  // const handleEmailValidation =(e)=>{
+  //   if(userEmail != userConfirmEmail) {
+  //     e.setCustomValidity("Emails Don't Match");
+  //   } else {
+  //     e.setCustomValidity('');
+  //   }
+  // }
   return (
     <form data-testid="signup">
       <div className="flex flex-col mt-20 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)]">
@@ -77,7 +85,8 @@ const SignupForm = () => {
           value={userConfirmEmail}
           onChange={handleState(setUserConfirmEmail)}
           placeholder="Confirm Email"
-          pattern={userEmail.current}
+          pattern={userEmail}
+          title="Emails don't match"
           className="rounded-md mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
         />
         <section className="flex gap-5 425:flex-col 425:gap-0">
@@ -96,6 +105,8 @@ const SignupForm = () => {
             value={userConfirmPassword}
             onChange={handleState(setUserConfirmPassword)}
             placeholder="Confirm Password"
+            pattern={userPassword}
+            title="Passwords don't match"
             required
             className="rounded-md mb-3 h-12 w-1/2 425:w-full pl-2 border border-solid border-[#D1DBE3]"
           />
