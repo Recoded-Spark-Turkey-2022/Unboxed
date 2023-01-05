@@ -1,4 +1,4 @@
-const Input = ({ type, placeholder, id, labelText }) => {
+const Input = ({ type, placeholder, id, labelText, func }) => {
   return (
     <div className="text-Clr94AFB6 flex flex-col w-2/3">
       <label htmlFor={id} className="text-2xl ">
@@ -9,6 +9,7 @@ const Input = ({ type, placeholder, id, labelText }) => {
         type={type}
         placeholder={placeholder}
         className="text-sm border border-Clr94AFB6 h-10 px-2"
+        onClick={(e) => func(e.target.value)}
       />
     </div>
   );
