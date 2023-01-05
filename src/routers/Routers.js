@@ -8,6 +8,7 @@ import Signup from '../pages/signup/Signup';
 import SignupThanks from '../pages/signupThanks/SignupThanks';
 
 import Thanks from '../pages/Thankyou/Thanks';
+import Contact from '../pages/contact/Contact';
 
 
 const Routers = () => {
@@ -20,6 +21,7 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="/Counsler" element={<Counsler />} />
+        <Route path="contact" element={<Contact />} />
       </Routes>
     </div>
   );
