@@ -24,7 +24,8 @@ const SignupForm = () => {
   const [navigate, setNavigate] = useState(false);
 
   // Register function
-  const register = async () => {
+  const register = async (e) => {
+    e.preventDefault()
     const { user } = await createUserWithEmailAndPassword(
       auth,
       userEmail,
@@ -38,7 +39,7 @@ const SignupForm = () => {
       birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
         'DD MM YYYY'
       ),
-    }).catch((error) => setNewError(error));
+    }).catch((error) => setNewError(error.message));
   };
 
   // This would only work with onSubmit
@@ -153,7 +154,7 @@ const SignupForm = () => {
           <button
             type="submit"
             className="h-16	w-1/3	rounded-md bg-[#2DD3E3] text-2xl text-black shadow-[0px_7px_20px_rgba(0,0,0,0.2)] 425:text-xl"
-            onClick={register}
+            onClick={userPassword===userConfirmPassword && userEmail ===userConfirmEmail ? register:null}
           >
             Signup
           </button>
