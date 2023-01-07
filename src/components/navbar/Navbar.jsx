@@ -25,6 +25,10 @@ const Navbar = () => {
           {' '}
           <NavLink to="login">To login</NavLink>
         </li>
+        <li>
+          {' '}
+          <NavLink to="signup">To sign up</NavLink>
+        </li>
       </ul>
       <div>
         <p data-testid="currentUser"> Current User: {user?.email}</p>

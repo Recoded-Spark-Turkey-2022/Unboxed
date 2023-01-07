@@ -2,7 +2,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
-import { Navigate } from 'react-router-dom';
+import {  NavLink, useNavigate } from 'react-router-dom';
 import { auth, db } from '../../firebaseFile';
 import LoginButtons from '../google&facebook/LoginButtons';
 
@@ -16,16 +16,20 @@ const SignupForm = () => {
   const [userBirthDay, setUserBirthDay] = useState('');
   const [userBirthMonth, setUserBirthMonth] = useState('');
   const [userBirthYear, setUserBirthYear] = useState('');
+
+  const navigate = useNavigate()
+
   const handleState = (state) => (e) => {
     state(e.target.value);
   };
   const [newError, setNewError] = useState();
   // eslint-disable-next-line no-unused-vars
-  const [navigate, setNavigate] = useState(false);
+  // const [navigate, setNavigate] = useState(false);
 
   // Register function
   const register = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    navigate("/signup-thanks")
     const { user } = await createUserWithEmailAndPassword(
       auth,
       userEmail,
@@ -38,7 +42,7 @@ const SignupForm = () => {
       password: userPassword,
       birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
         'DD MM YYYY'
-      ),
+      ),  
     }).catch((error) => setNewError(error.message));
   };
 
@@ -149,12 +153,17 @@ const SignupForm = () => {
             type="submit"
             className="h-16 w-1/3	rounded-md border border-solid border-[#2DD3E3] text-2xl text-[#2DD3E3] 425:text-xl"
           >
-            Login
+            <NavLink to="login">To login</NavLink>
           </button>
           <button
             type="submit"
             className="h-16	w-1/3	rounded-md bg-[#2DD3E3] text-2xl text-black shadow-[0px_7px_20px_rgba(0,0,0,0.2)] 425:text-xl"
-            onClick={userPassword===userConfirmPassword && userEmail ===userConfirmEmail ? register:null}
+            onClick={
+              userPassword === userConfirmPassword &&
+              userEmail === userConfirmEmail
+                ? register
+                : null
+            }
           >
             Signup
           </button>
@@ -162,7 +171,7 @@ const SignupForm = () => {
       </div>
       {newError && <div>{newError}</div>}
       <LoginButtons setNewError={setNewError} />
-      {navigate && <Navigate to="/signup-thanks" />}
+      {/* {navigate && <Navigate to="/signup-thanks" />} */}
     </form>
   );
 };
