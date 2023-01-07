@@ -27,7 +27,6 @@ const SignupForm = () => {
   // Register function
   const register = async (e) => {
     e.preventDefault();
-    navigate("/signup-thanks")
     const { user } = await createUserWithEmailAndPassword(
       auth,
       userEmail,
