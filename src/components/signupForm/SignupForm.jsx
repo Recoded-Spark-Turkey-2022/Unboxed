@@ -2,7 +2,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
-import {  NavLink, useNavigate } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
 import { auth, db } from '../../firebaseFile';
 import LoginButtons from '../google&facebook/LoginButtons';
 
@@ -17,7 +17,6 @@ const SignupForm = () => {
   const [userBirthMonth, setUserBirthMonth] = useState('');
   const [userBirthYear, setUserBirthYear] = useState('');
 
-  const navigate = useNavigate()
 
   const handleState = (state) => (e) => {
     state(e.target.value);
