@@ -17,7 +17,6 @@ const SignupForm = () => {
   const [userBirthMonth, setUserBirthMonth] = useState('');
   const [userBirthYear, setUserBirthYear] = useState('');
 
-
   const handleState = (state) => (e) => {
     state(e.target.value);
   };
