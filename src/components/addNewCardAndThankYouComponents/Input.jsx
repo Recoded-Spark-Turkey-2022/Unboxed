@@ -9,7 +9,7 @@ const Input = ({ type, placeholder, id, labelText, func }) => {
         type={type}
         placeholder={placeholder}
         className="text-sm border border-Clr94AFB6 h-10 px-2"
-        onClick={(e) => func(e.target.value)}
+        onChange={func}
       />
     </div>
   );
