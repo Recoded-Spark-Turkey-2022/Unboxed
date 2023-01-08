@@ -1,10 +1,11 @@
 const Input = ({ type, placeholder, id, labelText, func }) => {
   return (
-    <div className="text-Clr94AFB6 flex flex-col w-2/3">
+    <div className="text-Clr94AFB6 flex flex-col w-2/3 sm:w-full lg:w-4/5">
       <label htmlFor={id} className="text-2xl ">
         {labelText}
       </label>
       <input
+        data-testid="input"
         id={id}
         type={type}
         placeholder={placeholder}

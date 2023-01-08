@@ -81,8 +81,11 @@ const CardForm = () => {
     navigate('/add-new-card-thank-you');
   };
   return (
-    <div className=" mt-10 grid grid-cols-2 w-2/3">
-      <div className="text-2xl w-2/3">
+    <div
+      data-testid="cardForm"
+      className=" mt-10 grid grid-cols-2 w-2/3 sm:flex-col sm:flex sm:w-full sm:mt-4 lg:w-full"
+    >
+      <div className="text-2xl w-2/3 sm:w-full lg:w-4/5 sm:text-xl">
         <div className=" text-Clr94AFB6 ">Supported Card types</div>
         <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center">
           <button
@@ -103,10 +106,11 @@ const CardForm = () => {
           </button>
         </div>
       </div>
-      <div className="text-Clr94AFB6  w-2/3">
+      <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
         <label className="text-2xl flex flex-col" htmlFor="country">
           Country
           <select
+            data-testid="selectInput"
             className="text-sm border border-Clr94AFB6 h-10"
             name="Country"
             id="country"
@@ -139,7 +143,7 @@ const CardForm = () => {
         type="text"
         func={(e) => setZipCode(e.target.value)}
       />
-      <div className="flex w-1/2">
+      <div className="flex w-1/2 sm:flex-col sm:w-full">
         <Input
           labelText="Expiry Date"
           placeholder="MM / YY"
@@ -155,7 +159,7 @@ const CardForm = () => {
           func={(e) => setCvvCode(e.target.value)}
         />
       </div>
-      <div className="text-Clr94AFB6  w-1/2">
+      <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
         <label className="text-2xl flex flex-col" htmlFor="city">
           City
           <select

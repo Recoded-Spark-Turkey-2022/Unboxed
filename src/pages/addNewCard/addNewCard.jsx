@@ -8,9 +8,9 @@ const AddNewCard = () => {
   const titleTitle = 'add card details';
 
   return (
-    <div className="mx-28 mt-16">
+    <div className="mx-28 mt-16 sm:mx-4 md:mx-8">
       <Title text={titleText} title={titleTitle} />
-      <div className="flex mt-20">
+      <div className="flex mt-20 sm:flex-col-reverse sm:mt-4 lg:flex-col-reverse ">
         <CardForm />
         <CardPictures />
       </div>
