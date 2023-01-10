@@ -5,7 +5,7 @@ import Ticket from '../../components/ticket/Ticket';
 
 const Homepage = () => {
   return (
-    <div className='mt-12'>
+    <div>
       <Carousel />
       <Ticket />
       <Counsler />

@@ -7,7 +7,9 @@ function App() {
   return (
     <div data-testid="App" className="App">
       <Navbar />
-      <Routers />
+      <div className='mt-16'>
+        <Routers />
+      </div>
       <Footer />
     </div>
   );
