@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import ContactForm from '../../components/contactForm/ContactForm';
 
-const Contact = () => {
+function Contact() {
   return (
-    <div>Contact</div>
-  )
+    <div className='mt-12'>
+      <ContactForm />
+    </div>
+  );
 }
 
-export default Contact
+export default Contact;
