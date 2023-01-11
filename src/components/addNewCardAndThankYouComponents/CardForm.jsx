@@ -65,7 +65,7 @@ const CardForm = () => {
   }, [selectedItem]);
 
   const addCard = () => {
-    const uid = auth?.currentUser?.uid;
+    const uid = auth?.currentUser.uid;
     const cardInfo = doc(db, 'patients', uid);
     updateDoc(cardInfo, {
       cardType,
