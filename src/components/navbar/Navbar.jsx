@@ -4,13 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { auth } from '../../firebaseFile';
 
-
 const Navbar = () => {
   const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
-    act(()=> setUser(currentUser))
-    
+    act(() => setUser(currentUser));
   });
 
   const handleLogout = async () => {
@@ -26,6 +24,10 @@ const Navbar = () => {
         <li>
           {' '}
           <NavLink to="login">To login</NavLink>
+        </li>
+        <li>
+          {' '}
+          <NavLink to="signup">To sign up</NavLink>
         </li>
       </ul>
       <div>
