@@ -169,6 +169,7 @@ const SignupForm = () => {
       {newError && <div>{newError}</div>}
       <LoginButtons setNewError={setNewError} />
       {/* {navigate && <Navigate to="/signup-thanks" />} */}
+      {/* <p></p> */}
     </form>
   );
 };
