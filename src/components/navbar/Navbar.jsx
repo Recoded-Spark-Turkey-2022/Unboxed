@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { NavLink } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
+// import { act } from 'react-dom/test-utils';
 import { auth } from '../../firebaseFile';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
 
   onAuthStateChanged(auth, (currentUser) => {
-    act(() => setUser(currentUser));
+    setUser(currentUser);
   });
 
   const handleLogout = async () => {
