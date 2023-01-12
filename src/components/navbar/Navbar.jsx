@@ -4,6 +4,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { NavLink } from 'react-router-dom';
 import { auth } from '../../firebaseFile';
 
+
 const Navbar = () => {
   const [user, setUser] = useState({});
    onAuthStateChanged(auth, (currentUser) => {
@@ -26,10 +27,6 @@ const Navbar = () => {
         <li>
           {' '}
           <NavLink to="login">To login</NavLink>
-        </li>
-        <li>
-          {' '}
-          <NavLink to="signup">To sign up</NavLink>
         </li>
       </ul>
       <div>
