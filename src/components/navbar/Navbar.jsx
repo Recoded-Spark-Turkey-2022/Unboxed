@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+// import { doc } from "firebase/firestore";
 import { NavLink } from 'react-router-dom';
-// import { act } from 'react-dom/test-utils';
 import { auth } from '../../firebaseFile';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
+   onAuthStateChanged(auth, (currentUser) => {
+    if (currentUser){
+      // const userInfo = doc(db, 'patients', currentUser.uid);
+      setUser(currentUser);
+    }
   });
-
   const handleLogout = async () => {
     await signOut(auth);
+    setUser(null)
   };
   return (
     <div className="flex justify-around">
