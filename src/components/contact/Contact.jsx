@@ -2,7 +2,7 @@ import React from 'react';
 import ContactThanks from './ContactThanks';
 import ContactPlace from './ContactPlace';
 
-function ContactForm() {
+function Contact() {
   return (
     <div>
       <h1 className="flex-column flex-start text-5xl">SEND US YOUR REQUEST!</h1>
@@ -17,4 +17,4 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+export default Contact;
