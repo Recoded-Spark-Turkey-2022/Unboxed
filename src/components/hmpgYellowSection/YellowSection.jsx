@@ -7,12 +7,12 @@ const YellowSec = () => {
       data-testid="YellowSec"
       className="mb-1 pt-16 flex flex-col px-1 font-poppins bg-[#FEE89E]"
     >
-      <p className="text-5xl pt-[2rem] xl:pr-96 xl:mr-48 tablet:ml-36 tablet:pl-4 tablet:pr-2 tablet:mr-24 md:ml-12 md:pl-4 md:pr-36 sm:ml-4 sm:pl-2 sm:pr-12 uppercase">
+      <p className="tablet:text-5xl text-3xl pt-[2rem] xl:pr-96 xl:mr-48 tablet:ml-36 tablet:pl-4 tablet:pr-2 tablet:mr-24 md:ml-12 md:pl-4 md:pr-36 sm:ml-4 sm:pl-2 sm:pr-12 uppercase">
         Professional, licensed, and vetted therapists
       </p>
-      <p className="text-5xl pt-[2rem] xl:pr-96 xl:mr-48 tablet:ml-36 tablet:pl-4 tablet:pr-2 tablet:mr-24 md:ml-12 md:pl-4 md:pr-36 sm:ml-4 sm:pl-2 sm:pr-12 uppercase">that you can trust</p>
+      <p className="tablet-text-5xl text-4xl pt-[2rem] xl:pr-96 xl:mr-48 tablet:ml-36 tablet:pl-4 tablet:pr-2 tablet:mr-24 md:ml-12 md:pl-4 md:pr-36 sm:ml-4 sm:pl-2 sm:pr-12 uppercase">that you can trust</p>
       <img
-        className="pt-4 w-3/5  xl:ml-56 xl:pl-16 xl:pr-96 md:pl-12 tablet:ml-36 sm:ml-4 sm:pl-2 sm:pr-12 min-w-300px "
+        className="pt-4 w-3/5  xl:ml-56 xl:pl-16 xl:pr-96 md:pl-12 tablet:ml-36 sm:ml-4 sm:pl-2 sm:pr-12 min-w-300px min-h-200px "
         src={therapistpp}
         alt="therapistpp"
       />
