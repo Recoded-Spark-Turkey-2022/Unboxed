@@ -150,7 +150,7 @@ const SignupForm = () => {
             type="submit"
             className="h-16 w-1/3	rounded-md border border-solid border-[#2DD3E3] text-2xl text-[#2DD3E3] 425:text-xl"
           >
-            <NavLink to="login">To login</NavLink>
+            <NavLink to="/login">To login</NavLink>
           </button>
           <button
             type="submit"
