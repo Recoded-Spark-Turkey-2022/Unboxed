@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
 import Button from './Button';
 import Input from './Input';
@@ -16,7 +16,7 @@ const CardForm = () => {
   const [nameOnCard, setNameOnCard] = useState('');
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
-
+  const [card, setCard] = useState([]);
   const buttonTitle = 'Add Card';
   const navigate = useNavigate();
   const optionCountry = [
@@ -64,20 +64,61 @@ const CardForm = () => {
     setSelectedCities(newCity);
   }, [selectedItem]);
 
-  const addCard = () => {
+  // const addCard = () => {
+  //   const uid = auth?.currentUser.uid;
+  //   const cardInfo = doc(db, 'patients', uid);
+
+  //   setDoc(cardInfo, {
+  //     cards: [
+  //       {
+  //         cardType,
+  //         cardNumber,
+  //         expiryDate,
+  //         cvvCode,
+  //         nameOnCard,
+  //         country: selectedItem,
+  //         zipCode,
+  //         city,
+  //         address,
+  //       },
+  //     ],
+  //   });
+  //   navigate('/add-new-card-thank-you');
+  // };
+
+  useEffect(() => {
+    setCard((prev) => [
+      ...prev,
+      {
+        cardType,
+        cardNumber,
+        expiryDate,
+        cvvCode,
+        nameOnCard,
+        country: selectedItem,
+        zipCode,
+        city,
+        address,
+      },
+    ]);
+  }, [
+    cardType,
+    cardNumber,
+    expiryDate,
+    cvvCode,
+    nameOnCard,
+    selectedItem,
+    zipCode,
+    city,
+    address,
+  ]);
+  const newFunc = () => {
     const uid = auth?.currentUser.uid;
-    const cardInfo = doc(db, 'patients', uid);
-    updateDoc(cardInfo, {
-      cardType,
-      cardNumber,
-      expiryDate,
-      cvvCode,
-      nameOnCard,
-      country: selectedItem,
-      zipCode,
-      city,
-      address,
+
+    setDoc(doc(db, 'patients', uid), {
+      cards: card,
     });
+
     navigate('/add-new-card-thank-you');
   };
   return (
@@ -195,7 +236,7 @@ const CardForm = () => {
         type="text"
         func={(e) => setAddress(e.target.value)}
       />
-      <Button text={buttonTitle} func={addCard} />
+      <Button text={buttonTitle} func={newFunc} />
     </div>
   );
 };
