@@ -13,15 +13,11 @@ module.exports = {
         tablet: '640px',
         laptop: '1024px',
       },
-    
-      fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-      },
-      screens: {
-        sm: { max: '639px' },
-        lg: { max: '1024px' },
-        md: { max: '940px' },
-        425: { max: '425px' },
+      colors: {
+        lightBlack: 'rgba(0, 0, 0, 0.5)',
+        Clr94AFB6: '#94AFB6',
+        Cyan: '#2DD3E3',
+        LightBlue: ' #2DD3E3',
       },
     },
   },
