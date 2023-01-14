@@ -3,13 +3,9 @@ import SignupForm from '../../components/signupForm/SignupForm';
 
 const Signup = () => {
   return (
-    <div className="flex w-full gap-x-20 my-10 mx-20 md:mx-0 md:flex-col-reverse">
-      <img
-        src={img}
-        alt="signup"
-        className="w-2/5 mt-20 pt-10 md:w-5/6 md:mx-auto"
-      />
-      <section className="w-2/5 md:w-5/6 md:mx-auto">
+    <div className="flex w-full justify-evenly tablet2:flex-col-reverse tablet2:items-center">
+      <img src={img} alt="signup" className="w-2/5 mt-20 pt-10 tablet2:w-4/5" />
+      <section className="w-2/5 tablet2:w-4/5">
         <h1 className=" font-normal text-5xl">SIGNUP NOW</h1>
         <SignupForm />
       </section>
