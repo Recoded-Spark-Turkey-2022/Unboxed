@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+m startimport { React, useState, useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../firebaseFile';
@@ -16,6 +16,7 @@ const Edit = () => {
   // const [education, setEducation] = useState('');
   // const [photoUrl, setImage] = useState('');
   // const [DocUrl, setDocUrl] = useState('');
+  console.log(auth.currentUser.email, 'email');
 
   // // const [confrimPassword, setConfrimPassword] = useState('');
   // // const [imagePreview, setImagePreview] = useState('');
@@ -66,19 +67,37 @@ const Edit = () => {
   //   })();
   // }, [auth]);
 
-    function async onAuthStateChanged(auth, (currentUser) => {
-    const id = auth.currentUser.uid;
-    const get = doc(db, 'users', id);
-   await updateDoc(get, setEmail(currentUser.email));
-  })};
   // onAuthStateChanged(auth, (currentUser) => {
-  //   act(()=> setUser(currentUser))
-
+  //   const id = auth.currentUser.uid;
+  //   const get = doc(db, 'users', id);
+  //   updateDoc(get, setEmail(currentUser.email));
   // });
 
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
+  useEffect(() => {
+    onAuthStateChanged(auth, () => {
+      const id = auth.currentUser.uid;
+      console.log(id);
+    });
+  }, []);
+
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, () => {
+  //     const id = auth.currentUser.uid;
+  //     // const get = doc(db, 'users', id);
+
+  //     // updateDoc(get, setEmail(currentUser.email));
+  //   // });
+  //   console.log(id);
+  // }, []);
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    // update the auth user with the new email value
+    // update the firestore document with the new email value
+    const id = auth?.currentUser.uid;
+    const get = doc(db, 'users', id);
+    await updateDoc(get, { email });
+  }
 
   // if (name === 'displayName') setDisplayName(value);
   // if (name === 'password') setPassword(value);
@@ -215,9 +234,9 @@ const Edit = () => {
           Email{' '}
         </p>
         <input
-          type="email"
+          type={email}
           value={email}
-          onChange={handleChange}
+          onChange={(e) => setEmail(e.target.value)}
           className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
           style={{ width: 475, height: 68, left: 257, top: 580 }}
         />
@@ -277,13 +296,21 @@ const Edit = () => {
           Confirm Password
         </p>
       </div>
+
       <div
         className="relative inline-flex items-center justify-end mt-20 space-x-8"
         style={{ width: 732, height: 60 }}
       >
-        <div className="w-56 h-full bg-blue-400 rounded-md shadow">
-          <p className="flex-1 h-full text-2xl text-center">SAVE CHANGES</p>
-        </div>
+        <button
+          type="submit"
+          className="w-56 h-full bg-blue-400 rounded-md shadow"
+          onClick={handleUpdate}
+        >
+          Save Changes
+        </button>
+
+        <p className="flex-1 h-full text-2xl text-center">SAVE CHANGES</p>
+
         <div className="w-56 h-full bg-blue-400 rounded-md shadow">
           <p className="flex-1 h-full text-2xl text-center">DELETE ACCOUNT</p>
         </div>
