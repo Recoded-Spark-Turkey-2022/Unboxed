@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginButtons from '../google&facebook/LoginButtons';
 import { auth } from '../../firebaseFile';
+import { loginState } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
   const [errorFinder, setErrorFinder] = useState('');
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +25,11 @@ const LoginForm = () => {
         auth,
         loginInfo.email,
         loginInfo.password
-      );
+      )
+      .then(()=>{
+        dispatch(loginState())
+        console.log(user)
+      })
     } catch (error) {
       setErrorFinder(error);
     }
