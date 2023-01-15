@@ -1,13 +1,21 @@
-m startimport { React, useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateEmail,
+  updatePassword,
+  sendPasswordResetEmail,
+} from 'firebase/auth';
+
 import { auth, db } from '../../firebaseFile';
 
 const Edit = () => {
   // const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
 
-  // const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
   // const [hobbies, setHobbies] = useState('');
   // const [family, setFamily] = useState('');
   // const [gender, setGender] = useState('');
@@ -16,7 +24,6 @@ const Edit = () => {
   // const [education, setEducation] = useState('');
   // const [photoUrl, setImage] = useState('');
   // const [DocUrl, setDocUrl] = useState('');
-  console.log(auth.currentUser.email, 'email');
 
   // // const [confrimPassword, setConfrimPassword] = useState('');
   // // const [imagePreview, setImagePreview] = useState('');
@@ -73,12 +80,13 @@ const Edit = () => {
   //   updateDoc(get, setEmail(currentUser.email));
   // });
 
-  useEffect(() => {
-    onAuthStateChanged(auth, () => {
-      const id = auth.currentUser.uid;
-      console.log(id);
-    });
-  }, []);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, () => {
+  //     const emailNew = auth.currentUser.email;
+
+  //     setEmail(emailNew);
+  //   });
+  // }, []);
 
   // useEffect(() => {
   //   onAuthStateChanged(auth, () => {
@@ -90,14 +98,72 @@ const Edit = () => {
   //   console.log(id);
   // }, []);
 
+  // async function handleUpdate(e) {
+  //   e.preventDefault();
+  //   // update the auth user with the new email value
+  //   // update the firestore document with the new email value
+
+  //   try {
+  //     const id = auth?.currentUser.uid;
+  //     const get = doc(db, 'patients', id);
+  //     await updateDoc(get, { email, password });
+  //     console.log(get, 'p');
+
+  //     signInWithEmailAndPassword(auth, auth?.currentUser?.email, get.password)
+  //       .then(() => updateEmail(auth.currentUser, email))
+  //       .then(() => updatePassword(auth.currentUser, password));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
   async function handleUpdate(e) {
     e.preventDefault();
-    // update the auth user with the new email value
-    // update the firestore document with the new email value
-    const id = auth?.currentUser.uid;
-    const get = doc(db, 'users', id);
-    await updateDoc(get, { email });
+    try {
+      const id = auth?.currentUser.uid;
+      const get = doc(db, 'patients', id);
+      await signInWithEmailAndPassword(
+        auth,
+        auth?.currentUser?.email,
+        currentPassword
+      );
+      await updateEmail(auth.currentUser, email);
+      await updatePassword(auth.currentUser, password);
+      await updateDoc(get, { email, password });
+      await sendPasswordResetEmail(auth.currentUser);
+    } catch (err) {
+      console.log(err);
+      throw new Error('Invalid current password or unexpected error occurred.');
+    }
   }
+  useEffect(() => {
+    onAuthStateChanged(auth, () => {
+      const emailNew = auth.currentUser.email;
+      setEmail(emailNew);
+
+      console.log(emailNew, 'email');
+      console.log(email, 'email');
+      console.log(password, 'password');
+    });
+  }, []);
+  // async function handleUpdate(e) {
+  //   e.preventDefault();
+  //   // update the auth user with the new email value
+  //   // update the firestore document with the new email value
+
+  //   try {
+  //     const id = auth?.currentUser.uid;
+  //     const get = doc(db, 'patients', id);
+  //     await updateDoc(get, { email });
+
+  //     signInWithEmailAndPassword(auth, auth?.currentUser?.email).then(() =>
+  //       updateEmail(auth.currentUser, email)
+  //     );
+  //     // .then(() => updatePassword(auth.currentUser, password));
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   // if (name === 'displayName') setDisplayName(value);
   // if (name === 'password') setPassword(value);
@@ -237,6 +303,7 @@ const Edit = () => {
           type={email}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder={email}
           className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
           style={{ width: 475, height: 68, left: 257, top: 580 }}
         />
@@ -272,6 +339,7 @@ const Edit = () => {
           style={{ width: 474.35, height: 68, left: 257.65, top: 100 }}
         >
           <input
+            onChange={(e) => setPassword(e.target.value)}
             className="flex items-center justify-end pt-6 pb-5 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
             style={{ width: 474.35, height: 68 }}
           />
@@ -283,6 +351,7 @@ const Edit = () => {
           <input
             className="flex items-start justify-end pt-4 pr-5 bg-white border border-black rounded-lg shadow pl-96 pb-7 border-opacity-10"
             style={{ width: 474.35, height: 68 }}
+            onChange={(e) => setCurrentPassword(e.target.value)}
           />
           <link
             className="flex-1 h-full opacity-60"
