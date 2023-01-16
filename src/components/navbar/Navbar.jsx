@@ -49,15 +49,29 @@ const Navbar = () => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
 
+  // const handleLogout = async () => {
+  //   try {
+  //     await signOut(auth)
+  //       dispatch(loginState())
+  //       console.log(auth.currentUser)
+     
+  //   } catch (error) {
+  //     console.log(error);
+  // };
+  // }
+
   const handleLogout = async () => {
-    await signOut(auth)
-    console.log(auth.currentUser)
-    .then(()=>{
+    try {
+      await signOut(auth)
+        if(!auth.currentUser){
+          dispatch(loginState())
+        }
+        console.log(auth.currentUser)
+    } catch (error) {
+      console.log(error);
       console.log(auth.currentUser)
-      dispatch(loginState())
-      console.log(user)
-    })
   };
+  }
 
   return (
     <div className="flex justify-around">

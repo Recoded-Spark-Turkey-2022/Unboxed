@@ -1,6 +1,8 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import {  doc,getDoc } from 'firebase/firestore';
-import { auth,db } from '../../firebaseFile';
+// import { onAuthStateChanged } from 'firebase/auth';
+import { doc,onSnapshot } from 'firebase/firestore';
+// import { useEffect } from 'react';
+import { auth, db } from '../../firebaseFile';
+
 
 const initialState = {
   isLoggedIn: false,
@@ -9,27 +11,27 @@ const initialState = {
 };
 
 export const loginState = () => (dispatch) => {
-  onAuthStateChanged(auth, (currentUser) => {
-    if (currentUser) {
-      const userInfo = doc(db, 'patients', currentUser.uid);
-      try {
-        const docSnap = await getDoc(docRef);
-        console.log(docSnap.data());
-      } catch(error) {
-        console.log(error)
-    }
-      const newState = {
-        isLoggedIn: true,
-        authObject: currentUser,
-        firestoreObject: userInfo,
-      };
-      dispatch({ type: 'loggedIn', payload: newState });
-    }
-    else{
-        dispatch({type: "loggedOut"})
-    }
-  });
+    // const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const currentUser = auth.currentUser
+      if (currentUser) {
+        const userInfo = doc(db, 'patients', currentUser.uid);
+        (async () => {
+          const userInfoSnap = getDoc(userInfo)
+        })();
+        const newState = {
+          isLoggedIn: true,
+          authObject: currentUser,
+          firestoreObject: userInfo,
+        };
+        dispatch({ type: 'loggedIn', payload: newState });
+      } else {
+        dispatch({ type: 'loggedOut' });
+      }
+    // });
+    // return () => unsubscribe();
 };
+
+
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
@@ -43,6 +45,29 @@ function userReducer(state = initialState, action) {
 }
 export default userReducer;
 
+// export const loginState = () => {
+//   return (dispatch) => {
+//     onAuthStateChanged(auth,(currentUser) => {
+//       if (currentUser) {
+//         firestore
+//           .collection("patients")
+//           .doc(currentUser.uid)
+//           .get()
+//           .then((doc) => {
+//             const newState = {
+//               isLoggedIn: true,
+//               authObject: currentUser,
+//               firestoreObject: null,
+//             };
+//             dispatch({ type: 'loggedIn', payload: newState });
+//             return newState;
+//           })
+//       } else {
+//         dispatch({ type: "loggedOut" });
+//       }
+//     });
+//   };
+// };
 
 // import { createSlice } from "@reduxjs/toolkit"
 // import { onAuthStateChanged } from 'firebase/auth';
@@ -90,4 +115,3 @@ export default userReducer;
 // };
 
 // export default userSlice.reducer;
-
