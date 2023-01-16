@@ -1,5 +1,5 @@
 // import { onAuthStateChanged } from 'firebase/auth';
-import { doc,onSnapshot } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 // import { useEffect } from 'react';
 import { auth, db } from '../../firebaseFile';
 
@@ -11,13 +11,10 @@ const initialState = {
 };
 
 export const loginState = () => (dispatch) => {
-    // const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    //  onAuthStateChanged(auth, (currentUser) => {
       const currentUser = auth.currentUser
       if (currentUser) {
         const userInfo = doc(db, 'patients', currentUser.uid);
-        (async () => {
-          const userInfoSnap = getDoc(userInfo)
-        })();
         const newState = {
           isLoggedIn: true,
           authObject: currentUser,
@@ -28,7 +25,6 @@ export const loginState = () => (dispatch) => {
         dispatch({ type: 'loggedOut' });
       }
     // });
-    // return () => unsubscribe();
 };
 
 
@@ -95,6 +91,8 @@ export default userReducer;
 //     }
 //   }
 // });
+
+// export default userSlice
 
 // export const { loggedIn, loggedOut } = userSlice.actions;
 
