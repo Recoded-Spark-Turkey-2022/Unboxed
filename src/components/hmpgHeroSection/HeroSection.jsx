@@ -5,7 +5,7 @@ import illustration from './illustration.svg'
 const HeroSec = () => {
 return(
 <div data-testid="HeroSec" className='bg-cover bg-no-repeat top-0 h-screen flex items-center' style={{backgroundImage:`url(${background})`}}>
-    <div className='flex flex-row sm:flex-col-reverse mx-36 justify-evenly lg:mx-16'>  
+    <div className='flex flex-row sm:flex-col-reverse mx-36 justify-evenly lg:mx-10'>  
         <div className='flex-col mt-10'>
             <p className='text-6xl lg:text-4xl sm:text-2xl text-slate-800'>
                 WE ARE HERE TO
@@ -21,7 +21,7 @@ return(
                 </p>
             </button>
         </div>
-        <img className='flex laptop:w-1/2 laptop:ml-32 lg:w-2/5 sm:ml-16 sm:w-1/2' src={illustration} alt='illustration' />
+        <img className='flex laptop:w-1/2 laptop:ml-32 lg:w-2/5 sm:ml-14 sm:w-1/2' src={illustration} alt='illustration' />
     </div>  
 </div>
 
