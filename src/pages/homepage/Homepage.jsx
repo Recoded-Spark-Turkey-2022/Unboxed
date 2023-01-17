@@ -9,6 +9,9 @@ import Comm from '../../components/hmpgCommunication/Comm';
 const Homepage = () => {
   return (
     <div>
+      <HeroSec />
+      <YellowSec />
+      <Comm />
       <Carousel />
       <Ticket />
       <Counsler />
