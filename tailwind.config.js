@@ -12,6 +12,7 @@ module.exports = {
         lg: { max: '1024px' },
         tablet: '640px',
         laptop: '1024px',
+        tablet2: { max: '768px' },
       },
       colors: {
         lightBlack: 'rgba(0, 0, 0, 0.5)',
