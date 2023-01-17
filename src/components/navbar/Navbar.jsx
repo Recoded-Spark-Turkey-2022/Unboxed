@@ -1,77 +1,20 @@
-import React, {useState,useEffect } from 'react';
-import {  signOut } from 'firebase/auth';
-// import { doc } from "firebase/firestore";
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { auth } from '../../firebaseFile';
-import { loginState } from '../../features/user/userSlice';
+import { signoutHandler } from '../../features/user/userSlice';
 
 
 const Navbar = () => {
-  // Solution 1
-  // const {isLoggedIn,authObject} = useSelector(state => state.user)
-  // const dispatch = useDispatch()
-  // const [currentUser, setCurrentUser] = useState(null);
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       setCurrentUser(user);
-  //     } else {
-  //       setCurrentUser(null);
-  //       dispatch(loginState());
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, [dispatch]);
-
-  // const handleLogout = async () => {
-  //   await signOut(auth)
-  // };
-
-  // Solution 2
-  // const {isLoggedIn,authObject} = useSelector(state => state.user)
-  // const user = useSelector(state => state.user)
-  // const dispatch = useDispatch()
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await signOut(auth);
-  //     if(!auth.currentUser){
-  //       dispatch(loginState())
-  //   }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   // Solution 3
-  const {isLoggedIn,authObject} = useSelector(state => state.user)
   const user = useSelector(state => state.user)
+  const {firestoreObject} = user
+  console.log(user)
   const dispatch = useDispatch()
 
   const handleLogout = async () => {
-    try {
-      await signOut(auth)
-        dispatch(loginState())
-        console.log(auth.currentUser)
-     
-    } catch (error) {
-      console.log(error);
-  };
+   dispatch(signoutHandler())
   }
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await signOut(auth)
-  //       if(!auth.currentUser){
-  //         dispatch(loginState())
-  //       }
-  //       console.log(auth.currentUser)
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log(auth.currentUser)
-  // };
-  // }
 
   return (
     <div className="flex justify-around">
@@ -90,7 +33,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div>
-        <p data-testid="currentUser"> Current User: {isLoggedIn? authObject.email : null}</p>
+        <p data-testid="currentUser"> Current User: {firestoreObject? firestoreObject.name : null}</p>
         <button className="bg-red-600" type="button" onClick={handleLogout}>
           Log out
         </button>

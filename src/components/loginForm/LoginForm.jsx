@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { useDispatch, useSelector } from 'react-redux';
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LoginButtons from '../google&facebook/LoginButtons';
 import { auth } from '../../firebaseFile';
-import { loginState } from '../../features/user/userSlice';
+import { credentialsSigninHandler } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
   const [errorFinder, setErrorFinder] = useState('');
-  const user = useSelector(state => state.user)
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -19,21 +20,31 @@ const LoginForm = () => {
     }));
   };
 
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        loginInfo.email,
-        loginInfo.password
-      )
-      .then(()=>{
-        dispatch(loginState())
-        console.log(user)
-      })
-    } catch (error) {
-      setErrorFinder(error);
-    }
+  // const handleLogin = async () => {
+  //   try {
+  //     await signInWithEmailAndPassword(
+  //       auth,
+  //       loginInfo.email,
+  //       loginInfo.password
+  //     )
+  //     .then(()=>{
+  //       dispatch(loginState())
+  //       console.log(user)
+  //     })
+  //   } catch (error) {
+  //     setErrorFinder(error);
+  //   }
+  // };
+
+  const navigation = () => {
+    navigate('/');
   };
+
+  const handleLogin = ()=>{
+    dispatch(credentialsSigninHandler({email: loginInfo.email , password:loginInfo.password, navigation }))
+  }
+
+
   const googleProvider = new GoogleAuthProvider();
   const googleLogin = async ()=>{
     try{
