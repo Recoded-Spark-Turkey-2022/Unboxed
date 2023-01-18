@@ -9,7 +9,7 @@ import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 // import SignupThanks from '../pages/signupThanks/SignupThanks';
 import BlogDetails from '../features/blogs/BlogDetails';
 import Thanks from '../pages/Thankyou/Thanks';
-import Contact from '../pages/contact/Contact';
+import ContactPage from '../pages/contact/ContactPage';
 import ContactThanks from '../components/contact/ContactThanks';
 
 const Routers = () => {
@@ -25,7 +25,7 @@ const Routers = () => {
         <Route path="signup-thanks" element={<SignupThanks />} /> */}
         <Route path="blogs/:id" element={<BlogDetails />} />
         <Route path="/Counsler" element={<Counsler />} />
-        <Route path="contact" element={<Contact />} />
+        <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
       </Routes>
     </div>
