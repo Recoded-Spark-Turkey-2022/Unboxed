@@ -3,24 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import googleIcon from './Google.svg';
 import facebookIcon from './Facebook.svg';
-import { googleSignupHandler, facebookSignupHandler } from '../../features/user/userSlice';
-
+import {
+  googleSignupHandler,
+  facebookSignupHandler,
+} from '../../features/user/userSlice';
 
 const LoginButtons = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const navigation = () => {
     navigate('/');
   };
-
-  // const googleLogin = ()=>{
-  //   dispatch(googleSignupHandler({navigation}))
-  // }
-
-  // const facebookLogin = ()=>{
-  //   dispatch(facebookSignupHandler({navigation}))
-  // }
 
   return (
     <div data-testid="LoginButtons" className="flex flex-col items-center mt-6">
@@ -28,8 +22,19 @@ const LoginButtons = () => {
         <span className="px-2 bg-white">Or</span>
       </h2>
       <div className="flex gap-10">
-        <button data-testid="googleButton" type='button' onClick={()=>dispatch(facebookSignupHandler({navigation}))}><img src={facebookIcon} alt="facebook Icon" /></button>
-        <button type='button' onClick={()=>dispatch(googleSignupHandler({navigation}))}><img  src={googleIcon} alt="Google Icon" /></button>
+        <button
+          data-testid="googleButton"
+          type="button"
+          onClick={() => dispatch(facebookSignupHandler({ navigation }))}
+        >
+          <img src={facebookIcon} alt="facebook Icon" />
+        </button>
+        <button
+          type="button"
+          onClick={() => dispatch(googleSignupHandler({ navigation }))}
+        >
+          <img src={googleIcon} alt="Google Icon" />
+        </button>
       </div>
     </div>
   );

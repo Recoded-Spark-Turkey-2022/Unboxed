@@ -8,8 +8,11 @@ import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 import Signup from '../pages/signup/Signup';
 import SignupThanks from '../pages/signupThanks/SignupThanks';
 import BlogDetails from '../features/blogs/BlogDetails';
-import Thanks from '../pages/Thankyou/Thanks';
+import Team from '../pages/about/Team';
+import Overview from '../pages/about/Overview';
+import Careers from '../pages/about/Careers';
 import Contact from '../pages/contact/Contact';
+import Thanks from '../pages/Thankyou/Thanks';
 
 const Routers = () => {
   return (
@@ -25,6 +28,9 @@ const Routers = () => {
         <Route path="blogs/:id" element={<BlogDetails />} />
         <Route path="/Counsler" element={<Counsler />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="about/teams" element={<Team />} />
+        <Route path="about/careers" element={<Careers />} />
+        <Route path="about/overview" element={<Overview />} />
       </Routes>
     </div>
   );

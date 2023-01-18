@@ -19,7 +19,7 @@ const initialState = {
 
 export const currentUserHandler = createAsyncThunk(
   'user/currentUserHandler',
-  async (payload) => {
+  async (payload) => { // eslint-disable-line consistent-return
     try {
       const docRef = doc(db, 'patients', payload);
       const docSnap = await getDoc(docRef);
@@ -76,16 +76,16 @@ export const facebookSignupHandler = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     const facebookProvider = new FacebookAuthProvider();
     const { navigation } = payload;
-    try{
-      const {user} = await signInWithPopup(auth,facebookProvider)
+    try {
+      const { user } = await signInWithPopup(auth, facebookProvider);
       await setDoc(doc(db, 'patients', user.uid), {
         name: user.displayName.split(' ')[0],
         surname: user.displayName.split(' ')[1],
-        email: user.email
+        email: user.email,
       });
       navigation();
       return JSON.stringify({ ...auth.currentUser });
-    }catch (error) {
+    } catch (error) {
       return rejectWithValue(error);
     }
   }
@@ -96,16 +96,16 @@ export const googleSignupHandler = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     const googleProvider = new GoogleAuthProvider();
     const { navigation } = payload;
-    try{
-      const {user} = await signInWithPopup(auth,googleProvider)
+    try {
+      const { user } = await signInWithPopup(auth, googleProvider);
       await setDoc(doc(db, 'patients', user.uid), {
         name: user.displayName.split(' ')[0],
         surname: user.displayName.split(' ')[1],
-        email: user.email
+        email: user.email,
       });
       navigation();
       return JSON.stringify({ ...auth.currentUser });
-    }catch (error) {
+    } catch (error) {
       return rejectWithValue(error);
     }
   }
@@ -214,32 +214,3 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-
-// export const loginState = () => (dispatch) => {
-//      onAuthStateChanged(auth, (currentUser) => {
-//       const currentUser = auth.currentUser
-//       if (currentUser) {
-//         const userInfo = doc(db, 'patients', currentUser.uid);
-//         const newState = {
-//           isLoggedIn: true,
-//           authObject: currentUser,
-//           firestoreObject: userInfo,
-//         };
-//         dispatch({ type: 'loggedIn', payload: newState });
-//       } else {
-//         dispatch({ type: 'loggedOut' });
-//       }
-//     });
-// };
-
-// function userReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case 'loggedIn':
-//       return { ...action.payload };
-//     case 'loggedOut':
-//       return { ...initialState };
-//     default:
-//       return state;
-//   }
-// }
-// export default userReducer;

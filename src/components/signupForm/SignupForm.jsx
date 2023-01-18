@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { credentialsSignupHandler } from '../../features/user/userSlice';
 import LoginButtons from '../google&facebook/LoginButtons';
 
-
 const SignupForm = () => {
   const [userName, setUserName] = useState('');
   const [userSurname, setUserSurname] = useState('');
@@ -17,14 +16,12 @@ const SignupForm = () => {
   const [userBirthMonth, setUserBirthMonth] = useState('');
   const [userBirthYear, setUserBirthYear] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleState = (state) => (e) => {
     state(e.target.value);
   };
   // eslint-disable-next-line no-unused-vars
-
-
 
   // Register function
   const navigation = () => {
@@ -33,15 +30,18 @@ const SignupForm = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    dispatch(credentialsSignupHandler({
-      name: userName,
-      surname: userSurname,
-      email: userEmail,
-      password: userPassword,
-      birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
-        'DD MM YYYY'),
-      navigation,
-    }))
+    dispatch(
+      credentialsSignupHandler({
+        name: userName,
+        surname: userSurname,
+        email: userEmail,
+        password: userPassword,
+        birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
+          'DD MM YYYY'
+        ),
+        navigation,
+      })
+    );
   };
 
   return (

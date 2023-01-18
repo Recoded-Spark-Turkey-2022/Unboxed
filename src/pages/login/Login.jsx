@@ -4,7 +4,7 @@ import img from './LoginImg.svg';
 
 const Login = () => {
   return (
-    <div className="font-poppins mt-4">
+    <div className="font-poppins mt-12">
       <h1 className="text-3xl font-semibold ml-20 sm:ml-0 sm:text-center">
         LOGIN
       </h1>
