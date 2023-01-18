@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginButtons from '../google&facebook/LoginButtons';
 import { auth } from '../../firebaseFile';
@@ -9,6 +9,8 @@ import { credentialsSigninHandler } from '../../features/user/userSlice';
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
   const [errorFinder, setErrorFinder] = useState('');
+  const user = useSelector((state) => state.user);
+  const { error } = user;
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -19,22 +21,6 @@ const LoginForm = () => {
       [name]: value,
     }));
   };
-
-  // const handleLogin = async () => {
-  //   try {
-  //     await signInWithEmailAndPassword(
-  //       auth,
-  //       loginInfo.email,
-  //       loginInfo.password
-  //     )
-  //     .then(()=>{
-  //       dispatch(loginState())
-  //       console.log(user)
-  //     })
-  //   } catch (error) {
-  //     setErrorFinder(error);
-  //   }
-  // };
 
   const navigation = () => {
     navigate('/');
@@ -55,8 +41,8 @@ const LoginForm = () => {
           email: result.user.email,
         }));
       })
-    }catch (error) {
-      setErrorFinder(error);
+    }catch (errors) {
+      setErrorFinder(errors);
     }
   }
 
@@ -70,8 +56,8 @@ const LoginForm = () => {
           email: result.user.email,
         }));
       })
-    }catch (error) {
-      setErrorFinder(error);
+    }catch (errors) {
+      setErrorFinder(errors);
     }
   }
 
@@ -89,7 +75,7 @@ const LoginForm = () => {
       <form className={`${styles.form}`}>
         <input
           className={`${styles.input} ${
-            errorFinder ? 'border-red-300' : 'null'
+            error ? 'border-red-300' : 'null'
           }`}
           data-testid="emailInput"
           type="text"
@@ -100,7 +86,7 @@ const LoginForm = () => {
         />
         <input
           className={`${styles.input} ${
-            errorFinder ? 'border-red-300' : 'null'
+            error ? 'border-red-300' : 'null'
           }`}
           data-testid="passwordInput"
           type="password"
@@ -109,7 +95,7 @@ const LoginForm = () => {
           value={loginInfo.password}
           onChange={handleChange}
         />
-        {errorFinder ? (
+        {error ? (
           <p data-testid="loginError" className=" text-red-400 -my-4">Invalid email or password</p>
         ) : null}
         <div className="flex gap-5 w-full justify-center">

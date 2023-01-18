@@ -31,21 +31,21 @@ export const currentUserHandler = createAsyncThunk(
 
 export const credentialsSigninHandler = createAsyncThunk(
   'user/credentialsSigninHandler',
-  async (payload) => {
+  async (payload, { rejectWithValue }) => {
     const { navigation } = payload;
     try {
       await signInWithEmailAndPassword(auth, payload.email, payload.password);
       navigation();
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
-      return JSON.stringify(error);
+      return rejectWithValue(error);
     }
   }
 );
 
 export const credentialsSignupHandler = createAsyncThunk(
   'user/credentialsSignupHandler',
-  async (payload) => {
+  async (payload, { rejectWithValue }) => {
     try {
       const { name, surname, email, password, birthday, navigation } = payload;
       const { user } = await createUserWithEmailAndPassword(
@@ -63,16 +63,18 @@ export const credentialsSignupHandler = createAsyncThunk(
       });
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
-      return JSON.stringify(error);
+      return rejectWithValue(error);
     }
   }
 );
 
 export const signoutHandler = createAsyncThunk(
   'user/signoutHandler',
-  async () => {
+  async (payload) => {
+    const { navigation } = payload;
     try {
       await signOut(auth);
+      navigation();
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return JSON.stringify(error);
