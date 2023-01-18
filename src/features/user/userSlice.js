@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -68,6 +71,46 @@ export const credentialsSignupHandler = createAsyncThunk(
   }
 );
 
+export const facebookSignupHandler = createAsyncThunk(
+  'user/facebookSignupHandler',
+  async (payload, { rejectWithValue }) => {
+    const facebookProvider = new FacebookAuthProvider();
+    const { navigation } = payload;
+    try{
+      const {user} = await signInWithPopup(auth,facebookProvider)
+      await setDoc(doc(db, 'patients', user.uid), {
+        name: user.displayName.split(' ')[0],
+        surname: user.displayName.split(' ')[1],
+        email: user.email
+      });
+      navigation();
+      return JSON.stringify({ ...auth.currentUser });
+    }catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const googleSignupHandler = createAsyncThunk(
+  'user/googleSignupHandler',
+  async (payload, { rejectWithValue }) => {
+    const googleProvider = new GoogleAuthProvider();
+    const { navigation } = payload;
+    try{
+      const {user} = await signInWithPopup(auth,googleProvider)
+      await setDoc(doc(db, 'patients', user.uid), {
+        name: user.displayName.split(' ')[0],
+        surname: user.displayName.split(' ')[1],
+        email: user.email
+      });
+      navigation();
+      return JSON.stringify({ ...auth.currentUser });
+    }catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const signoutHandler = createAsyncThunk(
   'user/signoutHandler',
   async (payload) => {
@@ -89,7 +132,6 @@ const userSlice = createSlice({
     // Fetching Current User
     builder.addCase(currentUserHandler.pending, (state) => {
       state.isLoggedIn = false;
-      state.error = 'Fetching current user in progress';
     });
     builder.addCase(currentUserHandler.fulfilled, (state, action) => {
       state.firestoreObject = JSON.parse(action.payload);
@@ -104,7 +146,6 @@ const userSlice = createSlice({
     // Login with credentials
     builder.addCase(credentialsSigninHandler.pending, (state) => {
       state.isLoggedIn = false;
-      state.error = 'Login in progress';
     });
     builder.addCase(credentialsSigninHandler.fulfilled, (state, action) => {
       state.authObject = JSON.parse(action.payload);
@@ -133,7 +174,6 @@ const userSlice = createSlice({
     // Credential signup
     builder.addCase(credentialsSignupHandler.pending, (state) => {
       state.isLoggedIn = false;
-      state.error = 'Login in progress';
     });
     builder.addCase(credentialsSignupHandler.fulfilled, (state, action) => {
       state.authObject = JSON.parse(action.payload);
@@ -141,6 +181,32 @@ const userSlice = createSlice({
       state.error = null;
     });
     builder.addCase(credentialsSignupHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Google signup
+    builder.addCase(googleSignupHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(googleSignupHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(googleSignupHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Facebook Signup
+    builder.addCase(facebookSignupHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(facebookSignupHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(facebookSignupHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });

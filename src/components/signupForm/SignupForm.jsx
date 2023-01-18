@@ -22,7 +22,6 @@ const SignupForm = () => {
   const handleState = (state) => (e) => {
     state(e.target.value);
   };
-  const [newError, setNewError] = useState();
   // eslint-disable-next-line no-unused-vars
 
 
@@ -155,10 +154,7 @@ const SignupForm = () => {
           </button>
         </section>
       </div>
-      {newError && <div>{newError}</div>}
-      <LoginButtons setNewError={setNewError} />
-      {/* {navigate && <Navigate to="/signup-thanks" />} */}
-      {/* <p></p> */}
+      <LoginButtons />
     </form>
   );
 };

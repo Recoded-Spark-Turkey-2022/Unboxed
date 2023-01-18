@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import LoginButtons from '../google&facebook/LoginButtons';
-import { auth } from '../../firebaseFile';
 import { credentialsSigninHandler } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
-  const [errorFinder, setErrorFinder] = useState('');
   const user = useSelector((state) => state.user);
   const { error } = user;
   const navigate = useNavigate()
@@ -28,37 +25,6 @@ const LoginForm = () => {
 
   const handleLogin = ()=>{
     dispatch(credentialsSigninHandler({email: loginInfo.email , password:loginInfo.password, navigation }))
-  }
-
-
-  const googleProvider = new GoogleAuthProvider();
-  const googleLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,googleProvider)
-      .then((result)=>{
-        setLoginInfo((prevUser) => ({
-          ...prevUser,
-          email: result.user.email,
-        }));
-      })
-    }catch (errors) {
-      setErrorFinder(errors);
-    }
-  }
-
-  const facebookProvider = new FacebookAuthProvider();
-  const facebookLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,facebookProvider)
-      .then((result)=>{
-        setLoginInfo((prevUser) => ({
-          ...prevUser,
-          email: result.user.email,
-        }));
-      })
-    }catch (errors) {
-      setErrorFinder(errors);
-    }
   }
 
   const styles = {
@@ -112,7 +78,7 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
-      <LoginButtons googleLogin={googleLogin} facebookLogin={facebookLogin}/>
+      <LoginButtons />
     </div>
   );
 };
