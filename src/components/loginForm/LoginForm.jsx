@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import {
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 import LoginButtons from '../google&facebook/LoginButtons';
 import { auth } from '../../firebaseFile';
 
@@ -27,34 +32,32 @@ const LoginForm = () => {
     }
   };
   const googleProvider = new GoogleAuthProvider();
-  const googleLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,googleProvider)
-      .then((result)=>{
+  const googleLogin = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider).then((result) => {
         setLoginInfo((prevUser) => ({
           ...prevUser,
           email: result.user.email,
         }));
-      })
-    }catch (error) {
+      });
+    } catch (error) {
       setErrorFinder(error);
     }
-  }
+  };
 
   const facebookProvider = new FacebookAuthProvider();
-  const facebookLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,facebookProvider)
-      .then((result)=>{
+  const facebookLogin = async () => {
+    try {
+      await signInWithPopup(auth, facebookProvider).then((result) => {
         setLoginInfo((prevUser) => ({
           ...prevUser,
           email: result.user.email,
         }));
-      })
-    }catch (error) {
+      });
+    } catch (error) {
       setErrorFinder(error);
     }
-  }
+  };
 
   const styles = {
     form: 'flex flex-col gap-8 shadow-xl h-60 justify-center items-center',
@@ -91,7 +94,9 @@ const LoginForm = () => {
           onChange={handleChange}
         />
         {errorFinder ? (
-          <p data-testid="loginError" className=" text-red-400 -my-4">Invalid email or password</p>
+          <p data-testid="loginError" className=" text-red-400 -my-4">
+            Invalid email or password
+          </p>
         ) : null}
         <div className="flex gap-5 w-full justify-center">
           <button
@@ -107,7 +112,7 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
-      <LoginButtons googleLogin={googleLogin} facebookLogin={facebookLogin}/>
+      <LoginButtons googleLogin={googleLogin} facebookLogin={facebookLogin} />
     </div>
   );
 };

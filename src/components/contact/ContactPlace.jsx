@@ -2,7 +2,7 @@ import React from 'react';
 
 function ContactPlace() {
   return (
-    <div className="w-4/12 h-64 font-poppins rounded-[35px] text-2xl bg-[#eaf8f9]">
+    <div className=" h-64 font-poppins rounded-[35px] text-2xl bg-[#eaf8f9]">
       <div className="p-[6%]">
         <h6 className="mb-[2%]">Find us at: </h6>
         <text className="leading-9 opacity-50">
