@@ -36,4 +36,4 @@ return(
 </div>
 )
 }
-export default Comm
+export default Comm;
