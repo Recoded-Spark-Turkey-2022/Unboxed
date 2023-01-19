@@ -23,7 +23,7 @@ function Contact() {
         <div className=" w-[38%] ">
           <aside className="space-y-16">
             <img
-              className="w-4/5"
+              className="w-4/5 sm:hidden"
               src={contact}
               alt="smiling woman sitting in front of a computer with headphones, man on the background talking with the phone"
             />
