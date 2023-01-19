@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const CounselorSignupThanks = () => {
   const navigate = useNavigate();
   return (
-    <div
-      className="flex flex-col mx-20 mt-12 gap-5 sm:mx-0 sm:items-center"
-    >
+    <div className="flex flex-col mx-20 mt-12 gap-5 sm:mx-0 sm:items-center">
       <div className="text-5xl">THANK YOU!</div>
       <div className="text-2xl sm:text-lg sm:text-center">
         Thank you for your interest in working with Healing, we have recieved
