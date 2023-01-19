@@ -19,6 +19,11 @@ module.exports = {
         Cyan: '#2DD3E3',
         LightBlue: ' #2DD3E3',
       },
+      backgroundImage: {
+        'pink-card': "url('./public/Group 167.svg')",
+        'blue-card': "url('./public/Group 168.svg')",
+        'yellow-card': "url('./public/Group 169.svg')",
+      },
     },
   },
 };

@@ -10,6 +10,7 @@ import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 import BlogDetails from '../features/blogs/BlogDetails';
 import Thanks from '../pages/Thankyou/Thanks';
 import Contact from '../pages/contact/Contact';
+import BuyTickets from '../pages/buyTickets/BuyTickets';
 
 const Routers = () => {
   return (
@@ -25,6 +26,7 @@ const Routers = () => {
         <Route path="blogs/:id" element={<BlogDetails />} />
         <Route path="/Counsler" element={<Counsler />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="buy-ticket" element={<BuyTickets />} />
       </Routes>
     </div>
   );
