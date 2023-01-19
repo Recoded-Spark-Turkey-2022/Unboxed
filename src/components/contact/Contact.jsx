@@ -8,8 +8,8 @@ function Contact() {
     <div className="m-[5%] font-poppins">
       <div>
         {' '}
-        <h1 className="pb-[1%] text-5xl">SEND US YOUR REQUEST!</h1>
-        <p className="pb-[1%] text-2xl opacity-50">
+        <h1 className="pb-[1%] text-5xl sm:text-xl">SEND US YOUR REQUEST!</h1>
+        <p className="pb-[1%] text-2xl sm:text-base opacity-50">
           {`Do you have a question, concern, idea, feedback, or problem? If you
           need assistance, please fill out the form below and we'd be
           happy to help!`}

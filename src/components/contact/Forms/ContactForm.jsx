@@ -47,11 +47,11 @@ function ContactForm() {
       onSubmit={submitHandler}
     >
       <div>
-        <h1 className="m-[3%] text-2xl font-medium leading-9">
+        <h1 className="m-[3%] text-2xl sm:text-base font-medium leading-9">
           Type of contact
         </h1>
       </div>
-      <div className="flex-col space-y-[3%] text-xl font-normal">
+      <div className="flex-col space-y-[3%] text-xl sm:text-sm font-normal">
         <input
           type="radio"
           name={choosenOption}
