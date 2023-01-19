@@ -33,7 +33,7 @@ function ContactForm() {
       mail: enteredMail,
       details: enteredDetails,
     };
-    console.log(formData);
+    formData;
     setEnteredName('');
     setEnteredMail('');
     setEnteredDetails('');
