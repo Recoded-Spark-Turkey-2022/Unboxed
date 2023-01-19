@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function ContactThanks() {
   return (
-    <div className="flex font-poppins mx-[6%] border-2 border-red-700">
+    <div className="flex font-poppins mx-[6%] ">
       <div>
         <h1 className="flex-column my-[1%] flex-start text-5xl">THANK YOU!</h1>
         <span className="text-2xl leading-9 opacity-50">

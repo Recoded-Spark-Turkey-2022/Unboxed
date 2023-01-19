@@ -15,8 +15,8 @@ function Contact() {
           happy to help!`}
         </p>
       </div>
-      <div className="flex space-x-24 border-2">
-        <div className="border-2 border-red-600">
+      <div className="flex space-x-24">
+        <div>
           {' '}
           <ContactForm />
         </div>

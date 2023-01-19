@@ -24,7 +24,7 @@ function ContactForm() {
   const detailsHandler = (event) => {
     setEnteredDetails(event.target.value);
   };
-
+  // formData contains the returning object for the entered inputs. && I just added console log for eslint error, will delete it later
   const submitHandler = (event) => {
     event.preventDefault();
     const formData = {
@@ -33,6 +33,7 @@ function ContactForm() {
       mail: enteredMail,
       details: enteredDetails,
     };
+    console.log(formData);
     setEnteredName('');
     setEnteredMail('');
     setEnteredDetails('');
