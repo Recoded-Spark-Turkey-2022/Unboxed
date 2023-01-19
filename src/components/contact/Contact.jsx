@@ -15,14 +15,15 @@ function Contact() {
           happy to help!`}
         </p>
       </div>
-      <div className="flex border-2">
+      <div className="flex space-x-24 border-2">
         <div className="border-2 border-red-600">
           {' '}
           <ContactForm />
         </div>
-        <div className="w-[38%]">
-          <aside>
+        <div className=" w-[38%] ">
+          <aside className="space-y-16">
             <img
+              className="w-4/5"
               src={contact}
               alt="smiling woman sitting in front of a computer with headphones, man on the background talking with the phone"
             />
