@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Counsler from '../components/Counsler/Counsler';
+import CounselorRequirements from '../pages/counselor/CounselorRequirements';
+import CounselorSignup from '../pages/counselor/CounselorSignup';
+import CounselorSignupThanks from '../pages/counselor/CounselorSignupThanks';
 import Homepage from '../pages/homepage/Homepage';
 import Login from '../pages/login/Login';
 import AddNewCard from '../pages/addNewCard/addNewCard';
@@ -26,7 +28,9 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route path="/Counsler" element={<Counsler />} />
+        <Route path="counselorRequirements" element={<CounselorRequirements />} />
+        <Route path="CounselorSignup" element={<CounselorSignup />} />
+        <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
         <Route path="contact" element={<Contact />} />
         <Route path="about/teams" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
