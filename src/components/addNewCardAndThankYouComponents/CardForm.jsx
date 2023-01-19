@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
 import Button from './Button';
 import Input from './Input';
@@ -16,9 +16,11 @@ const CardForm = () => {
   const [nameOnCard, setNameOnCard] = useState('');
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
+  const [card, setCard] = useState({});
 
   const buttonTitle = 'Add Card';
   const navigate = useNavigate();
+
   const optionCountry = [
     {
       name: 'Turkey',
@@ -68,18 +70,34 @@ const CardForm = () => {
     const uid = auth?.currentUser.uid;
     const cardInfo = doc(db, 'patients', uid);
     updateDoc(cardInfo, {
-      cardType,
-      cardNumber,
-      expiryDate,
-      cvvCode,
-      nameOnCard,
-      country: selectedItem,
-      zipCode,
-      city,
-      address,
+      cards: arrayUnion(card),
     });
     navigate('/add-new-card-thank-you');
   };
+  useEffect(() => {
+    setCard((prev) => ({
+      ...prev,
+      expiryDate,
+      cardType,
+      cardNumber,
+      city,
+      cvvCode,
+      zipCode,
+      nameOnCard,
+      address,
+      selectedItem,
+    }));
+  }, [
+    expiryDate,
+    cardType,
+    cardNumber,
+    city,
+    cvvCode,
+    zipCode,
+    nameOnCard,
+    address,
+    selectedItem,
+  ]);
   return (
     <div
       data-testid="cardForm"
@@ -87,9 +105,13 @@ const CardForm = () => {
     >
       <div className="text-2xl w-2/3 sm:w-full lg:w-4/5 sm:text-xl">
         <div className=" text-Clr94AFB6 ">Supported Card types</div>
-        <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center">
+        <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center ">
           <button
+            className={
+              cardType === 'Visa' ? 'bg-orange-500 , text-white' : 'bg-white'
+            }
             type="submit"
+            value={cardType}
             onClick={() => {
               setCardType('Visa');
             }}
@@ -98,6 +120,12 @@ const CardForm = () => {
           </button>
           <button
             type="submit"
+            className={
+              cardType === 'MasterCard'
+                ? 'bg-orange-500 , text-white'
+                : 'bg-white'
+            }
+            value={cardType}
             onClick={() => {
               setCardType('MasterCard');
             }}
@@ -166,7 +194,7 @@ const CardForm = () => {
             className="text-sm border border-Clr94AFB6 h-10"
             name="City"
             id="city"
-            onClick={(e) => {
+            onChange={(e) => {
               setCity(e.target.value);
             }}
           >
