@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { auth, db } from '../../firebaseFile';
+import { credentialsSignupHandler } from '../../features/user/userSlice';
 import LoginButtons from '../google&facebook/LoginButtons';
 
 const SignupForm = () => {
@@ -17,32 +16,32 @@ const SignupForm = () => {
   const [userBirthMonth, setUserBirthMonth] = useState('');
   const [userBirthYear, setUserBirthYear] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleState = (state) => (e) => {
     state(e.target.value);
   };
-  const [newError, setNewError] = useState();
   // eslint-disable-next-line no-unused-vars
 
   // Register function
+  const navigation = () => {
+    navigate('/signup-thanks');
+  };
+
   const register = async (e) => {
     e.preventDefault();
-    const { user } = await createUserWithEmailAndPassword(
-      auth,
-      userEmail,
-      userPassword
+    dispatch(
+      credentialsSignupHandler({
+        name: userName,
+        surname: userSurname,
+        email: userEmail,
+        password: userPassword,
+        birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
+          'DD MM YYYY'
+        ),
+        navigation,
+      })
     );
-    return setDoc(doc(db, 'patients', user.uid), {
-      name: userName,
-      surname: userSurname,
-      email: userEmail,
-      password: userPassword,
-      birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
-        'DD MM YYYY'
-      ),
-    })
-      .then(() => navigate('/signup-thanks'))
-      .catch((error) => setNewError(error.message));
   };
 
   return (
@@ -155,10 +154,7 @@ const SignupForm = () => {
           </button>
         </section>
       </div>
-      {newError && <div>{newError}</div>}
-      <LoginButtons setNewError={setNewError} />
-      {/* {navigate && <Navigate to="/signup-thanks" />} */}
-      {/* <p></p> */}
+      <LoginButtons />
     </form>
   );
 };
