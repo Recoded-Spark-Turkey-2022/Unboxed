@@ -11,6 +11,10 @@ import BlogDetails from '../features/blogs/BlogDetails';
 import Thanks from '../pages/Thankyou/Thanks';
 import ContactPage from '../pages/contact/ContactPage';
 import ContactThanks from '../components/contact/ContactThanks';
+import Team from '../pages/about/Team';
+import Overview from '../pages/about/Overview';
+import Careers from '../pages/about/Careers';
+
 
 const Routers = () => {
   return (
@@ -27,6 +31,9 @@ const Routers = () => {
         <Route path="/Counsler" element={<Counsler />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
+        <Route path="about/teams" element={<Team />} />
+        <Route path="about/careers" element={<Careers />} />
+        <Route path="about/overview" element={<Overview />} />
       </Routes>
     </div>
   );
