@@ -7,7 +7,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
 
 const initialState = {
@@ -19,7 +19,8 @@ const initialState = {
 
 export const currentUserHandler = createAsyncThunk(
   'user/currentUserHandler',
-  async (payload) => { // eslint-disable-line consistent-return
+  // eslint-disable-next-line consistent-return
+  async (payload) => {
     try {
       const docRef = doc(db, 'patients', payload);
       const docSnap = await getDoc(docRef);
@@ -124,7 +125,23 @@ export const signoutHandler = createAsyncThunk(
     }
   }
 );
-
+export const addCard = createAsyncThunk(
+  'user/addCard',
+  async (payload, { rejectWithValue }) => {
+    const { navigation, card } = payload;
+    try {
+      const myId = auth.currentUser.uid;
+      const cardInfo = doc(db, 'patients', myId);
+      await updateDoc(cardInfo, {
+        cards: arrayUnion(card),
+      });
+      navigation();
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -208,6 +225,20 @@ const userSlice = createSlice({
     });
     builder.addCase(facebookSignupHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Adding Cards
+    builder.addCase(addCard.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addCard.fulfilled, (state, action) => {
+      state.cards = JSON.parse(action.payload);
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(addCard.rejected, (state, action) => {
+      state.cards = null;
+      state.loading = false;
       state.error = action.payload.message;
     });
   },
