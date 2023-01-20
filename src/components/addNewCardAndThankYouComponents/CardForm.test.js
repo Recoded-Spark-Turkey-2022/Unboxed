@@ -1,6 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
 import { cleanup, render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import CardForm from './CardForm';
+import { store } from '../../app/store';
 
 afterEach(() => {
   cleanup();
@@ -8,9 +10,11 @@ afterEach(() => {
 
 test('Renders CardForm', () => {
   render(
-    <BrowserRouter>
-      <CardForm />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <CardForm />
+      </BrowserRouter>
+    </Provider>
   );
 
   const cardFormElement = screen.getByTestId('cardForm');
