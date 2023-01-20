@@ -1,10 +1,10 @@
 import React from 'react';
-import HealingInfo from '../../components/healinginfo/HealingInfo';
+import AboutUs from '../../components/aboutUs/AboutUs';
 
 const About = () => {
   return (
     <div>
-      <HealingInfo />
+      <AboutUs />
     </div>
   );
 };
