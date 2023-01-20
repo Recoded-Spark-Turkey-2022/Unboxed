@@ -7,6 +7,8 @@ import {
   updatePassword,
   sendPasswordResetEmail,
 } from 'firebase/auth';
+import img from './user-profile.svg';
+import icon from './Upload.png';
 
 import { auth, db } from '../../firebaseFile';
 
@@ -129,19 +131,25 @@ const Edit = () => {
       );
       await updateEmail(auth.currentUser, email);
       await updatePassword(auth.currentUser, password);
-      await updateDoc(get, { email, password });
+      await updateDoc(get, { email });
+
       await sendPasswordResetEmail(auth.currentUser);
+      if (auth.currentUser.email === email) {
+        console.log('email or password updated');
+      } else {
+        console.log('email or password not updated');
+      }
     } catch (err) {
       console.log(err);
-      throw new Error('Invalid current password or unexpected error occurred.');
     }
   }
+
   useEffect(() => {
     onAuthStateChanged(auth, () => {
       const emailNew = auth.currentUser.email;
       setEmail(emailNew);
 
-      console.log(emailNew, 'email');
+      console.log(emailNew, 'newemail');
       console.log(email, 'email');
       console.log(password, 'password');
     });
@@ -210,207 +218,229 @@ const Edit = () => {
   // };
 
   return (
-    <form className="relative h-full bg-white">
-      <div
-        className="absolute relative left-top"
-        style={{ width: 293, height: 337, left: 143, top: 191 }}
-      >
-        <div
-          className="absolute relative top-0 left-0"
-          style={{ width: 293, height: 316.32 }}
-        >
-          <div className="container flex flex-col items-center px-5 py-24 mx-auto bg-gray-300 rounded-full w-72 h-80 md:flex-row" />
-          <image
-            className="absolute top-0 left-0 w-80 h-80"
-            src="https://via.placeholder.com/315x315"
-          />
+    <form className=" relative w-full " data-testid="Edit">
+      <div className="flex flex-col lg:items-center  sm:items-start">
+        <div className=" self-center mt-8 lg:text-xl md:text-base sm:text-sm text-[#FF0000] sm:ml-[20%]">
+          Please fill all the fields with correct and valid details to complete
+          your profile.
         </div>
-        <div className="absolute inset-x-0 bottom-0 w-20 h-16 mx-auto bg-white border-2 border-black rounded-full" />
-        <image
-          className="absolute h-12 w-14"
-          style={{ left: 119, top: 273 }}
-          src="https://via.placeholder.com/54x52"
-        />
-      </div>
-      <div
-        className="absolute relative"
-        style={{ width: 733, height: 811, left: 564, top: 191 }}
-      >
-        <p className="absolute top-0 left-0 text-5xl font-medium">
-          PROFILE INFO
-        </p>
-        <p className="absolute text-2xl" style={{ left: 1, top: 104 }}>
-          Full Name
-        </p>
-        <input
-          type="text"
-          name="displayName"
-          className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 88 }}
-        />
-        <p className="absolute text-2xl" style={{ left: 0, top: 186 }}>
-          Education Level
-        </p>
-        <input
-          className="absolute inline-flex items-center justify-end py-5 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 170 }}
-        />
+        <div className="flex flex-row sm:flex-col ">
+          <div className="flex  lg:ml-[10rm] xxl:ml-[15rm] self-start-4 ml-10 lg:self-start-3 sm:self-center  mt-[5%]  ">
+            <img
+              src={img}
+              alt="user-profile"
+              className="w-36 h-36 rounded-full"
+            />
+            <button
+              type="button"
+              className="w-12 h-12 ml-14 absolute translate-y-28"
+            >
+              {' '}
+              <img src={icon} alt="Upload " />{' '}
+            </button>
+          </div>
+          <div className="flex flex-col sm:ml-3 lg:ml-16 ml-15 xl:ml-25 mt-5">
+            <div className="lg:ml-[10%] ml-[15%]  lg:mr-44 mb-15 ">
+              <h1 className="text-5xl  lg:ml-0 ml-15 mb-10 sm:self-Center mt-10 ">
+                <b>PROFILE INFO</b>
+              </h1>
+              <div />
+              <div className=" flex flex-rows ">
+                <div className="flex flex-col mt-4 lg:text-xl sm:text-sm gap-10 lg:ml-0">
+                  <div className="text-2xl  ">Full Name</div>
+                  <div className="text-2xl ">Education Level</div>
+                  <div className="text-2xl ">Hobbies</div>
+                  <div className="text-2xl ">Family Size</div>
+                  <p className="text-2xl ">Member(s)</p>
+                  <div className="text-2xl ">Gender</div>
+                  <div className="text-2xl ">Birth Date</div>
+                  <div className="text-2xl ">Phone Number</div>
+                  <div className="text-2xl ">Upload ID</div>
 
-        <p className="absolute text-2xl" style={{ left: 0, top: 268 }}>
-          Hobbies
-        </p>
-        <input
-          className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 252 }}
-        />
-        <p className="absolute text-2xl" style={{ left: 0, top: 350 }}>
-          Family Size
-        </p>
-        <input
-          className="absolute w-16 h-16 bg-white border border-black rounded-lg shadow border-opacity-10"
-          style={{ left: 257, top: 334 }}
-        />
-        <p className="absolute text-2xl" style={{ left: 359, top: 350 }}>
-          Member(s)
-        </p>
-        <p className="absolute text-2xl" style={{ left: 0, top: 432 }}>
-          Gender
-        </p>
-        <input
-          className="absolute inline-flex items-center justify-end py-5 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 417 }}
-        />
-        <image
-          className="flex-1 h-full rounded-lg"
-          src="https://via.placeholder.com/30x30"
-        />
-        <p className="absolute text-2xl" style={{ left: 0, top: 514 }}>
-          Birth Date
-        </p>
-        <div
-          className="absolute"
-          style={{ width: 474.72, height: 68.35, left: 257, top: 498 }}
-        >
-          <input
-            className="flex items-center justify-end pt-5 pb-6 pr-6 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
-            style={{ width: 474.72, height: 68.35 }}
-          />
-        </div>
-        <p className="absolute text-2xl" style={{ left: 0, top: 596 }}>
-          Email{' '}
-        </p>
-        <input
-          type={email}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={email}
-          className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 580 }}
-        />
-        <p className="absolute text-2xl" style={{ left: 0, top: 678 }}>
-          Phone Number
-        </p>
-        <link
-          className="absolute bg-white border border-black rounded-lg shadow border-opacity-10"
-          style={{ width: 475, height: 68, left: 257, top: 662 }}
-        />
-        <p className="absolute text-2xl" style={{ left: 1, top: 759 }}>
-          Upload ID
-        </p>
+                  <div className="text-2xl ">Email </div>
+                </div>
 
-        <div
-          className="absolute bottom-0 right-0 inline-flex items-center justify-end py-4 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
-          style={{ width: 475, height: 68 }}
-        >
-          <image
-            className="flex-1 h-full rounded-lg"
-            src="https://via.placeholder.com/35x35"
-          />
-        </div>
-      </div>
-      <div
-        className="relative mt-20 "
-        style={{ width: 733, height: 811, left: 564, top: 191 }}
-      >
-        <p className="absolute top-0 left-0 text-5xl font-medium">Security</p>
+                <div className="flex flex-col gap-7 lg:mt-1 mt-3 ml-6">
+                  <div>
+                    <input
+                      type="text"
+                      name="displayName"
+                      className="  border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem] "
+                      style={{ width: 475, height: 68, left: 257, top: 88 }}
+                    />
+                  </div>
 
-        <div
-          className="absolute"
-          style={{ width: 474.35, height: 68, left: 257.65, top: 100 }}
-        >
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            className="flex items-center justify-end pt-6 pb-5 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
-            style={{ width: 474.35, height: 68 }}
-          />
-          <link
-            className="flex-1 h-full opacity-60"
-            src="https://via.placeholder.com/23.96725845336914x23.000001907348633"
-          />
+                  <div>
+                    <input
+                      className="  border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 475, height: 68, left: 257, top: 170 }}
+                    />{' '}
+                  </div>
+                  <div>
+                    <input
+                      className="  border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 475, height: 68, left: 257, top: 170 }}
+                    />{' '}
+                  </div>
+                  <div>
+                    <input
+                      className=" border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block sm:w-[20] sm:h-[4.8rm] lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 475, height: 68, left: 257, top: 170 }}
+                    />{' '}
+                  </div>
+                  <input
+                    className="  border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[6em] lg:h-[6.8rm] xxl:w-[6rem] xxl:h-[6.8rm] w-[4em]  h-[6.8rem]"
+                    style={{ left: 257, top: 334, height: 68 }}
+                  />
+                  <div>
+                    <input
+                      className=" border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 474.72, height: 68.35 }}
+                    />
+                    <image
+                      className="flex-1 h-full rounded-lg"
+                      src="https://via.placeholder.com/30x30"
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="displayName"
+                      className="border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 475, height: 68, left: 257, top: 88 }}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      name="displayName"
+                      className=" border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 475, height: 68, left: 257, top: 88 }}
+                    />{' '}
+                  </div>
+                  <div>
+                    <input
+                      type={email}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={email}
+                      className=" border-black rounded-lg shadow border-opacity-10 bg-white border  text-gray-900 sm:text-sm ml-6 focus:ring-primary-600 focus:border-primary-600 block lg:p-2 p-1 lg:w-[35em] lg:h-[6.8rm] xxl:w-[40rem] xxl:h-[6.8rem] w-[16em] h-[6.8rem]"
+                      style={{ width: 474.72, height: 68.35 }}
+                    />
+                  </div>
+                </div>
+              </div>
 
-          <input
-            className="flex items-start justify-end pt-4 pr-5 bg-white border border-black rounded-lg shadow pl-96 pb-7 border-opacity-10"
-            style={{ width: 474.35, height: 68 }}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-          />
-          <link
-            className="flex-1 h-full opacity-60"
-            src="https://via.placeholder.com/23.96725845336914x23.000001907348633"
-          />
-        </div>
-        <p className="absolute text-2xl w-28 h-9" style={{ left: 1, top: 117 }}>
-          Password
-        </p>
-        <p className="absolute w-56 text-2xl h-9" style={{ left: 1, top: 202 }}>
-          Confirm Password
-        </p>
-      </div>
+              <div
+                className=" "
+                style={{ width: 733, height: 811, left: 564, top: 191 }}
+              >
+                <div className="flex flex-col gap-7 lg:mt-1 mt-3 ml-6">
+                  <p className="text-5xl font-medium ">Security</p>
+                  <div className="col-start-1  col-span-6">
+                    <p className="text-2xl " style={{ left: 0, top: 596 }}>
+                      Email{' '}
+                    </p>
+                    <input
+                      type={email}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={email}
+                      className=" bg-white border border-black rounded-lg shadow border-opacity-10"
+                      style={{ width: 474.72, height: 68.35 }}
+                    />
+                  </div>
+                  <div className="">
+                    <p
+                      className="text-2xl w-28 h-9"
+                      style={{ left: 1, top: 117 }}
+                    >
+                      Password
+                    </p>
+                    <input
+                      onChange={(e) => setCurrentPassword(e.target.value)}
+                      className=" sm:w-10 items-center justify-end pt-6 pb-5 pr-5 bg-white border border-black rounded-lg shadow pl-96 border-opacity-10"
+                    />
+                    <link
+                      className="flex-1 h-full opacity-60"
+                      src="https://via.placeholder.com/23.96725845336914x23.000001907348633"
+                    />
+                  </div>
+                  <div className="">
+                    <p
+                      className="w-56 text-2xl h-9"
+                      style={{ left: 1, top: 202 }}
+                    >
+                      Confirm Password
+                    </p>
+                    <input
+                      className="flepx items-start justify-end t-4 pr-5 bg-white border border-black rounded-lg shadow pl-96 pb-7 border-opacity-10"
+                      style={{ width: 474.35, height: 68 }}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <link
+                      className="flex-1 h-full opacity-60"
+                      src="https://via.placeholder.com/23.96725845336914x23.000001907348633"
+                    />
+                  </div>
+                </div>
+              </div>
 
-      <div
-        className="relative inline-flex items-center justify-end mt-20 space-x-8"
-        style={{ width: 732, height: 60 }}
-      >
-        <button
-          type="submit"
-          className="w-56 h-full bg-blue-400 rounded-md shadow"
-          onClick={handleUpdate}
-        >
-          Save Changes
-        </button>
+              <div
+                className="  p-5 mt-20  space-x-4 "
+                style={{ width: 732, height: 60 }}
+              >
+                <button
+                  type="submit"
+                  className="col-start-1 w-40 h-12 bg-[#2DD3E3]  rounded-md shadow"
+                  onClick={handleUpdate}
+                >
+                  Save Changes
+                </button>
 
-        <p className="flex-1 h-full text-2xl text-center">SAVE CHANGES</p>
+                <button
+                  type="submit"
+                  className=" w-40 h-12 bg-[#2DD3E3] rounded-md shadow"
+                >
+                  DELETE ACCOUNT
+                </button>
+                <button
+                  type="submit"
+                  className=" w-40 h-12 bg-[#2DD3E3]   rounded-md shadow"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
 
-        <div className="w-56 h-full bg-blue-400 rounded-md shadow">
-          <p className="flex-1 h-full text-2xl text-center">DELETE ACCOUNT</p>
-        </div>
-        <div className="w-56 h-full bg-blue-400 rounded-md shadow">
-          <p className="flex-1 h-full text-2xl text-center">CANCEL </p>
-        </div>
-      </div>
-      <div className="relative" style={{ width: 732, height: 227 }}>
-        <p
-          className="absolute top-0 left-0 text-5xl font-medium"
-          style={{ width: 732, height: 73 }}
-        >
-          Payment Methods & Tickets
-        </p>
-        <p className="absolute w-64 text-2xl h-9" style={{ left: 0, top: 117 }}>
-          3 Cards Added
-        </p>
-        <div className="absolute bottom-0 left-0 w-64 h-16 bg-blue-400 rounded-md shadow">
-          <p className="flex-1 h-full text-2xl text-center">SHOW CARDS</p>
-        </div>
-        <p
-          className="absolute w-64 text-2xl h-9"
-          style={{ left: 280, top: 117 }}
-        >
-          10 Tickets Remaining
-        </p>
-        <div
-          className="absolute w-64 h-16 bg-blue-400 rounded-md shadow"
-          style={{ left: 280, top: 167 }}
-        >
-          <p className="flex-1 h-full text-2xl text-center">BUY TICKETS</p>
+            <div className="flex flex-col g:ml-20 ml-[-10em] mt-16">
+              <div className="lg:text-5xl text-2xl">
+                <b>Payment Methods & Tickets</b>
+              </div>
+              <div className="flex flex-rows gap-10 mt-8 mb-16">
+                <div className="flex flex-col ">
+                  <div className="lg:text-lg text-sm mb-2">3 Cards Added</div>
+                  <button
+                    type="button"
+                    className="bg-[#2DD3E3] font-medium text-2xl px-10 py-3 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+                  >
+                    SHOW CARDS
+                  </button>
+                </div>
+                <div className="flex flex-col">
+                  <div className="lg:text-lg text-sm mb-2 ">
+                    10 Tickets Remaining
+                  </div>
+                  <button
+                    type="button"
+                    className="bg-[#2DD3E3] font-medium text-2xl px-10 py-3 rounded-md shadow-[0px_7px_20px_rgba(0,0,0,0.2)]"
+                  >
+                    BUY TICKETS
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </form>
