@@ -12,11 +12,11 @@ afterEach(() => {
 
 test('App is rendering', () => {
   render(
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
         <App />
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
   const appElement = screen.getByTestId('App');
   expect(appElement).toBeInTheDocument();
