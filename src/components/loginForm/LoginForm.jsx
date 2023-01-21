@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { FacebookAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, NavLink } from 'react-router-dom';
 import LoginButtons from '../google&facebook/LoginButtons';
-import { auth } from '../../firebaseFile';
+import { credentialsSigninHandler } from '../../features/user/userSlice';
 
 const LoginForm = () => {
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
-  const [errorFinder, setErrorFinder] = useState('');
+  const user = useSelector((state) => state.user);
+  const { error } = user;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,46 +19,19 @@ const LoginForm = () => {
     }));
   };
 
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(
-        auth,
-        loginInfo.email,
-        loginInfo.password
-      );
-    } catch (error) {
-      setErrorFinder(error);
-    }
+  const navigation = () => {
+    navigate('/');
   };
-  const googleProvider = new GoogleAuthProvider();
-  const googleLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,googleProvider)
-      .then((result)=>{
-        setLoginInfo((prevUser) => ({
-          ...prevUser,
-          email: result.user.email,
-        }));
-      })
-    }catch (error) {
-      setErrorFinder(error);
-    }
-  }
 
-  const facebookProvider = new FacebookAuthProvider();
-  const facebookLogin = async ()=>{
-    try{
-      await signInWithPopup(auth,facebookProvider)
-      .then((result)=>{
-        setLoginInfo((prevUser) => ({
-          ...prevUser,
-          email: result.user.email,
-        }));
+  const handleLogin = () => {
+    dispatch(
+      credentialsSigninHandler({
+        email: loginInfo.email,
+        password: loginInfo.password,
+        navigation,
       })
-    }catch (error) {
-      setErrorFinder(error);
-    }
-  }
+    );
+  };
 
   const styles = {
     form: 'flex flex-col gap-8 shadow-xl h-60 justify-center items-center',
@@ -69,9 +46,7 @@ const LoginForm = () => {
     <div data-testid="loginForm" className="w-1/3 sm:w-10/12">
       <form className={`${styles.form}`}>
         <input
-          className={`${styles.input} ${
-            errorFinder ? 'border-red-300' : 'null'
-          }`}
+          className={`${styles.input} ${error ? 'border-red-300' : 'null'}`}
           data-testid="emailInput"
           type="text"
           placeholder="Your Email"
@@ -80,9 +55,7 @@ const LoginForm = () => {
           onChange={handleChange}
         />
         <input
-          className={`${styles.input} ${
-            errorFinder ? 'border-red-300' : 'null'
-          }`}
+          className={`${styles.input} ${error ? 'border-red-300' : 'null'}`}
           data-testid="passwordInput"
           type="password"
           placeholder="Your Password"
@@ -90,8 +63,10 @@ const LoginForm = () => {
           value={loginInfo.password}
           onChange={handleChange}
         />
-        {errorFinder ? (
-          <p data-testid="loginError" className=" text-red-400 -my-4">Invalid email or password</p>
+        {error ? (
+          <p data-testid="loginError" className=" text-red-400 -my-4">
+            Invalid email or password
+          </p>
         ) : null}
         <div className="flex gap-5 w-full justify-center">
           <button
@@ -103,11 +78,11 @@ const LoginForm = () => {
             Login
           </button>
           <button className={`${styles.signupButton}`} type="button">
-            Signup
+            <NavLink to="/signup">Signup</NavLink>
           </button>
         </div>
       </form>
-      <LoginButtons googleLogin={googleLogin} facebookLogin={facebookLogin}/>
+      <LoginButtons />
     </div>
   );
 };

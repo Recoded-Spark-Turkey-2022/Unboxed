@@ -1,22 +1,23 @@
-import React from "react";
-import { render,cleanup,screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "./app/store";
-import App from "./App";
+import React from 'react';
+import { render, cleanup, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './app/store';
 
-afterEach(()=>{
-  cleanup()
-})
+import App from './App';
 
-test("App is rendering", () => {
+afterEach(() => {
+  cleanup();
+});
+
+test('App is rendering', () => {
   render(
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
+      <BrowserRouter>
         <App />
-      </Provider>
-    </BrowserRouter>
-  )
-  const appElement = screen.getByTestId("App")
-  expect(appElement).toBeInTheDocument()
+      </BrowserRouter>
+    </Provider>
+  );
+  const appElement = screen.getByTestId('App');
+  expect(appElement).toBeInTheDocument();
 });
