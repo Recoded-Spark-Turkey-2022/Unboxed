@@ -23,8 +23,9 @@ const EditPatientProfile = () => {
     password: '',
     confirmPassword: '',
     photo: '',
+    tickets: '',
+    cards:''
   });
-  console.log(editInfo);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +41,7 @@ const EditPatientProfile = () => {
     editInfo.email = firestoreObject.email;
     editInfo.birthdate = firestoreObject.birthday;
     editInfo.password = firestoreObject.password;
+    editInfo.cards = firestoreObject.cards.length;
   }
   // useEffect(()=>{
   //   editInfo.name=firestoreObject.name
@@ -51,10 +53,16 @@ const EditPatientProfile = () => {
   //   navigate('/CounselorSignupThanks');
   // };
 
+  const handleEdit =(e)=>{
+    e.preventDefault();
+    console.log(editInfo)
+  }
+
   const styles = {
     inputs: 'border-2 border-gray-200 rounded min-w-[60%] text-xl',
     inputRows: 'flex justify-between mb-3',
     inputLabel: 'text-xl',
+    button:'rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400'
   };
 
   return (
@@ -245,19 +253,23 @@ const EditPatientProfile = () => {
 
           <div className="flex gap-6">
             <button
-              className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
-              type="button"
+              className={styles.button}
+              type="submit"
+              onClick={
+                editInfo.password===editInfo.confirmPassword?
+                handleEdit:
+              null}
             >
               SAVE CHANGES
             </button>
             <button
-              className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
+              className={styles.button}
               type="button"
             >
               DELETE ACCOUNT
             </button>
             <button
-              className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
+              className={styles.button}
               type="button"
             >
               CANCEL
@@ -268,9 +280,9 @@ const EditPatientProfile = () => {
           </h1>
           <div className="flex gap-6">
             <div>
-              <p> Cards Added</p>
+              <p>{editInfo.cards} Cards Added</p>
               <button
-                className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
+                className={styles.button}
                 type="button"
               >
                 SHOW CARDS
@@ -279,7 +291,7 @@ const EditPatientProfile = () => {
             <div>
               <p>10 Tickets Remaining</p>
               <button
-                className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
+                className={styles.button}
                 type="button"
               >
                 BUY TICKETS
