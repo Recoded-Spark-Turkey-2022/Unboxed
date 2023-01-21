@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 // import { useNavigate } from 'react-router-dom';
 import img from './user-profile.svg';
@@ -24,6 +24,7 @@ const EditPatientProfile = () => {
     confirmPassword: '',
     photo: '',
   });
+  console.log(editInfo);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,11 +33,19 @@ const EditPatientProfile = () => {
       [name]: value,
     }));
   };
-  useEffect(() => {
+
+  if (firestoreObject) {
     editInfo.name = firestoreObject.name;
     editInfo.surname = firestoreObject.surname;
     editInfo.email = firestoreObject.email;
-  }, []);
+    editInfo.birthdate = firestoreObject.birthday;
+    editInfo.password = firestoreObject.password;
+  }
+  // useEffect(()=>{
+  //   editInfo.name=firestoreObject.name
+  //   editInfo.surname=firestoreObject.surname
+  //   editInfo.email=firestoreObject.email
+  // },[firestoreObject])
 
   // const navigation = () => {
   //   navigate('/CounselorSignupThanks');
@@ -76,16 +85,14 @@ const EditPatientProfile = () => {
             <div className={styles.inputRows}>
               {' '}
               <p className={styles.inputLabel}>Name</p>
-              <input // eslint-disable-line react/void-dom-elements-no-children
+              <input
                 className={styles.inputs}
                 type="text"
                 name="name"
                 required
                 value={editInfo.name}
                 onChange={handleChange}
-              >
-                {editInfo.name}
-              </input>
+              />
             </div>
             <div className={styles.inputRows}>
               {' '}
@@ -108,6 +115,7 @@ const EditPatientProfile = () => {
                 value={editInfo.educationLevel}
                 onChange={handleChange}
               >
+                <option value="none">Select an Option</option>
                 <option value="High School">High School</option>
                 <option value="Associate's Degree">Associate Degree</option>
                 <option value="Bacheclor's Degree">Bacheclor Degree</option>
@@ -149,6 +157,7 @@ const EditPatientProfile = () => {
                 value={editInfo.gender}
                 onChange={handleChange}
               >
+                <option value="none">Select an Option</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
@@ -203,6 +212,37 @@ const EditPatientProfile = () => {
             </div>
           </div>
           <h1 className="text-4xl font-semibold mb-5">Security</h1>
+          <div className="mb-7 w-10/12 sm:w-full ">
+            <div className={styles.inputRows}>
+              {' '}
+              <p className={styles.inputLabel}>Password</p>
+              <input
+                className={styles.inputs}
+                type="password"
+                name="password"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                required
+                title="Password should include minimum 8 characters, at least one letter and one number"
+                value={editInfo.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.inputRows}>
+              {' '}
+              <p className={styles.inputLabel}>Confirm Password</p>
+              <input
+                className={styles.inputs}
+                type="password"
+                name="confirmPassword"
+                pattern={editInfo.password}
+                title="Passwords don't match"
+                required
+                value={editInfo.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
           <div className="flex gap-6">
             <button
               className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
@@ -228,7 +268,7 @@ const EditPatientProfile = () => {
           </h1>
           <div className="flex gap-6">
             <div>
-              <p>3 Cards Added</p>
+              <p> Cards Added</p>
               <button
                 className="rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400"
                 type="button"
