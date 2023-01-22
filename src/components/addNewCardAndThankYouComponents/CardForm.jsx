@@ -69,13 +69,18 @@ const CardForm = () => {
     setSelectedCities(newCity);
   }, [selectedItem]);
 
-  const addCardFunction = () => {
-    dispatch(
-      addCard({
-        card,
-        navigation,
-      })
-    );
+  const addCardFunction = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-unused-expressions
+    cardType &&
+      city &&
+      selectedItem &&
+      dispatch(
+        addCard({
+          card,
+          navigation,
+        })
+      );
   };
   useEffect(() => {
     setCard((prev) => ({
@@ -102,18 +107,19 @@ const CardForm = () => {
     selectedItem,
   ]);
   return (
-    <div
+    <form
       data-testid="cardForm"
-      className=" mt-10 grid grid-cols-2 w-2/3 sm:flex-col sm:flex sm:w-full sm:mt-4 lg:w-full"
+      className=" mt-6 grid grid-cols-2 w-2/3 sm:flex-col sm:flex sm:w-full sm:mt-4 lg:w-full"
+      onSubmit={addCardFunction}
     >
-      <div className="text-2xl w-2/3 sm:w-full lg:w-4/5 sm:text-xl">
+      <div className="text-xl w-2/3 sm:w-full lg:w-4/5">
         <div className=" text-Clr94AFB6 ">Supported Card types</div>
         <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center ">
           <button
             className={
               cardType === 'Visa' ? 'bg-orange-500 , text-white' : 'bg-white'
             }
-            type="submit"
+            type="button"
             value={cardType}
             onClick={() => {
               setCardType('Visa');
@@ -122,7 +128,7 @@ const CardForm = () => {
             Visa
           </button>
           <button
-            type="submit"
+            type="button"
             className={
               cardType === 'MasterCard'
                 ? 'bg-orange-500 , text-white'
@@ -138,7 +144,7 @@ const CardForm = () => {
         </div>
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
-        <label className="text-2xl flex flex-col" htmlFor="country">
+        <label className="text-xl flex flex-col" htmlFor="country">
           Country
           <select
             data-testid="selectInput"
@@ -165,6 +171,8 @@ const CardForm = () => {
         placeholder="Card Number"
         id="cardNumber"
         type="text"
+        pattern="^[0-9]{16}$"
+        title="Card number should include 16 characters, and only numbers!"
         func={(e) => setCardNumber(e.target.value)}
       />
       <Input
@@ -172,6 +180,8 @@ const CardForm = () => {
         placeholder="ZIP Code"
         id="zipCode"
         type="text"
+        pattern="^[0-9]{6}$"
+        title="ZIP Code should include 6 characters, and only numbers!"
         func={(e) => setZipCode(e.target.value)}
       />
       <div className="flex w-1/2 sm:flex-col sm:w-full">
@@ -180,6 +190,8 @@ const CardForm = () => {
           placeholder="MM / YY"
           id="expiryDate"
           type="text"
+          pattern="^[0-9]{4,6}$"
+          title="Expiry Date should include min 4 max 6 characters, and only numbers!"
           func={(e) => setExpiryDate(e.target.value)}
         />
         <Input
@@ -187,11 +199,13 @@ const CardForm = () => {
           placeholder="***"
           id="cvvCode"
           type="text"
+          pattern="^[0-9]{3}$"
+          title="CVV Code should include 3 characters, and only numbers!"
           func={(e) => setCvvCode(e.target.value)}
         />
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
-        <label className="text-2xl flex flex-col" htmlFor="city">
+        <label className="text-xl flex flex-col" htmlFor="city">
           City
           <select
             className="text-sm border border-Clr94AFB6 h-10"
@@ -217,6 +231,8 @@ const CardForm = () => {
         placeholder="Name On Card"
         id="name"
         type="text"
+        pattern="^[a-zA-Z0-9]{1,30}$"
+        title="Name shouldn't include any special character!"
         func={(e) => setNameOnCard(e.target.value)}
       />
       <Input
@@ -224,10 +240,12 @@ const CardForm = () => {
         placeholder="Address"
         id="address"
         type="text"
+        pattern="^[a-zA-Z0-9]{1,90}$"
+        title="Address shouldn't include any special character!"
         func={(e) => setAddress(e.target.value)}
       />
-      <Button text={buttonTitle} func={addCardFunction} />
-    </div>
+      <Button text={buttonTitle} />
+    </form>
   );
 };
 export default CardForm;
