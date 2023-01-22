@@ -24,8 +24,13 @@ export const currentUserHandler = createAsyncThunk(
     try {
       const docRef = doc(db, 'patients', payload);
       const docSnap = await getDoc(docRef);
+      const docRef2 = doc(db, 'counselors', payload);
+      const docSnap2 = await getDoc(docRef2);
       if (docSnap.exists()) {
         return JSON.stringify({ ...docSnap.data() });
+      }
+       if (docSnap2.exists()) {
+        return JSON.stringify({ ...docSnap2.data() });
       }
     } catch (error) {
       return JSON.stringify(error);
@@ -40,6 +45,31 @@ export const credentialsSigninHandler = createAsyncThunk(
     try {
       await signInWithEmailAndPassword(auth, payload.email, payload.password);
       navigation();
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const counselorsSignupHandler = createAsyncThunk(
+  'user/counselorsSignupHandler',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const { name, city, email, password, license, navigation } = payload;
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      navigation();
+      await setDoc(doc(db, 'counselors', user.uid), {
+        name,
+        city,
+        email,
+        password,
+        license,
+      });
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -227,6 +257,7 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });
+
     // Adding Cards
     builder.addCase(addCard.pending, (state) => {
       state.loading = true;
@@ -239,6 +270,19 @@ const userSlice = createSlice({
     builder.addCase(addCard.rejected, (state, action) => {
       state.cards = null;
       state.loading = false;
+
+    // Counselor Signup
+    builder.addCase(counselorsSignupHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(counselorsSignupHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(counselorsSignupHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+
       state.error = action.payload.message;
     });
   },
