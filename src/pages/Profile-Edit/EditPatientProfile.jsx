@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { editProfileHandler } from '../../features/user/userSlice';
 import img from './user-profile.svg';
 // import icon from './Upload.png';
 
 const EditPatientProfile = () => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const { firestoreObject } = user;
   const [editInfo, setEditInfo] = useState({
@@ -16,7 +17,7 @@ const EditPatientProfile = () => {
     hobbies: '',
     familySize: '',
     gender: '',
-    birthdate: '',
+    birthday: '',
     email: '',
     phone: '',
     ID: '',
@@ -24,7 +25,7 @@ const EditPatientProfile = () => {
     confirmPassword: '',
     photo: '',
     tickets: '',
-    cards:''
+    cards: '',
   });
 
   const handleChange = (e) => {
@@ -35,34 +36,49 @@ const EditPatientProfile = () => {
     }));
   };
 
-  if (firestoreObject) {
-    editInfo.name = firestoreObject.name;
-    editInfo.surname = firestoreObject.surname;
-    editInfo.email = firestoreObject.email;
-    editInfo.birthdate = firestoreObject.birthday;
-    editInfo.password = firestoreObject.password;
-    editInfo.cards = firestoreObject.cards.length;
-  }
-  // useEffect(()=>{
-  //   editInfo.name=firestoreObject.name
-  //   editInfo.surname=firestoreObject.surname
-  //   editInfo.email=firestoreObject.email
-  // },[firestoreObject])
 
-  // const navigation = () => {
-  //   navigate('/CounselorSignupThanks');
-  // };
+  useEffect(()=>{
+    if (firestoreObject) {
+      editInfo.name = firestoreObject.name;
+      editInfo.surname = firestoreObject.surname;
+      editInfo.email = firestoreObject.email;
+      editInfo.birthday = firestoreObject.birthday;
+      editInfo.password = firestoreObject.password;
+      // editInfo.cards = firestoreObject.cards.length;
+    }
+  },[firestoreObject])
 
-  const handleEdit =(e)=>{
+  const navigation = () => {
+    navigate('/editPatientProfileThanks');
+  };
+
+  const handleEdit = (e) => {
     e.preventDefault();
-    console.log(editInfo)
-  }
+    console.log(editInfo);
+    dispatch(
+      editProfileHandler({
+        name: editInfo.name,
+        surname: editInfo.surname,
+        educationLevel: editInfo.educationLevel,
+        hobbies: editInfo.hobbies,
+        familySize: editInfo.familySize,
+        gender: editInfo.gender,
+        birthday: editInfo.birthday,
+        email: editInfo.email,
+        phone: editInfo.phone,
+        ID: editInfo.ID,
+        password: editInfo.password,
+        navigation,
+      })
+    );
+  };
 
   const styles = {
     inputs: 'border-2 border-gray-200 rounded min-w-[60%] text-xl',
     inputRows: 'flex justify-between mb-3',
     inputLabel: 'text-xl',
-    button:'rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400'
+    button:
+      'rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400',
   };
 
   return (
@@ -177,8 +193,8 @@ const EditPatientProfile = () => {
               <input
                 className={styles.inputs}
                 type="text"
-                name="birthdate"
-                value={editInfo.birthdate}
+                name="birthday"
+                value={editInfo.birthday}
                 onChange={handleChange}
               />
             </div>
@@ -256,22 +272,17 @@ const EditPatientProfile = () => {
               className={styles.button}
               type="submit"
               onClick={
-                editInfo.password===editInfo.confirmPassword?
-                handleEdit:
-              null}
+                editInfo.password === editInfo.confirmPassword
+                  ? handleEdit
+                  : null
+              }
             >
               SAVE CHANGES
             </button>
-            <button
-              className={styles.button}
-              type="button"
-            >
+            <button className={styles.button} type="button">
               DELETE ACCOUNT
             </button>
-            <button
-              className={styles.button}
-              type="button"
-            >
+            <button className={styles.button} type="button">
               CANCEL
             </button>
           </div>
@@ -280,20 +291,14 @@ const EditPatientProfile = () => {
           </h1>
           <div className="flex gap-6">
             <div>
-              <p>{editInfo.cards} Cards Added</p>
-              <button
-                className={styles.button}
-                type="button"
-              >
+              <p>0 Cards Added</p>
+              <button className={styles.button} type="button">
                 SHOW CARDS
               </button>
             </div>
             <div>
               <p>10 Tickets Remaining</p>
-              <button
-                className={styles.button}
-                type="button"
-              >
+              <button className={styles.button} type="button">
                 BUY TICKETS
               </button>
             </div>

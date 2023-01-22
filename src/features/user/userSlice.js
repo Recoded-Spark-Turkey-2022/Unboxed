@@ -6,8 +6,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail,
+  updatePassword,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
 
 const initialState = {
@@ -19,7 +21,8 @@ const initialState = {
 
 export const currentUserHandler = createAsyncThunk(
   'user/currentUserHandler',
-  async (payload) => { // eslint-disable-line consistent-return
+  // eslint-disable-next-line consistent-return
+  async (payload) => {
     try {
       const docRef = doc(db, 'patients', payload);
       const docSnap = await getDoc(docRef);
@@ -28,7 +31,7 @@ export const currentUserHandler = createAsyncThunk(
       if (docSnap.exists()) {
         return JSON.stringify({ ...docSnap.data() });
       }
-       if (docSnap2.exists()) {
+      if (docSnap2.exists()) {
         return JSON.stringify({ ...docSnap2.data() });
       }
     } catch (error) {
@@ -155,6 +158,50 @@ export const signoutHandler = createAsyncThunk(
   }
 );
 
+export const editProfileHandler = createAsyncThunk(
+  'user/editProfileHandler',
+  async (payload, { rejectWithValue }) => {
+    const {
+      navigation,
+      name,
+      surname,
+      educationLevel,
+      hobbies,
+      familySize,
+      gender,
+      birthday,
+      email,
+      phone,
+      ID,
+      password,
+    } = payload;
+    try {
+      await signInWithEmailAndPassword(auth, auth.currentUser.email, password);
+      await updateEmail(auth.currentUser, email);
+      await updatePassword(auth.currentUser, password);
+      const myId = auth.currentUser.uid;
+      const profileInfo = doc(db, 'patients', myId);
+      await updateDoc(profileInfo, {
+        name,
+        surname,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        birthday,
+        email,
+        phone,
+        ID,
+        password
+      });
+      navigation();
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -250,6 +297,19 @@ const userSlice = createSlice({
       state.error = null;
     });
     builder.addCase(counselorsSignupHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Patient Edit Profile
+    builder.addCase(editProfileHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(editProfileHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(editProfileHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });
