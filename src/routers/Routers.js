@@ -17,7 +17,6 @@ import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
 
-
 const Routers = () => {
   return (
     <div>
