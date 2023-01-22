@@ -29,7 +29,7 @@ export const currentUserHandler = createAsyncThunk(
       if (docSnap.exists()) {
         return JSON.stringify({ ...docSnap.data() });
       }
-       if (docSnap2.exists()) {
+      if (docSnap2.exists()) {
         return JSON.stringify({ ...docSnap2.data() });
       }
     } catch (error) {
@@ -270,7 +270,8 @@ const userSlice = createSlice({
     builder.addCase(addCard.rejected, (state, action) => {
       state.cards = null;
       state.loading = false;
-
+      state.error = action.payload;
+    });
     // Counselor Signup
     builder.addCase(counselorsSignupHandler.pending, (state) => {
       state.isLoggedIn = false;
