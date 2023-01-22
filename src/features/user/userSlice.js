@@ -174,11 +174,14 @@ export const editProfileHandler = createAsyncThunk(
       phone,
       ID,
       password,
+      oldPassword
     } = payload;
     try {
-      await signInWithEmailAndPassword(auth, auth.currentUser.email, password);
-      await updateEmail(auth.currentUser, email);
-      await updatePassword(auth.currentUser, password);
+      if(password){
+        await signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword);
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, password);
+      }
       const myId = auth.currentUser.uid;
       const profileInfo = doc(db, 'patients', myId);
       await updateDoc(profileInfo, {
@@ -195,6 +198,7 @@ export const editProfileHandler = createAsyncThunk(
         password
       });
       navigation();
+      window.location.reload(false)
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);

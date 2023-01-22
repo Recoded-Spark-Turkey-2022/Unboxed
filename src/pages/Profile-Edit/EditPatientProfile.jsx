@@ -22,10 +22,11 @@ const EditPatientProfile = () => {
     phone: '',
     ID: '',
     password: '',
+    oldPassword: '',
     confirmPassword: '',
     photo: '',
-    tickets: '',
-    cards: '',
+    tickets: 0,
+    cards: 0,
   });
 
   const handleChange = (e) => {
@@ -36,17 +37,77 @@ const EditPatientProfile = () => {
     }));
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (firestoreObject) {
-      editInfo.name = firestoreObject.name;
-      editInfo.surname = firestoreObject.surname;
-      editInfo.email = firestoreObject.email;
-      editInfo.birthday = firestoreObject.birthday;
-      editInfo.password = firestoreObject.password;
-      // editInfo.cards = firestoreObject.cards.length;
+      setEditInfo((prevUser) => ({
+        ...prevUser,
+        name: firestoreObject.name,
+        surname: firestoreObject.surname,
+        email: firestoreObject.email,
+      }));
+      if (firestoreObject.educationLevel) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          educationLevel: firestoreObject.educationLevel,
+        }));
+      }
+      if (firestoreObject.hobbies) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          hobbies: firestoreObject.hobbies,
+        }));
+      }
+      if (firestoreObject.familySize) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          familySize: firestoreObject.familySize,
+        }));
+      }
+      if (firestoreObject.gender) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          gender: firestoreObject.gender,
+        }));
+      }
+      if (firestoreObject.birthday) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          birthday: firestoreObject.birthday,
+        }));
+      }
+      if (firestoreObject.phone) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          phone: firestoreObject.phone,
+        }));
+      }
+      if (firestoreObject.ID) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          ID: firestoreObject.ID,
+        }));
+      }
+      if (firestoreObject.tickets) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          tickets: firestoreObject.tickets,
+        }));
+      }
+      if (firestoreObject.cards) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          cards: firestoreObject.cards.length,
+        }));
+      }
+      if (firestoreObject.password) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          password: firestoreObject.password,
+          oldPassword: firestoreObject.password,
+        }));
+      }
     }
-  },[firestoreObject])
+  }, [firestoreObject]);
 
   const navigation = () => {
     navigate('/editPatientProfileThanks');
@@ -54,7 +115,6 @@ const EditPatientProfile = () => {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(editInfo);
     dispatch(
       editProfileHandler({
         name: editInfo.name,
@@ -68,6 +128,7 @@ const EditPatientProfile = () => {
         phone: editInfo.phone,
         ID: editInfo.ID,
         password: editInfo.password,
+        oldPassword: editInfo.oldPassword,
         navigation,
       })
     );
@@ -198,18 +259,20 @@ const EditPatientProfile = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Email</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="email"
-                required
-                value={editInfo.email}
-                onChange={handleChange}
-              />
-            </div>
+            {editInfo.password ? (
+              <div className={styles.inputRows}>
+                {' '}
+                <p className={styles.inputLabel}>Email</p>
+                <input
+                  className={styles.inputs}
+                  type="text"
+                  name="email"
+                  required
+                  value={editInfo.email}
+                  onChange={handleChange}
+                />
+              </div>
+            ) : null}
             <div className={styles.inputRows}>
               {' '}
               <p className={styles.inputLabel}>Phone Number</p>
@@ -236,6 +299,60 @@ const EditPatientProfile = () => {
             </div>
           </div>
           <h1 className="text-4xl font-semibold mb-5">Security</h1>
+          {editInfo.password ? (
+            <div>
+              <div className="mb-7 w-10/12 sm:w-full ">
+                <div className={styles.inputRows}>
+                  {' '}
+                  <p className={styles.inputLabel}>Password</p>
+                  <input
+                    className={styles.inputs}
+                    type="password"
+                    name="password"
+                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                    required
+                    title="Password should include minimum 8 characters, at least one letter and one number"
+                    value={editInfo.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={styles.inputRows}>
+                  {' '}
+                  <p className={styles.inputLabel}>Confirm Password</p>
+                  <input
+                    className={styles.inputs}
+                    type="password"
+                    name="confirmPassword"
+                    pattern={editInfo.password}
+                    title="Passwords don't match"
+                    required
+                    value={editInfo.confirmPassword}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+          ) : null}
+          <div className="flex gap-6">
+            <button
+              className={styles.button}
+              type="submit"
+              onClick={
+                editInfo.password === editInfo.confirmPassword
+                  ? handleEdit
+                  : null
+              }
+            >
+              SAVE CHANGES
+            </button>
+            <button className={styles.button} type="button">
+              DELETE ACCOUNT
+            </button>
+            <button className={styles.button} type="button">
+              CANCEL
+            </button>
+          </div>
+          {/* <h1 className="text-4xl font-semibold mb-5">Security</h1>
           <div className="mb-7 w-10/12 sm:w-full ">
             <div className={styles.inputRows}>
               {' '}
@@ -285,19 +402,19 @@ const EditPatientProfile = () => {
             <button className={styles.button} type="button">
               CANCEL
             </button>
-          </div>
+          </div> */}
           <h1 className="text-4xl font-semibold mb-5">
             Payment Methods & Tickets
           </h1>
           <div className="flex gap-6">
             <div>
-              <p>0 Cards Added</p>
+              <p>{editInfo.cards} Cards Added</p>
               <button className={styles.button} type="button">
                 SHOW CARDS
               </button>
             </div>
             <div>
-              <p>10 Tickets Remaining</p>
+              <p>{editInfo.tickets} Tickets Remaining</p>
               <button className={styles.button} type="button">
                 BUY TICKETS
               </button>
