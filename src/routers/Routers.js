@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Counsler from '../components/Counsler/Counsler';
+import CounselorRequirements from '../pages/counselor/CounselorRequirements';
+import CounselorSignup from '../pages/counselor/CounselorSignup';
+import CounselorSignupThanks from '../pages/counselor/CounselorSignupThanks';
 import Homepage from '../pages/homepage/Homepage';
 import Login from '../pages/login/Login';
 import AddNewCard from '../pages/addNewCard/addNewCard';

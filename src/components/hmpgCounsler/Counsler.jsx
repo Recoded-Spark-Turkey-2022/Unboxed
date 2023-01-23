@@ -5,7 +5,7 @@ const Counsler = () => {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate('/counselor');
+    navigate('counselorRequirements');
   }
 
   return (
