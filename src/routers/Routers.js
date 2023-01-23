@@ -5,7 +5,7 @@ import CounselorSignup from '../pages/counselor/CounselorSignup';
 import CounselorSignupThanks from '../pages/counselor/CounselorSignupThanks';
 import Homepage from '../pages/homepage/Homepage';
 import Login from '../pages/login/Login';
-import Edit from '../pages/Profile-Edit/Profile-Edit';
+// import Edit from '../pages/Profile-Edit/Profile-Edit';
 import AddNewCard from '../pages/addNewCard/addNewCard';
 import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 import Signup from '../pages/signup/Signup';
@@ -20,7 +20,6 @@ import Careers from '../pages/about/Careers';
 import EditPatientProfile from '../pages/Profile-Edit/EditPatientProfile';
 import EditPatientProfileThanks from '../pages/Profile-Edit/EditPatientProfileThanks';
 
-
 const Routers = () => {
   return (
     <div>
@@ -28,7 +27,7 @@ const Routers = () => {
         <Route path="/Thankyou" element={<Thanks />} />
         <Route path="/" element={<Homepage />} />
         <Route path="login" element={<Login />} />
-        <Route path="/Edit-Profile" element={<Edit />} />
+        {/* <Route path="/Edit-Profile" element={<Edit />} /> */}
         <Route path="editPatientProfile" element={<EditPatientProfile />} />
         <Route path="editPatientProfileThanks" element={<EditPatientProfileThanks />} />
         <Route path="add-new-card" element={<AddNewCard />} />
