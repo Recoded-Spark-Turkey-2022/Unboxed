@@ -29,9 +29,15 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route path="counselorRequirements" element={<CounselorRequirements />} />
+        <Route
+          path="counselorRequirements"
+          element={<CounselorRequirements />}
+        />
         <Route path="CounselorSignup" element={<CounselorSignup />} />
-        <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
+        <Route
+          path="CounselorSignupThanks"
+          element={<CounselorSignupThanks />}
+        />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
         <Route path="about/teams" element={<Team />} />
