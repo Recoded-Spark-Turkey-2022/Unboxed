@@ -9,9 +9,16 @@ const BlogDetails = () => {
 
   const findBlog = blogs.filter((blog) => blog.id === id.slice(1));
   const renderBlog = findBlog.map((blog) => (
-    <div key={id}>
-      <img src={blog.image} alt={blog.imageDescription} />
-      <h1>{blog.mainTitle}</h1>
+    <div
+      key={id}
+      className="flex-col justify-center items-start border-2 border-red-500"
+    >
+      <img
+        className="rounded-xl"
+        src={blog.image}
+        alt={blog.imageDescription}
+      />
+      <h1 className="">{blog.mainTitle}</h1>
       <p>{blog.summary}</p>
       <h2>{blog.subtitle}</h2>
       <p>{blog.article}</p>
