@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux';
 import Card from '../card/Card';
 
-const Cards = ({ start, end, setSelected, selected }) => {
-  const user = useSelector((state) => state.user);
-  const { firestoreObject } = user;
-
+const Cards = ({ start, end, setSelected, selected, cards }) => {
   return (
-    <button onClick={() => setSelected(!selected)} type="submit">
-      {firestoreObject?.cards?.slice(start, end).map((item) => {
+    <button
+      onClick={() => setSelected(!selected)}
+      type="submit"
+      className="flex gap-2"
+    >
+      {cards?.slice(start, end).map((item) => {
         return (
           <Card
             expiryDate={item?.expiryDate}

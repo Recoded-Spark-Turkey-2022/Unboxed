@@ -16,6 +16,7 @@ import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
 
 import BuyTickets from '../pages/buyTickets/BuyTickets';
+import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 
 const Routers = () => {
   return (
@@ -36,6 +37,7 @@ const Routers = () => {
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
         <Route path="buy-ticket" element={<BuyTickets />} />
+        <Route path="payment-methods" element={<PaymentMethods />} />
       </Routes>
     </div>
   );
