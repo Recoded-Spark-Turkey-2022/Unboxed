@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Subscribe from '../../components/footer/Subscribe';
+import Subscribe from '../footer/Subscribe';
+import RecommendBlog from './RecommendBlog';
 import { blogs } from '../../data/blogArticles';
 
 const BlogDetails = () => {
@@ -21,6 +22,7 @@ const BlogDetails = () => {
     <div>
       {renderBlog}
       <Subscribe />
+      <RecommendBlog id={id} />
     </div>
   );
 };
