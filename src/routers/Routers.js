@@ -16,6 +16,7 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
+import CounselorEditInfo from '../pages/counselor/CounselorEditInfo';
 
 const Routers = () => {
   return (
@@ -31,6 +32,7 @@ const Routers = () => {
         <Route path="blogs/:id" element={<BlogDetails />} />
         <Route path="counselorRequirements" element={<CounselorRequirements />} />
         <Route path="CounselorSignup" element={<CounselorSignup />} />
+        <Route path="CounselorEditInfo" element={<CounselorEditInfo />} />
         <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
