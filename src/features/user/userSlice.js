@@ -8,8 +8,9 @@ import {
   signOut,
   updateEmail,
   updatePassword,
+  deleteUser,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, deleteDoc } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
 
 const initialState = {
@@ -246,6 +247,21 @@ export const editCounselerHandler = createAsyncThunk(
     }
   }
 );
+
+export const deleteCounselorHandler = createAsyncThunk(
+  'user/deleteUserHandler',
+  async (payload) => {
+    const { navigation } = payload;
+    try {
+      await deleteDoc(doc(db, "counselors", auth.currentUser.uid));
+      await deleteUser(auth.currentUser);
+      navigation();
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return JSON.stringify(error);
+    }
+  }
+);
 export const addCard = createAsyncThunk(
   'user/addCard',
   async (payload, { rejectWithValue }) => {
@@ -399,6 +415,21 @@ const userSlice = createSlice({
       state.error = null;
     });
     builder.addCase(editCounselerHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // delete Counselor
+    builder.addCase(deleteCounselorHandler.pending, (state) => {
+      state.isLoggedIn = false;
+      state.error = 'signout in progress';
+    });
+    builder.addCase(deleteCounselorHandler.fulfilled, (state) => {
+      state.isLoggedIn = false;
+      state.firestoreObject = null;
+      state.authObject = null;
+      state.error = '';
+    });
+    builder.addCase(deleteCounselorHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });
