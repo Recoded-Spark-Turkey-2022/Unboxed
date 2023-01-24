@@ -111,37 +111,25 @@ const CounselorEditInfo = () => {
         <form className={styles.form}>
           <h1 className={styles.h1Style}>View Info</h1>
           <EditProfileInputs
-            styles={styles}
             textContent="Name"
             name="name"
             value={editInfo.name}
             handleChange={handleChange}
             validation
           />
-          {/* <EditProfileInputs
-            styles={styles}
-            textContent="Surname"
-            name="surname"
-            value={editInfo.surname}
-            handleChange={handleChange}
-            validation
-          /> */}
           <EditProfileInputs
-            styles={styles}
             textContent="Bio"
             name="bio"
             value={editInfo.bio}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            styles={styles}
             textContent="City"
             name="city"
             value={editInfo.city}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            styles={styles}
             textContent="License number"
             name="license"
             value={editInfo.license}
@@ -149,14 +137,12 @@ const CounselorEditInfo = () => {
             validation
           />
           <EditProfileInputs
-            styles={styles}
             textContent="BirthDate"
             name="birthday"
             value={editInfo.birthday}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            styles={styles}
             textContent="Email"
             name="email"
             value={editInfo.email}
@@ -164,7 +150,6 @@ const CounselorEditInfo = () => {
             validation
           />
           <EditProfileInputs
-            styles={styles}
             textContent="Phone Number"
             name="phone"
             value={editInfo.phone}
@@ -202,7 +187,7 @@ const CounselorEditInfo = () => {
               />
             </div>
           </div>
-            <AccountButtons editInfo={editInfo} handleEdit={handleEdit} />
+            <AccountButtons editInfo={editInfo} handleEdit={handleEdit} collection="counselors" />
         </form>
       </div>
     </div>

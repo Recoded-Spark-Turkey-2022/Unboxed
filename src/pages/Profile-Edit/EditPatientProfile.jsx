@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AccountButtons from '../../components/profile/AccountButtons';
 import { editProfileHandler } from '../../features/user/userSlice';
+import EditProfileInputs from '../../components/profile/EditProfileInputs';
+import { styles } from '../../components/profile/ProfileStyle';
 import img from './user-profile.svg';
 // import icon from './Upload.png';
 
@@ -134,14 +137,6 @@ const EditPatientProfile = () => {
     );
   };
 
-  const styles = {
-    inputs: 'border-2 border-gray-200 rounded min-w-[60%] text-xl',
-    inputRows: 'flex justify-between mb-3',
-    inputLabel: 'text-xl',
-    button:
-      'rounded text-xl px-7 py-2 mb-3 relative sm:text-base font-medium shadow-md bg-cyan-400',
-  };
-
   return (
     <div className="font-poppins">
       <h1 className="text-[#FF0000] text-center text-xl">
@@ -149,7 +144,7 @@ const EditPatientProfile = () => {
         Please fill all the fields with correct and valid details to complete
         your profile.
       </h1>
-      <div className="flex items-start justify-center mt-6 sm:flex-col sm:items-center">
+      <div className={styles.container}>
         <div className="">
           <img
             src={img}
@@ -164,33 +159,23 @@ const EditPatientProfile = () => {
             <img src={icon} alt="Upload " />{' '}
           </button> */}
         </div>
-        <form className="flex flex-col w-3/5 lg:w-3/4 tablet2:pl-12 sm:pl-0  pl-44 ">
-          <h1 className="text-4xl font-semibold mb-5">Profile Info</h1>
+        <form className={styles.form}>
+          <h1 className={styles.h1Style}>Profile Info</h1>
           <div className="mb-7 w-10/12 sm:w-full ">
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Name</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="name"
-                required
-                value={editInfo.name}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Surname</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="surname"
-                required
-                value={editInfo.surname}
-                onChange={handleChange}
-              />
-            </div>
+            <EditProfileInputs
+              textContent="Name"
+              name="name"
+              value={editInfo.name}
+              handleChange={handleChange}
+              validation
+            />
+            <EditProfileInputs
+              textContent="Surname"
+              name="surname"
+              value={editInfo.surname}
+              handleChange={handleChange}
+              validation
+            />
             <div className={styles.inputRows}>
               {' '}
               <p className={styles.inputLabel}>Education Level</p>
@@ -208,17 +193,12 @@ const EditPatientProfile = () => {
                 <option value="PHD">PHD</option>
               </select>
             </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Hobbies</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="hobbies"
-                value={editInfo.hobbies}
-                onChange={handleChange}
-              />
-            </div>
+            <EditProfileInputs
+              textContent="Hobbies"
+              name="hobbies"
+              value={editInfo.hobbies}
+              handleChange={handleChange}
+            />
             <div className={styles.inputRows}>
               {' '}
               <p className={styles.inputLabel}>Family Size</p>
@@ -248,57 +228,36 @@ const EditPatientProfile = () => {
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Birth Date</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="birthday"
-                value={editInfo.birthday}
-                onChange={handleChange}
-              />
-            </div>
+            <EditProfileInputs
+              textContent="Birth Date"
+              name="birthday"
+              value={editInfo.birthday}
+              handleChange={handleChange}
+              validation
+            />
             {editInfo.password ? (
-              <div className={styles.inputRows}>
-                {' '}
-                <p className={styles.inputLabel}>Email</p>
-                <input
-                  className={styles.inputs}
-                  type="text"
-                  name="email"
-                  required
-                  value={editInfo.email}
-                  onChange={handleChange}
-                />
-              </div>
+              <EditProfileInputs
+                textContent="Email"
+                name="email"
+                value={editInfo.email}
+                handleChange={handleChange}
+                validation
+              />
             ) : null}
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Phone Number</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="phone"
-                required
-                value={editInfo.phone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>ID</p>
-              <input
-                className={styles.inputs}
-                type="text"
-                name="ID"
-                required
-                value={editInfo.ID}
-                onChange={handleChange}
-              />
-            </div>
+            <EditProfileInputs
+              textContent="Phone Number"
+              name="phone"
+              value={editInfo.phone}
+              handleChange={handleChange}
+            />
+            <EditProfileInputs
+              textContent="ID"
+              name="ID"
+              value={editInfo.ID}
+              handleChange={handleChange}
+            />
           </div>
-          <h1 className="text-4xl font-semibold mb-5">Security</h1>
+          <h1 className={styles.h1Style}>Security</h1>
           {editInfo.password ? (
             <div>
               <div className="mb-7 w-10/12 sm:w-full ">
@@ -333,79 +292,12 @@ const EditPatientProfile = () => {
               </div>
             </div>
           ) : null}
-          <div className="flex gap-6">
-            <button
-              className={styles.button}
-              type="submit"
-              onClick={
-                editInfo.password === editInfo.confirmPassword
-                  ? handleEdit
-                  : null
-              }
-            >
-              SAVE CHANGES
-            </button>
-            <button className={styles.button} type="button">
-              DELETE ACCOUNT
-            </button>
-            <button className={styles.button} type="button">
-              CANCEL
-            </button>
-          </div>
-          {/* <h1 className="text-4xl font-semibold mb-5">Security</h1>
-          <div className="mb-7 w-10/12 sm:w-full ">
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Password</p>
-              <input
-                className={styles.inputs}
-                type="password"
-                name="password"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                required
-                title="Password should include minimum 8 characters, at least one letter and one number"
-                value={editInfo.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className={styles.inputRows}>
-              {' '}
-              <p className={styles.inputLabel}>Confirm Password</p>
-              <input
-                className={styles.inputs}
-                type="password"
-                name="confirmPassword"
-                pattern={editInfo.password}
-                title="Passwords don't match"
-                required
-                value={editInfo.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-6">
-            <button
-              className={styles.button}
-              type="submit"
-              onClick={
-                editInfo.password === editInfo.confirmPassword
-                  ? handleEdit
-                  : null
-              }
-            >
-              SAVE CHANGES
-            </button>
-            <button className={styles.button} type="button">
-              DELETE ACCOUNT
-            </button>
-            <button className={styles.button} type="button">
-              CANCEL
-            </button>
-          </div> */}
-          <h1 className="text-4xl font-semibold mb-5">
-            Payment Methods & Tickets
-          </h1>
+          <AccountButtons
+            editInfo={editInfo}
+            handleEdit={handleEdit}
+            collection="patients"
+          />
+          <h1 className={styles.h1Style}>Payment Methods & Tickets</h1>
           <div className="flex gap-6">
             <div>
               <p>{editInfo.cards} Cards Added</p>

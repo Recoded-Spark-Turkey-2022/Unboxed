@@ -2,9 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { styles } from './ProfileStyle';
-import { deleteCounselorHandler } from '../../features/user/userSlice';
+import { deleteUserHandler } from '../../features/user/userSlice';
 
-const AccountButtons = ({ editInfo, handleEdit }) => {
+const AccountButtons = ({ editInfo, handleEdit, collection }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const navigation = () => {
@@ -24,7 +24,7 @@ const AccountButtons = ({ editInfo, handleEdit }) => {
       <button
         className={styles.button}
         onClick={() => {
-          dispatch(deleteCounselorHandler({ navigation }));
+          dispatch(deleteUserHandler({ navigation, collection }));
         }}
         type="button"
       >

@@ -1,6 +1,7 @@
 import React from 'react';
+import { styles } from './ProfileStyle';
 
-const EditProfileInputs = ({styles,textContent,name,value,handleChange, validation}) => {
+const EditProfileInputs = ({textContent,name,value,handleChange, validation}) => {
     
   return (
     <div className={styles.inputRows}>

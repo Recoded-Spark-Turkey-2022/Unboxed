@@ -248,12 +248,12 @@ export const editCounselerHandler = createAsyncThunk(
   }
 );
 
-export const deleteCounselorHandler = createAsyncThunk(
+export const deleteUserHandler = createAsyncThunk(
   'user/deleteUserHandler',
   async (payload) => {
-    const { navigation } = payload;
+    const { navigation, collection } = payload;
     try {
-      await deleteDoc(doc(db, "counselors", auth.currentUser.uid));
+      await deleteDoc(doc(db, collection, auth.currentUser.uid));
       await deleteUser(auth.currentUser);
       navigation();
       return JSON.stringify({ ...initialState });
@@ -418,18 +418,18 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });
-    // delete Counselor
-    builder.addCase(deleteCounselorHandler.pending, (state) => {
+    // delete User
+    builder.addCase(deleteUserHandler.pending, (state) => {
       state.isLoggedIn = false;
       state.error = 'signout in progress';
     });
-    builder.addCase(deleteCounselorHandler.fulfilled, (state) => {
+    builder.addCase(deleteUserHandler.fulfilled, (state) => {
       state.isLoggedIn = false;
       state.firestoreObject = null;
       state.authObject = null;
       state.error = '';
     });
-    builder.addCase(deleteCounselorHandler.rejected, (state, action) => {
+    builder.addCase(deleteUserHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
       state.error = action.payload.message;
     });
