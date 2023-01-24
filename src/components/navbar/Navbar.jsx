@@ -155,7 +155,7 @@ const Navbar = () => {
               >
                 <li className={styles.aboutLi}>Booking Info</li>
                 <li className={styles.aboutLi}>Buy Tickets</li>
-                <li className={styles.aboutLi}>Profile Info</li>
+                <li className={styles.aboutLi}>{firestoreObject.license?<NavLink to="CounselorEditInfo">View Info</NavLink>:<NavLink to="editPatientProfile">Profile Info</NavLink> }</li>
                 <li>
                   {' '}
                   <button

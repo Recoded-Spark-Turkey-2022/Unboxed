@@ -5,6 +5,7 @@ import CounselorSignup from '../pages/counselor/CounselorSignup';
 import CounselorSignupThanks from '../pages/counselor/CounselorSignupThanks';
 import Homepage from '../pages/homepage/Homepage';
 import Login from '../pages/login/Login';
+// import Edit from '../pages/Profile-Edit/Profile-Edit';
 import AddNewCard from '../pages/addNewCard/addNewCard';
 import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 import Signup from '../pages/signup/Signup';
@@ -17,6 +18,8 @@ import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
 import CounselorEditInfo from '../pages/counselor/CounselorEditInfo';
+import EditPatientProfile from '../pages/Profile-Edit/EditPatientProfile';
+import EditPatientProfileThanks from '../pages/Profile-Edit/EditPatientProfileThanks';
 
 const Routers = () => {
   return (
@@ -25,6 +28,9 @@ const Routers = () => {
         <Route path="/Thankyou" element={<Thanks />} />
         <Route path="/" element={<Homepage />} />
         <Route path="login" element={<Login />} />
+        {/* <Route path="/Edit-Profile" element={<Edit />} /> */}
+        <Route path="editPatientProfile" element={<EditPatientProfile />} />
+        <Route path="editPatientProfileThanks" element={<EditPatientProfileThanks />} />
         <Route path="add-new-card" element={<AddNewCard />} />
         <Route path="add-new-card-thank-you" element={<AddNewCardThankYou />} />
         <Route path="signup" element={<Signup />} />

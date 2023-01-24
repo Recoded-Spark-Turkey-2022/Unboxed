@@ -6,6 +6,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail,
+  updatePassword,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db, auth } from '../../firebaseFile';
@@ -155,6 +157,95 @@ export const signoutHandler = createAsyncThunk(
     }
   }
 );
+
+export const editProfileHandler = createAsyncThunk(
+  'user/editProfileHandler',
+  async (payload, { rejectWithValue }) => {
+    const {
+      navigation,
+      name,
+      surname,
+      educationLevel,
+      hobbies,
+      familySize,
+      gender,
+      birthday,
+      email,
+      phone,
+      ID,
+      password,
+      oldPassword
+    } = payload;
+    try {
+      if(password){
+        await signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword);
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, password);
+      }
+      const myId = auth.currentUser.uid;
+      const profileInfo = doc(db, 'patients', myId);
+      await updateDoc(profileInfo, {
+        name,
+        surname,
+        educationLevel,
+        hobbies,
+        familySize,
+        gender,
+        birthday,
+        email,
+        phone,
+        ID,
+        password
+      });
+      navigation();
+      window.location.reload(false)
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const editCounselerHandler = createAsyncThunk(
+  'user/editCounselerHandler',
+  async (payload, { rejectWithValue }) => {
+    const {
+      navigation,
+      name,
+      bio,
+      city,
+      license,
+      birthday,
+      email,
+      phone,
+      password,
+      oldPassword
+    } = payload;
+    try {
+      if(password !== oldPassword || email !== auth.currentUser.email){
+        await signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword);
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, password);
+      }
+      const myId = auth.currentUser.uid;
+      const profileInfo = doc(db, 'counselors', myId);
+      await updateDoc(profileInfo, {
+        name,
+        bio,
+        city,
+        license,
+        birthday,
+        email,
+        phone,
+        password,
+      });
+      navigation();
+      window.location.reload(false)
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 export const addCard = createAsyncThunk(
   'user/addCard',
   async (payload, { rejectWithValue }) => {
@@ -283,7 +374,32 @@ const userSlice = createSlice({
     });
     builder.addCase(counselorsSignupHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
-
+      state.error = action.payload.message;
+    });
+    // Patient Edit Profile
+    builder.addCase(editProfileHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(editProfileHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(editProfileHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Counselor Edit Profile
+    builder.addCase(editCounselerHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(editCounselerHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(editCounselerHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
       state.error = action.payload.message;
     });
   },
