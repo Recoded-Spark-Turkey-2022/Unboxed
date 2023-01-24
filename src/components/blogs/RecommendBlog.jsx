@@ -7,13 +7,17 @@ function RecommendBlog({ id }) {
     .slice(1, 3)
     .map((blog) => (
       <div key={id}>
-        <img src={blog.image} alt={blog.imageDescription} />
+        <img
+          className="w-screen"
+          src={blog.image}
+          alt={blog.imageDescription}
+        />
       </div>
     ));
   return (
-    <div>
-      <h1>Recommended For You</h1>
-      {recommends}
+    <div className="py-[5%] text-3xl sm:text-lg">
+      <h1 className="py-[3%]">Recommended For You</h1>
+      <div className="flex space-x-[2%] pb-[3%]">{recommends}</div>
     </div>
   );
 }

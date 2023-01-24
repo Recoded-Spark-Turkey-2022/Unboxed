@@ -9,27 +9,32 @@ const BlogDetails = () => {
 
   const findBlog = blogs.filter((blog) => blog.id === id.slice(1));
   const renderBlog = findBlog.map((blog) => (
-    <div
-      key={id}
-      className="flex-col justify-center items-start border-2 border-red-500"
-    >
+    <div key={id} className="flex-col justify-center items-start space-y-[3%] ">
+      {' '}
       <img
-        className="rounded-xl"
-        src={blog.image}
+        className="rounded-xl w-full pt-[8%]"
+        src={blog.mainImage}
         alt={blog.imageDescription}
       />
-      <h1 className="">{blog.mainTitle}</h1>
+      <h1 className="text-5xl pt-[4%] sm:text-2xl">{blog.mainTitle}</h1>
       <p>{blog.summary}</p>
-      <h2>{blog.subtitle}</h2>
+      <h2 className="text-3xl sm:text-lg">{blog.subtitle}</h2>
       <p>{blog.article}</p>
     </div>
   ));
 
   return (
-    <div>
+    <div className="font-poppins uppercase text-xl sm:text-sm leading-8 font-light space-y-[3%]">
       {renderBlog}
-      <Subscribe />
-      <RecommendBlog id={id} />
+      <div className="space-y-[0.5%] ">
+        <h2 className="text-3xl sm:text-lg">Sign Up For The Healing Blog</h2>
+        <p>A weekly, ad-free Blog that helps you stay in the know.</p>
+        <Subscribe />
+      </div>
+      <div>
+        {' '}
+        <RecommendBlog id={id} />
+      </div>
     </div>
   );
 };

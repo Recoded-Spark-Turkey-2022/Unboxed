@@ -1,4 +1,5 @@
 import firstImg from './firstimg.svg';
+import firstBlog from './firstblog.svg';
 import secondImg from './secondimg.svg';
 import thirdImg from './thirdimg.svg';
 
@@ -6,6 +7,7 @@ const blogs = [
   {
     id: '1',
     image: firstImg,
+    mainImage: firstBlog,
     imageDescription:
       'in front of a purple background, blonde woman sitting cross-legged and she is looking at her phone',
     mainTitle: 'MENTAL HEALTH AND TECHNOLOGY',
