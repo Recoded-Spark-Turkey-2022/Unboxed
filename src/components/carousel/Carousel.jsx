@@ -11,13 +11,17 @@ function Carousel() {
   // this hook is used for make buttons work
   const [sliderRef, setSliderRef] = useState(null);
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   // mapping blogs-- to make images interactive, button element is assigned
   const recentBlogs = blogs.map((blog) => {
     return (
       <div key={blog.id}>
         <Link to={`/blogs/:${blog.id}`}>
           {' '}
-          <button className="mx-1" type="button">
+          <button className="mx-1" type="button" onClick={handleClick}>
             <img src={blog.image} alt={blog.title} />
           </button>
         </Link>

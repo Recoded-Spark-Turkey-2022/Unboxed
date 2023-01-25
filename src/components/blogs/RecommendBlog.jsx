@@ -1,22 +1,25 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { blogs } from '../../data/blogArticles';
 
 function RecommendBlog({ id }) {
-  const navigate = useNavigate();
-
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
   const recommends = blogs
     .filter((blog) => blog.id !== id.slice(1))
     .slice(0, 2)
     .map((blog) => (
       <div key={blog.id}>
-        <button type="button" onClick={() => navigate(`/blogs/:${blog.id}`)}>
-          <img
-            className="w-screen"
-            src={blog.image}
-            alt={blog.imageDescription}
-          />
-        </button>
+        <Link to={`/blogs/:${blog.id}`}>
+          <button type="button" onClick={handleClick}>
+            <img
+              className="w-screen"
+              src={blog.image}
+              alt={blog.imageDescription}
+            />
+          </button>
+        </Link>
       </div>
     ));
   return (
