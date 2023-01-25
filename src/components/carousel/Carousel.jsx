@@ -15,7 +15,7 @@ function Carousel() {
   const recentBlogs = blogs.map((blog) => {
     return (
       <div key={blog.id}>
-        <Link to={`/blogs/${blog.id}`}>
+        <Link to={`/blogs/:${blog.id}`}>
           {' '}
           <button className="mx-1" type="button">
             <img src={blog.image} alt={blog.title} />
