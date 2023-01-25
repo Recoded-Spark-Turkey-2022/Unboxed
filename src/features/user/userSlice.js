@@ -120,12 +120,19 @@ export const facebookSignupHandler = createAsyncThunk(
     const { navigation } = payload;
     try {
       const { user } = await signInWithPopup(auth, facebookProvider);
-      await setDoc(doc(db, 'patients', user.uid), {
-        name: user.displayName.split(' ')[0],
-        surname: user.displayName.split(' ')[1],
-        email: user.email,
-      });
-      navigation();
+      const docRef = doc(db, 'patients', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        navigation();
+      } else {
+        await setDoc(doc(db, 'patients', user.uid), {
+          name: user.displayName.split(' ')[0],
+          surname: user.displayName.split(' ')[1],
+          email: user.email,
+        });
+        navigation();
+        window.location.reload(false);
+      }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -137,15 +144,21 @@ export const googleSignupHandler = createAsyncThunk(
   'user/googleSignupHandler',
   async (payload, { rejectWithValue }) => {
     const googleProvider = new GoogleAuthProvider();
-    const { navigation } = payload;
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      await setDoc(doc(db, 'patients', user.uid), {
-        name: user.displayName.split(' ')[0],
-        surname: user.displayName.split(' ')[1],
-        email: user.email,
-      });
-      navigation();
+      const docRef = doc(db, 'patients', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        payload();
+      } else {
+        await setDoc(doc(db, 'patients', user.uid), {
+          name: user.displayName.split(' ')[0],
+          surname: user.displayName.split(' ')[1],
+          email: user.email,
+        });
+        payload();
+        window.location.reload(false);
+      }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -185,6 +198,7 @@ export const editProfileHandler = createAsyncThunk(
       password,
       oldPassword,
       photo,
+      oldPhoto,
     } = payload;
     try {
       if (password) {
@@ -198,7 +212,7 @@ export const editProfileHandler = createAsyncThunk(
       }
       const myId = auth.currentUser.uid;
       const profileInfo = doc(db, 'patients', myId);
-      if (photo) {
+      if (photo !== oldPhoto) {
         const imageRef = ref(storage, `images/${myId}`);
         await uploadBytes(imageRef, photo);
         const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));
@@ -254,6 +268,7 @@ export const editCounselerHandler = createAsyncThunk(
       password,
       oldPassword,
       photo,
+      oldPhoto,
     } = payload;
     try {
       if (password !== oldPassword || email !== auth.currentUser.email) {
@@ -267,7 +282,7 @@ export const editCounselerHandler = createAsyncThunk(
       }
       const myId = auth.currentUser.uid;
       const profileInfo = doc(db, 'counselors', myId);
-      if (photo) {
+      if (photo !== oldPhoto) {
         const imageRef = ref(storage, `images/${myId}`);
         await uploadBytes(imageRef, photo);
         const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));

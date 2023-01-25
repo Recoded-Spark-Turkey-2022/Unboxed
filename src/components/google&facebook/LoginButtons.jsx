@@ -31,7 +31,7 @@ const LoginButtons = () => {
         </button>
         <button
           type="button"
-          onClick={() => dispatch(googleSignupHandler({ navigation }))}
+          onClick={() => dispatch(googleSignupHandler( navigation ))}
         >
           <img src={googleIcon} alt="Google Icon" />
         </button>

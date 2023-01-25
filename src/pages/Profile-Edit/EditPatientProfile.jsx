@@ -28,6 +28,7 @@ const EditPatientProfile = () => {
     oldPassword: '',
     confirmPassword: '',
     photo: img,
+    oldPhoto: img,
     tickets: 0,
     cards: 0,
   });
@@ -113,6 +114,7 @@ const EditPatientProfile = () => {
         setEditInfo((prevUser) => ({
           ...prevUser,
           photo: firestoreObject.photo,
+          oldPhoto:firestoreObject.photo
         }));
       }
     }
@@ -139,6 +141,7 @@ const EditPatientProfile = () => {
         password: editInfo.password,
         oldPassword: editInfo.oldPassword,
         photo: editInfo.photo,
+        oldPhoto: editInfo.oldPhoto,
         navigation,
       })
     );

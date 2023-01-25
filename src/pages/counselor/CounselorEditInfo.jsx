@@ -24,6 +24,7 @@ const CounselorEditInfo = () => {
     oldPassword: '',
     confirmPassword: '',
     photo: img,
+    oldPhoto: img,
   });
   useEffect(() => {
     if (firestoreObject) {
@@ -73,6 +74,7 @@ const CounselorEditInfo = () => {
         setEditInfo((prevUser) => ({
           ...prevUser,
           photo: firestoreObject.photo,
+          oldPhoto:firestoreObject.photo
         }));
       }
     }
@@ -101,6 +103,7 @@ const CounselorEditInfo = () => {
         password: editInfo.password,
         oldPassword: editInfo.oldPassword,
         photo: editInfo.photo,
+        oldPhoto: editInfo.oldPhoto,
         navigation,
       })
     );
