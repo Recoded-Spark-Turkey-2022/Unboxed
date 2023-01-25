@@ -10,8 +10,16 @@ import {
   updatePassword,
   deleteUser,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, arrayUnion, deleteDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebaseFile';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  deleteDoc,
+} from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { db, auth, storage } from '../../firebaseFile';
 
 const initialState = {
   isLoggedIn: false,
@@ -175,31 +183,56 @@ export const editProfileHandler = createAsyncThunk(
       phone,
       ID,
       password,
-      oldPassword
+      oldPassword,
+      photo,
     } = payload;
     try {
-      if(password){
-        await signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword);
+      if (password) {
+        await signInWithEmailAndPassword(
+          auth,
+          auth.currentUser.email,
+          oldPassword
+        );
         await updateEmail(auth.currentUser, email);
         await updatePassword(auth.currentUser, password);
       }
       const myId = auth.currentUser.uid;
       const profileInfo = doc(db, 'patients', myId);
-      await updateDoc(profileInfo, {
-        name,
-        surname,
-        educationLevel,
-        hobbies,
-        familySize,
-        gender,
-        birthday,
-        email,
-        phone,
-        ID,
-        password
-      });
+      if (photo) {
+        const imageRef = ref(storage, `images/${myId}`);
+        await uploadBytes(imageRef, photo);
+        const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));
+        await updateDoc(profileInfo, {
+          name,
+          surname,
+          educationLevel,
+          hobbies,
+          familySize,
+          gender,
+          birthday,
+          email,
+          phone,
+          ID,
+          password,
+          photo: photoUrl,
+        });
+      } else {
+        await updateDoc(profileInfo, {
+          name,
+          surname,
+          educationLevel,
+          hobbies,
+          familySize,
+          gender,
+          birthday,
+          email,
+          phone,
+          ID,
+          password,
+        });
+      }
       navigation();
-      window.location.reload(false)
+      window.location.reload(false);
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -219,28 +252,50 @@ export const editCounselerHandler = createAsyncThunk(
       email,
       phone,
       password,
-      oldPassword
+      oldPassword,
+      photo,
     } = payload;
     try {
-      if(password !== oldPassword || email !== auth.currentUser.email){
-        await signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword);
+      if (password !== oldPassword || email !== auth.currentUser.email) {
+        await signInWithEmailAndPassword(
+          auth,
+          auth.currentUser.email,
+          oldPassword
+        );
         await updateEmail(auth.currentUser, email);
         await updatePassword(auth.currentUser, password);
       }
       const myId = auth.currentUser.uid;
       const profileInfo = doc(db, 'counselors', myId);
-      await updateDoc(profileInfo, {
-        name,
-        bio,
-        city,
-        license,
-        birthday,
-        email,
-        phone,
-        password,
-      });
+      if (photo) {
+        const imageRef = ref(storage, `images/${myId}`);
+        await uploadBytes(imageRef, photo);
+        const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));
+        await updateDoc(profileInfo, {
+          name,
+          bio,
+          city,
+          license,
+          birthday,
+          email,
+          phone,
+          password,
+          photo: photoUrl,
+        });
+      } else {
+        await updateDoc(profileInfo, {
+          name,
+          bio,
+          city,
+          license,
+          birthday,
+          email,
+          phone,
+          password,
+        });
+      }
       navigation();
-      window.location.reload(false)
+      window.location.reload(false);
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);

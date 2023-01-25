@@ -11,7 +11,7 @@ const AccountButtons = ({ editInfo, handleEdit, collection }) => {
     navigate('/');
   };
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 xsm:flex-wrap">
       <button
         className={styles.button}
         type="submit"

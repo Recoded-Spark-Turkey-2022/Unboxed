@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import img from '../Profile-Edit/user-profile.svg';
-import {styles} from '../../components/profile/ProfileStyle' 
+import { styles } from '../../components/profile/ProfileStyle';
 import AccountButtons from '../../components/profile/AccountButtons';
 import { editCounselerHandler } from '../../features/user/userSlice';
 
 const CounselorEditInfo = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
-    const { firestoreObject } = user;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const { firestoreObject } = user;
   const [editInfo, setEditInfo] = useState({
     name: '',
     bio: '',
@@ -23,7 +23,7 @@ const CounselorEditInfo = () => {
     password: '',
     oldPassword: '',
     confirmPassword: '',
-    photo: '',
+    photo: img,
   });
   useEffect(() => {
     if (firestoreObject) {
@@ -69,6 +69,12 @@ const CounselorEditInfo = () => {
           oldPassword: firestoreObject.password,
         }));
       }
+      if (firestoreObject.photo) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          photo: firestoreObject.photo,
+        }));
+      }
     }
   }, [firestoreObject]);
   const handleChange = (e) => {
@@ -94,6 +100,7 @@ const CounselorEditInfo = () => {
         phone: editInfo.phone,
         password: editInfo.password,
         oldPassword: editInfo.oldPassword,
+        photo: editInfo.photo,
         navigation,
       })
     );
@@ -101,11 +108,22 @@ const CounselorEditInfo = () => {
   return (
     <div className=" font-poppins">
       <div className={styles.container}>
-        <div className="">
+        <div className="flex flex-col items-start">
           <img
-            src={img}
+            src={editInfo.photo}
             alt="user-profile"
             className="w-36 h-36 rounded-full"
+          />
+          <input
+            className="w-36"
+            type="file"
+            name="photo"
+            onChange={(e) => {
+              setEditInfo((prevUser) => ({
+                ...prevUser,
+                photo: e.target.files[0],
+              }));
+            }}
           />
         </div>
         <form className={styles.form}>
@@ -187,7 +205,11 @@ const CounselorEditInfo = () => {
               />
             </div>
           </div>
-            <AccountButtons editInfo={editInfo} handleEdit={handleEdit} collection="counselors" />
+          <AccountButtons
+            editInfo={editInfo}
+            handleEdit={handleEdit}
+            collection="counselors"
+          />
         </form>
       </div>
     </div>

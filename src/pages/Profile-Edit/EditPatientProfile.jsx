@@ -27,7 +27,7 @@ const EditPatientProfile = () => {
     password: '',
     oldPassword: '',
     confirmPassword: '',
-    photo: '',
+    photo: img,
     tickets: 0,
     cards: 0,
   });
@@ -109,6 +109,12 @@ const EditPatientProfile = () => {
           oldPassword: firestoreObject.password,
         }));
       }
+      if (firestoreObject.photo) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          photo: firestoreObject.photo,
+        }));
+      }
     }
   }, [firestoreObject]);
 
@@ -132,6 +138,7 @@ const EditPatientProfile = () => {
         ID: editInfo.ID,
         password: editInfo.password,
         oldPassword: editInfo.oldPassword,
+        photo: editInfo.photo,
         navigation,
       })
     );
@@ -145,11 +152,22 @@ const EditPatientProfile = () => {
         your profile.
       </h1>
       <div className={styles.container}>
-        <div className="">
+        <div className=" flex flex-col items-start">
           <img
-            src={img}
+            src={editInfo.photo}
             alt="user-profile"
             className="w-36 h-36 rounded-full"
+          />
+          <input
+            className="w-36"
+            type="file"
+            name="photo"
+            onChange={(e) => {
+              setEditInfo((prevUser) => ({
+                ...prevUser,
+                photo: e.target.files[0],
+              }));
+            }}
           />
           {/* <button
             type="button"
@@ -210,7 +228,7 @@ const EditPatientProfile = () => {
                   value={editInfo.familySize}
                   onChange={handleChange}
                 />
-                <p className="text-xl ">Member(s)</p>
+                <p className="text-xl xsm:text-base ">Member(s)</p>
               </div>
             </div>
             <div className={styles.inputRows}>
