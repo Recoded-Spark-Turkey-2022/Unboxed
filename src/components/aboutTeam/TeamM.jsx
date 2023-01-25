@@ -9,9 +9,9 @@ import ysf from './TeamMembersPP/ysf.jpg';
 const TeamM = () => {
   return (
     <div data-testid="TeamM" className=" font-poppins flex flex-col items-center ">
-      <div className=" flex flex-col items-center my-10 w-3/4">
-        <div className=" self-start ml-8">
-          <h1 className=" font-normal text-5xl sm:text-3xl">WE ARE HEALING, NICE TO MEET YOU!</h1>
+      <div className=" flex flex-col items-center my-10 w-2/3 lg:w-5/6">
+        <div className=" self-start">
+          <h1 className="text-5xl sm:text-3xl">WE ARE HEALING, NICE TO MEET YOU!</h1>
           <p className="text-3xl sm:text-xl leading-10 mt-24 sm:mt-16 text-gray-700">Meet the Team!</p>
         </div>
       </div>
