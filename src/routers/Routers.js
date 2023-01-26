@@ -34,7 +34,7 @@ const Routers = () => {
         <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
-        <Route path="about/teams" element={<Team />} />
+        <Route path="about/team" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
       </Routes>
