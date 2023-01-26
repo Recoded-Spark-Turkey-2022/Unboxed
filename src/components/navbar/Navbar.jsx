@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    dispatch(signoutHandler({navigation}));
+    dispatch(signoutHandler({ navigation }));
   };
 
   const location = useLocation();
@@ -58,7 +58,7 @@ const Navbar = () => {
               location.pathname === '/blogs' ? ' text-blue-300' : null
             } `}
           >
-            <NavLink to="blogs/1">Blogs</NavLink>
+            <NavLink to="blogs/:1">Blogs</NavLink>
           </li>
           <li
             className="text-lg flex flex-col sm:text-sm "
