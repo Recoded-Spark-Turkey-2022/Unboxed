@@ -6,7 +6,7 @@ import { editProfileHandler } from '../../features/user/userSlice';
 import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import { styles } from '../../components/profile/ProfileStyle';
 import img from './user-profile.svg';
-// import icon from './Upload.png';
+
 
 const EditPatientProfile = () => {
   const navigate = useNavigate();
@@ -172,13 +172,6 @@ const EditPatientProfile = () => {
               }));
             }}
           />
-          {/* <button
-            type="button"
-            className="w-12 h-12 ml-14 absolute translate-y-28"
-          >
-            {' '}
-            <img src={icon} alt="Upload " />{' '}
-          </button> */}
         </div>
         <form className={styles.form}>
           <h1 className={styles.h1Style}>Profile Info</h1>
