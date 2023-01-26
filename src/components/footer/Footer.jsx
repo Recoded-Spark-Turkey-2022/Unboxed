@@ -6,17 +6,19 @@ const Footer = () => {
   return (
     <div
       data-testid="FooterTest"
-      className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col h-auto py-10 sm:p-6 md:py-10 md:px-8  bg-[#FEE89E]  space-x-3 md:space-x-6"
+      className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col   sm:p-2 md:py-2 md:px-8  bg-[#FEE89E]  space-x-3 md:space-x-6 sm:w-auto sm:flex sm:flex-col sm:text-xl sm:space-x-0"
     >
-      <div className="">
-        <h3 className="pb-4 mt-10 ml-20 text-3xl font-normal ">Subscribe</h3>
-        <p className="pb-6 ml-20 text-[#718096] font-normal  ">
+      <div>
+        <h3 className="pb-2  laptop:ml-20 text-3xl font-normal sm:ml-0 sm:text-xl ">
+          Subscribe
+        </h3>
+        <p className="pb-2 laptop:ml-20 text-[#718096] font-normal sm:ml-0 ">
           We will never to spam you or share your email
         </p>
-        <Subscribe className="pb-10 ml-20 " />
+        <Subscribe className="laptop:ml-20 sm:ml-0" />
       </div>
-      <div className="   ">
-        <div className="pb-5   mt-24  sm: ml-24 md:ml-24  xl:ml-36    text-[#718096] text-xl inline-flex  space-x-3 md:space-x-6">
+      <div className="sm:text-center">
+        <div className="pb-2  mt-8  md:ml-20  xl:ml-36  text-[#718096] text-xl inline-flex  space-x-3 md:space-x-6 sm:ml-0 sm:text-sm sm:mt-2 ">
           <a href="/" src="Ho me">
             Home
           </a>
@@ -29,7 +31,7 @@ const Footer = () => {
           </a>
         </div>
 
-        <div className=" ml-40 md:ml-44  xl:ml-48 flex space-x-4 md:space-x-8    ">
+        <div className=" ml-40 md:ml-44  xl:ml-48 flex space-x-4 md:space-x-8  sm:flex sm:justify-center sm:ml-0 ">
           <BsTwitter style={{ fontSize: '25px' }} />
           <BsInstagram style={{ fontSize: '25px' }} />
           <BsFacebook style={{ fontSize: '25px' }} />
