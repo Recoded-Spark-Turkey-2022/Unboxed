@@ -16,7 +16,6 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
-
 import BuyTickets from '../pages/buyTickets/BuyTickets';
 import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 
@@ -32,7 +31,15 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route path="/Counsler" element={<Counsler />} />
+        <Route
+          path="counselorRequirements"
+          element={<CounselorRequirements />}
+        />
+        <Route path="CounselorSignup" element={<CounselorSignup />} />
+        <Route
+          path="CounselorSignupThanks"
+          element={<CounselorSignupThanks />}
+        />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
         <Route path="about/teams" element={<Team />} />

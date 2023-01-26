@@ -31,7 +31,7 @@ function Subscribe() {
 
   return (
     <form
-      className="ml-20  w-[15.2rem] h-[2.5rem]  flex  border-2 border-[#718096]  rounded box-border  flex-center  "
+      className="laptop:ml-20  w-[15.2rem] h-[2.5rem]  flex  border-2 border-[#718096]  rounded box-border  flex-center sm:ml-0 "
       onSubmit={handleChange}
       data-testid="SubscribeTest"
     >
@@ -46,7 +46,7 @@ function Subscribe() {
       />
 
       <button
-        className="  bg-[#2DD3E3] hover:bg-[#27B2C4] h-[2.27rem] w-[6rem] max-w-[8rem]  border-l-2  rounded-sm-x-2 rounded-r-sm box-border   border-[#718096]  color-[#718096]   "
+        className=" bg-[#2DD3E3] hover:bg-[#27B2C4] h-[2.27rem] w-[6rem] max-w-[8rem]  border-l-2  rounded-sm-x-2 rounded-r-sm box-border   border-[#718096]  color-[#718096]   "
         type="submit"
         name="submit"
         value="Submit"

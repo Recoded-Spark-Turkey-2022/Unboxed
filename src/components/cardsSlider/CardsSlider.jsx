@@ -22,8 +22,13 @@ const CardsSlider = ({ setSelected, selected }) => {
     setEnd((prev) => (prev - 3 === 0 ? prev : prev - 1));
   };
   return (
-    <div className="flex justify-between">
-      <img src={right} alt="next" onClick={handleNext} />
+    <div className="flex justify-between mb-12 lg:flex-col lg:mb-10">
+      <img
+        src={right}
+        alt="next"
+        onClick={handleNext}
+        className="lg:w-12 lg:ml-auto lg:mr-auto lg:mb-2"
+      />
       <Cards
         start={start}
         end={end}
@@ -31,7 +36,12 @@ const CardsSlider = ({ setSelected, selected }) => {
         selected={selected}
         cards={firestoreObject?.cards}
       />
-      <img src={left} alt="prev" onClick={handlePrev} />
+      <img
+        src={left}
+        alt="prev"
+        onClick={handlePrev}
+        className="lg:w-12 lg:ml-auto lg:mr-auto lg:mt-2"
+      />
     </div>
   );
 };

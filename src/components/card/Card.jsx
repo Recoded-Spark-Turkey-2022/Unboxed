@@ -1,18 +1,18 @@
+/* eslint-disable no-nested-ternary */
+
 import visa from './visa.svg';
 import master from './master.svg';
 
 const Card = ({ cardNumber, cardType, expiryDate, nameOnCard }) => {
   const closeCardNumber = `xxxx xxxx xxxx ${cardNumber.slice(-4)}`;
-  const random = Math.floor(Math.random() * 3);
+
   return (
-    <div
+    <button
+      type="button"
       className={
-        // eslint-disable-next-line no-nested-ternary
-        random === 0
-          ? 'bg-pink-card w-80 h-56 text-white'
-          : random === 1
-          ? 'bg-blue-card w-80 h-56 text-white'
-          : 'bg-yellow-card w-80 h-56 text-white'
+        cardType === 'Visa'
+          ? 'bg-pink-card w-80 h-56 text-white lg:w-72'
+          : 'bg-yellow-card w-80 h-56 text-white lg:w-72'
       }
     >
       <img
@@ -26,7 +26,7 @@ const Card = ({ cardNumber, cardType, expiryDate, nameOnCard }) => {
         <div>{closeCardNumber}</div>
         <div>{nameOnCard}</div>
       </section>
-    </div>
+    </button>
   );
 };
 export default Card;
