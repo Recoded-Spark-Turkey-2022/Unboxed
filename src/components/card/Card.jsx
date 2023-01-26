@@ -3,11 +3,19 @@
 import visa from './visa.svg';
 import master from './master.svg';
 
-const Card = ({ cardNumber, cardType, expiryDate, nameOnCard }) => {
+const Card = ({
+  cardNumber,
+  cardType,
+  expiryDate,
+  nameOnCard,
+  setSelected,
+  selected,
+}) => {
   const closeCardNumber = `xxxx xxxx xxxx ${cardNumber.slice(-4)}`;
 
   return (
     <button
+      onClick={() => setSelected(!selected)}
       type="button"
       className={
         cardType === 'Visa'
