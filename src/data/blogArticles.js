@@ -1,5 +1,7 @@
 import firstImg from './firstimg.svg';
-import firstBlog from './firstblog.svg';
+import firstMain from './firstmain.svg';
+import secondMain from './secondmain.svg';
+import thirdMain from './thirdmain.svg';
 import secondImg from './secondimg.svg';
 import thirdImg from './thirdimg.svg';
 
@@ -7,7 +9,7 @@ const blogs = [
   {
     id: '1',
     image: firstImg,
-    mainImage: firstBlog,
+    mainImage: firstMain,
     imageDescription:
       'in front of a purple background, blonde woman sitting cross-legged and she is looking at her phone',
     mainTitle: 'MENTAL HEALTH AND TECHNOLOGY',
@@ -20,6 +22,7 @@ const blogs = [
   },
   {
     id: '2',
+    mainImage: secondMain,
     image: secondImg,
     imageDescription: 'a woman trying to catch puzzle pieces',
     mainTitle: 'HEAL FROM TRAUMA',
@@ -29,6 +32,7 @@ const blogs = [
   },
   {
     id: '3',
+    mainImage: thirdMain,
     image: thirdImg,
     imageDescription:
       'a sad looking woman thinking and her speech baloon shows tangled things',
@@ -39,6 +43,7 @@ const blogs = [
   },
   {
     id: '4',
+    mainImage: firstMain,
     image: secondImg,
     imageDescription: 'to be decided',
     mainTitle: 'LOREM IPSUM',

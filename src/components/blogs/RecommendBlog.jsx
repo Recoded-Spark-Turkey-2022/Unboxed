@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { blogs } from '../../data/blogArticles';
 
-function RecommendBlog({ id }) {
+function RecommendBlog({ clippedId }) {
+  // when the new component is rendered, the top of the page will be seen
   const handleClick = () => {
     window.scrollTo(0, 0);
   };
+
+  // recommendations with next two id
   const recommends = blogs
-    .filter((blog) => blog.id !== id.slice(1))
+    .filter((blog) => blog.id !== clippedId)
     .slice(0, 2)
     .map((blog) => (
       <div key={blog.id}>
@@ -22,6 +25,7 @@ function RecommendBlog({ id }) {
         </Link>
       </div>
     ));
+
   return (
     <div className="py-[5%] text-3xl sm:text-lg">
       <h1 className="py-[3%]">Recommended For You</h1>
