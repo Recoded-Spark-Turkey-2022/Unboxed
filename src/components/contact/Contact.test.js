@@ -4,13 +4,12 @@ import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 
 test('Renders Contact Form component', () => {
-  act(() =>
     render(
       <BrowserRouter>
         <Contact />
       </BrowserRouter>
     )
-  );
+
   const contactFormElement = screen.getByTestId('contactForm');
   expect(contactFormElement).toBeInTheDocument();
 });
