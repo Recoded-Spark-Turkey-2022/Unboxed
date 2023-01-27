@@ -20,7 +20,7 @@ function App() {
   return (
     <div data-testid="App" className="App">
       <Navbar />
-      <div className="mt-16">
+      <div>
         <Routers />
       </div>
       <Footer />

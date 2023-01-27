@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    dispatch(signoutHandler({navigation}));
+    dispatch(signoutHandler({ navigation }));
   };
 
   const location = useLocation();
