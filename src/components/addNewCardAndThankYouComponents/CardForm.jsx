@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db, auth } from '../../firebaseFile';
 import Button from './Button';
 import Input from './Input';
+import { addCard } from '../../features/user/userSlice';
 
 const CardForm = () => {
   const [cardType, setCardType] = useState('');
@@ -16,9 +16,14 @@ const CardForm = () => {
   const [nameOnCard, setNameOnCard] = useState('');
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
-
+  const [card, setCard] = useState({});
   const buttonTitle = 'Add Card';
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigation = () => {
+    navigate('/add-new-card-thank-you');
+  };
+
   const optionCountry = [
     {
       name: 'Turkey',
@@ -64,32 +69,58 @@ const CardForm = () => {
     setSelectedCities(newCity);
   }, [selectedItem]);
 
-  const addCard = () => {
-    const uid = auth?.currentUser.uid;
-    const cardInfo = doc(db, 'patients', uid);
-    updateDoc(cardInfo, {
+  const addCardFunction = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-unused-expressions
+    cardType &&
+      city &&
+      selectedItem &&
+      dispatch(
+        addCard({
+          card,
+          navigation,
+        })
+      );
+  };
+  useEffect(() => {
+    setCard((prev) => ({
+      ...prev,
+      expiryDate,
       cardType,
       cardNumber,
-      expiryDate,
-      cvvCode,
-      nameOnCard,
-      country: selectedItem,
-      zipCode,
       city,
+      cvvCode,
+      zipCode,
+      nameOnCard,
       address,
-    });
-    navigate('/add-new-card-thank-you');
-  };
+      selectedItem,
+    }));
+  }, [
+    expiryDate,
+    cardType,
+    cardNumber,
+    city,
+    cvvCode,
+    zipCode,
+    nameOnCard,
+    address,
+    selectedItem,
+  ]);
   return (
-    <div
+    <form
       data-testid="cardForm"
-      className=" mt-10 grid grid-cols-2 w-2/3 sm:flex-col sm:flex sm:w-full sm:mt-4 lg:w-full"
+      className=" mt-6 grid grid-cols-2 w-2/3 sm:flex-col sm:flex sm:w-full sm:mt-4 lg:w-full"
+      onSubmit={addCardFunction}
     >
-      <div className="text-2xl w-2/3 sm:w-full lg:w-4/5 sm:text-xl">
+      <div className="text-xl w-2/3 sm:w-full lg:w-4/5">
         <div className=" text-Clr94AFB6 ">Supported Card types</div>
-        <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center">
+        <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center ">
           <button
-            type="submit"
+            className={
+              cardType === 'Visa' ? 'bg-orange-500 , text-white' : 'bg-white'
+            }
+            type="button"
+            value={cardType}
             onClick={() => {
               setCardType('Visa');
             }}
@@ -97,7 +128,13 @@ const CardForm = () => {
             Visa
           </button>
           <button
-            type="submit"
+            type="button"
+            className={
+              cardType === 'MasterCard'
+                ? 'bg-orange-500 , text-white'
+                : 'bg-white'
+            }
+            value={cardType}
             onClick={() => {
               setCardType('MasterCard');
             }}
@@ -107,7 +144,7 @@ const CardForm = () => {
         </div>
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
-        <label className="text-2xl flex flex-col" htmlFor="country">
+        <label className="text-xl flex flex-col" htmlFor="country">
           Country
           <select
             data-testid="selectInput"
@@ -134,6 +171,8 @@ const CardForm = () => {
         placeholder="Card Number"
         id="cardNumber"
         type="text"
+        pattern="^[0-9]{16}$"
+        title="Card number should include 16 characters, and only numbers!"
         func={(e) => setCardNumber(e.target.value)}
       />
       <Input
@@ -141,6 +180,8 @@ const CardForm = () => {
         placeholder="ZIP Code"
         id="zipCode"
         type="text"
+        pattern="^[0-9]{6}$"
+        title="ZIP Code should include 6 characters, and only numbers!"
         func={(e) => setZipCode(e.target.value)}
       />
       <div className="flex w-1/2 sm:flex-col sm:w-full">
@@ -149,6 +190,8 @@ const CardForm = () => {
           placeholder="MM / YY"
           id="expiryDate"
           type="text"
+          pattern="^[0-9]{4,6}$"
+          title="Expiry Date should include min 4 max 6 characters, and only numbers!"
           func={(e) => setExpiryDate(e.target.value)}
         />
         <Input
@@ -156,17 +199,19 @@ const CardForm = () => {
           placeholder="***"
           id="cvvCode"
           type="text"
+          pattern="^[0-9]{3}$"
+          title="CVV Code should include 3 characters, and only numbers!"
           func={(e) => setCvvCode(e.target.value)}
         />
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
-        <label className="text-2xl flex flex-col" htmlFor="city">
+        <label className="text-xl flex flex-col" htmlFor="city">
           City
           <select
             className="text-sm border border-Clr94AFB6 h-10"
             name="City"
             id="city"
-            onClick={(e) => {
+            onChange={(e) => {
               setCity(e.target.value);
             }}
           >
@@ -186,6 +231,8 @@ const CardForm = () => {
         placeholder="Name On Card"
         id="name"
         type="text"
+        pattern="^[a-zA-Z0-9]{1,30}$"
+        title="Name shouldn't include any special character!"
         func={(e) => setNameOnCard(e.target.value)}
       />
       <Input
@@ -193,10 +240,12 @@ const CardForm = () => {
         placeholder="Address"
         id="address"
         type="text"
+        pattern="^[a-zA-Z0-9]{1,90}$"
+        title="Address shouldn't include any special character!"
         func={(e) => setAddress(e.target.value)}
       />
-      <Button text={buttonTitle} func={addCard} />
-    </div>
+      <Button text={buttonTitle} />
+    </form>
   );
 };
 export default CardForm;
