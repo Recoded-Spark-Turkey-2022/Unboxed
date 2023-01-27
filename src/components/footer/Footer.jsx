@@ -6,7 +6,11 @@ const Footer = () => {
   return (
     <div
       data-testid="FooterTest"
+<<<<<<< HEAD
+      className=" bottom-0  grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col h-auto py-10 sm:p-6 md:py-10 md:px-8  bg-[#FEE89E]  space-x-3 md:space-x-6"
+=======
       className="grid  grid-flow-row  md:grid-flow-col  lg:grid-flow-col   sm:p-2 md:py-2 md:px-8  bg-[#FEE89E]  space-x-3 md:space-x-6 sm:w-auto sm:flex sm:flex-col sm:text-xl sm:space-x-0"
+>>>>>>> ef18c4cb8913f90bb78bbc7a53ebf6e95dd46fa4
     >
       <div>
         <h3 className="pb-2  laptop:ml-20 text-3xl font-normal sm:ml-0 sm:text-xl ">
