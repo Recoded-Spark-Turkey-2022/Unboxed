@@ -9,7 +9,7 @@ import AddNewCard from '../pages/addNewCard/addNewCard';
 import AddNewCardThankYou from '../pages/addNewCardThankYou/AddNewCardThankYou';
 import Signup from '../pages/signup/Signup';
 import SignupThanks from '../pages/signupThanks/SignupThanks';
-import BlogDetails from '../features/blogs/BlogDetails';
+import BlogDetails from '../components/blogs/BlogDetails';
 import Thanks from '../pages/Thankyou/Thanks';
 import ContactPage from '../pages/contact/ContactPage';
 import ContactThanks from '../components/contact/ContactThanks';
@@ -47,7 +47,7 @@ const Routers = () => {
         <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
-        <Route path="about/teams" element={<Team />} />
+        <Route path="about/team" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
         <Route path="buy-ticket" element={<BuyTickets />} />

@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   return (
-    <div data-testid="App" className="App">
+    <div data-testid="App" className="h-screen">
       <Navbar />
       <div className="mt-16">
         <Routers />

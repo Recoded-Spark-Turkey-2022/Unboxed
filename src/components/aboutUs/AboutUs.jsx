@@ -1,5 +1,5 @@
 import React from "react";
-import FounderPP from "./FounderPP.svg";
+import FounderPP from "./HadiMaleh.jpg";
 
 const HealingInfo = () => {
 
