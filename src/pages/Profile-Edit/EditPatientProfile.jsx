@@ -117,6 +117,12 @@ const EditPatientProfile = () => {
           oldPhoto:firestoreObject.photo
         }));
       }
+      if (firestoreObject.tickets) {
+        setEditInfo((prevUser) => ({
+          ...prevUser,
+          tickets: firestoreObject.tickets
+        }));
+      }
     }
   }, [firestoreObject]);
 
@@ -315,7 +321,7 @@ const EditPatientProfile = () => {
           <div className="flex gap-6">
             <div>
               <p>{editInfo.cards} Cards Added</p>
-              <button className={styles.button} type="button">
+              <button className={styles.button} onClick={()=> navigate("/payment-methods")} type="button">
                 SHOW CARDS
               </button>
             </div>

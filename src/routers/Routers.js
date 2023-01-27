@@ -19,6 +19,10 @@ import Careers from '../pages/about/Careers';
 import CounselorEditInfo from '../pages/counselor/CounselorEditInfo';
 import EditPatientProfile from '../pages/Profile-Edit/EditPatientProfile';
 import EditPatientProfileThanks from '../pages/Profile-Edit/EditPatientProfileThanks';
+import BuyTickets from '../pages/buyTickets/BuyTickets';
+import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
+import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
+// import buyTicketsPage from '../pages/ticketsPage/buyTicketsPage';
 
 const Routers = () => {
   return (
@@ -34,7 +38,10 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route path="counselorRequirements" element={<CounselorRequirements />} />
+        <Route
+          path="counselorRequirements"
+          element={<CounselorRequirements />}
+        />
         <Route path="CounselorSignup" element={<CounselorSignup />} />
         <Route path="CounselorEditInfo" element={<CounselorEditInfo />} />
         <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
@@ -43,6 +50,10 @@ const Routers = () => {
         <Route path="about/teams" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
+        <Route path="buy-ticket" element={<BuyTickets />} />
+        {/* <Route path="buyTicketsPage" element={<buyTicketsPage />} /> */}
+        <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
+        <Route path="payment-methods" element={<PaymentMethods />} />
       </Routes>
     </div>
   );

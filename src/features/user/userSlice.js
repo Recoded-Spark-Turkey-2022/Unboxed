@@ -17,6 +17,7 @@ import {
   updateDoc,
   arrayUnion,
   deleteDoc,
+  increment,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, auth, storage } from '../../firebaseFile';
@@ -343,6 +344,25 @@ export const addCard = createAsyncThunk(
         cards: arrayUnion(card),
       });
       navigation();
+      window.location.reload(false);
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const buyTicket = createAsyncThunk(
+  'user/buyTicket',
+  async (payload, { rejectWithValue }) => {
+    const { navigation, ticket } = payload;
+    try {
+      const myId = auth.currentUser.uid;
+      const ticketInfo = doc(db, 'patients', myId);
+      await updateDoc(ticketInfo, {
+        tickets: increment(ticket),
+      });
+      navigation();
+      window.location.reload(false);
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return rejectWithValue(error);
@@ -502,6 +522,20 @@ const userSlice = createSlice({
     builder.addCase(deleteUserHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
       state.error = action.payload.message;
+    });
+    // Buying Ticket
+    builder.addCase(buyTicket.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(buyTicket.fulfilled, (state, action) => {
+      state.tickets = JSON.parse(action.payload);
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(buyTicket.rejected, (state, action) => {
+      state.tickets = null;
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });
