@@ -16,7 +16,7 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
-
+import Booking1 from '../pages/Booking/Booking-1';
 
 const Routers = () => {
   return (
@@ -30,14 +30,21 @@ const Routers = () => {
         <Route path="signup" element={<Signup />} />
         <Route path="signup-thanks" element={<SignupThanks />} />
         <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route path="counselorRequirements" element={<CounselorRequirements />} />
+        <Route
+          path="counselorRequirements"
+          element={<CounselorRequirements />}
+        />
         <Route path="CounselorSignup" element={<CounselorSignup />} />
-        <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
+        <Route
+          path="CounselorSignupThanks"
+          element={<CounselorSignupThanks />}
+        />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
         <Route path="about/teams" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
+        <Route path="/Booking1" element={<Booking1 />} />
       </Routes>
     </div>
   );
