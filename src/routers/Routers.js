@@ -16,10 +16,8 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
-<<<<<<< HEAD
-import Booking1 from '../pages/Booking/Booking-1';
-=======
->>>>>>> ef18c4cb8913f90bb78bbc7a53ebf6e95dd46fa4
+
+import Booking from '../pages/Booking/Booking';
 
 const Routers = () => {
   return (
@@ -47,7 +45,8 @@ const Routers = () => {
         <Route path="about/team" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
-        <Route path="/Booking1" element={<Booking1 />} />
+
+        <Route path="Booking" element={<Booking />} />
       </Routes>
     </div>
   );
