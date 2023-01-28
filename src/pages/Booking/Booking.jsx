@@ -1,9 +1,11 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
+
 import Data from './Booking-Data';
+
+// import { db } from '../../firebase';
 //  booking page logical path step by step :
-// -  create data inside one object , with 8 different id's , for each oage one id.
-// -  create three differernt states of jsx , based on the changes of the page ,
+
 // - create afunction that map the data by ID from other comoponent ,
 // - create a function that map the styles from the design component ,
 // - create state that linked with the data component ,
@@ -14,35 +16,38 @@ import Data from './Booking-Data';
 // - create a function that interact with firebase to put the collected object inside firebase on submit .
 // - create a function to reject next button if user didnt choose answer ,
 
-const booking1 = () => {
+const Booking = () => {
   const [page, setPage] = useState(1);
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    BookingData: '',
+  });
   const [selectedData, setSelectedData] = useState('');
-  console.log(
-    '🚀 ~ file: Booking-1.jsx:21 ~ booking1 ~ selectedData',
-    selectedData
-  );
 
-  // this function will map the data from the data component
-
-  function HandleClick() {
-    if (page < 8) {
+  async function HandleClick() {
+    if (page <= 7) {
       setData({ ...data, [page]: selectedData });
       setPage(page + 1);
     }
-  }
 
-  console.log(
-    '🚀 ~ file: Booking-1.jsx:24 ~ HandleClick ~ HandleClick',
-    HandleClick
-  );
+    if (page === 8) {
+      // await db
+      //   .collection('patients')
+      //   .doc(selectedData.id)
+      //   .set(selectedData)
+      //   .then(() => {
+      //     console.log('Data added successfully!');
+      //   });
+
+      window.location.href = '/';
+    }
+  }
 
   // this function will create a parameter to access the data from the data component , and will map the data based on the id of the page
   const filteredData = Data.filter((any) => any.id === page);
 
   return (
-    <form className=" flex- col xl:mt-28 ">
-      <div className="   container sm:mr-20  bg-white  ">
+    <form className=" flex- col xl:mt-28 " data-testid="Booking">
+      <div className=" container sm:mr-20  bg-white  ">
         <div className="    h-auto  xl:ml-28 lg:ml-12  md:ml-10  sm:ml-1  ">
           {filteredData.map((any) => (
             <div className=" xxl:text-3xl xl:text-3xl lg:text-2xl sm:w-[80%] xs:w-[80%]  w-[60%] md:text-xl sm:text-sm  uppercase  ">
@@ -68,21 +73,26 @@ const booking1 = () => {
             ))}
 
             {page >= 1 && page <= 3 ? (
-              <div className=" mx-3 pt-7  sm:w-[80%] ">
+              <div>
                 {filteredData.map((item) =>
                   item.answer.map((answer) => (
-                    <input
-                      key={answer.id}
-                      type="checkbox"
-                      value={answer}
-                      className=" appearance-none pl-[1rem] mt-4 text-base p-2 text-center capitalize flex items-center md:text-xl sm:text-sm w-full  sm:h-[3rem] h-[3.5rem]  transition-all duration-500 hover:bg-[#2dd3e3] hover:text-white bg-white border-2 rounded-md border-gray-150 "
-                      onChange={(e) => {
-                        setSelectedData({
-                          ...data,
-                          [page.answer]: e.target.value,
-                        });
-                      }}
-                    />
+                    <div className=" mx-3 pt-7  sm:w-[80%] ">
+                      <button
+                        key={answer.id}
+                        type="button"
+                        value={answer}
+                        name="answer"
+                        className=" appearance-none pl-[1rem] mt-4 text-base p-2 text-center capitalize flex items-center md:text-xl sm:text-sm w-full  sm:h-[3rem] h-[3.5rem]  transition-all duration-500 hover:bg-[#2dd3e3] active:bg-[#2dd3e3] active:text-white hover:text-white bg-white border-2 rounded-md border-gray-150 "
+                        onClick={(e) => {
+                          setSelectedData({
+                            ...selectedData,
+                            [page]: e.target.value,
+                          });
+                        }}
+                      >
+                        {answer}
+                      </button>
+                    </div>
                   ))
                 )}
               </div>
@@ -91,20 +101,21 @@ const booking1 = () => {
                 {filteredData.map((item) =>
                   item.answer.map((any) => (
                     <div key={any.id} className=" flex items-center gap-2 p-2">
-                      <button
-                        id="default-radio-1"
-                        type="button"
+                      <input
+                        type="radio"
+                        value={any}
+                        key={any.id}
+                        name="answer"
                         placeholder="Enter your answer"
                         onClick={(e) => {
                           setSelectedData({
-                            ...data,
+                            ...selectedData,
                             [page.any]: e.target.value,
                           });
                         }}
                         className=" text-xl  w-5 h-5 text-black-600 bg-gray-100 border-Black-300 focus:#06b6d4  dark:focus:bg-cyan-500 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-2 font-medium text-black-900 dark:text-gray-300"
-                      >
-                        {any}
-                      </button>
+                      />
+                      {any}
                     </div>
                   ))
                 )}
@@ -122,7 +133,7 @@ const booking1 = () => {
                     onChange={(e) => {
                       setSelectedData({
                         ...data,
-                        [page.any]: e.target.value,
+                        [page]: e.target.value,
                       });
                     }}
                   />
@@ -154,4 +165,4 @@ const booking1 = () => {
   );
 };
 
-export default booking1;
+export default Booking;
