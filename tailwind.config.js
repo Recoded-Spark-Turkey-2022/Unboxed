@@ -8,11 +8,13 @@ module.exports = {
         poppins: ['Poppins', 'sans-serif'],
       },
       screens: {
+        xsm: { max: '425px' },
         sm: { max: '639px' },
+        tablet2: { max: '768px' },
         lg: { max: '1024px' },
         tablet: '640px',
         laptop: '1024px',
-        tablet2: { max: '768px' },
+
         max: '1500px',
         425: '425px',
         768: '768px',
