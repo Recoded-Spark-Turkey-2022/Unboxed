@@ -6,7 +6,9 @@ import facebookIcon from './Facebook.svg';
 import {
   googleSignupHandler,
   facebookSignupHandler,
+  currentUserHandler,
 } from '../../features/user/userSlice';
+import { auth } from '../../firebaseFile';
 
 const LoginButtons = () => {
   const navigate = useNavigate();
@@ -25,13 +27,19 @@ const LoginButtons = () => {
         <button
           data-testid="googleButton"
           type="button"
-          onClick={() => dispatch(facebookSignupHandler({ navigation }))}
+          onClick={async () => {
+            await dispatch(facebookSignupHandler( navigation ));
+            dispatch(currentUserHandler(auth.currentUser.uid));
+          }}
         >
           <img src={facebookIcon} alt="facebook Icon" />
         </button>
         <button
           type="button"
-          onClick={() => dispatch(googleSignupHandler( navigation ))}
+          onClick={async () => {
+            await dispatch(googleSignupHandler(navigation));
+            dispatch(currentUserHandler(auth.currentUser.uid));
+          }}
         >
           <img src={googleIcon} alt="Google Icon" />
         </button>

@@ -5,7 +5,8 @@ import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import img from '../Profile-Edit/user-profile.svg';
 import { styles } from '../../components/profile/ProfileStyle';
 import AccountButtons from '../../components/profile/AccountButtons';
-import { editCounselerHandler } from '../../features/user/userSlice';
+import { currentUserHandler, editCounselerHandler } from '../../features/user/userSlice';
+import { auth } from '../../firebaseFile';
 
 const CounselorEditInfo = () => {
   const navigate = useNavigate();
@@ -89,9 +90,9 @@ const CounselorEditInfo = () => {
   const navigation = () => {
     navigate('/editPatientProfileThanks');
   };
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
-    dispatch(
+   await dispatch(
       editCounselerHandler({
         name: editInfo.name,
         bio: editInfo.bio,
@@ -107,6 +108,7 @@ const CounselorEditInfo = () => {
         navigation,
       })
     );
+      dispatch(currentUserHandler(auth.currentUser.uid))
   };
   return (
     <div className=" font-poppins">

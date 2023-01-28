@@ -118,21 +118,20 @@ export const facebookSignupHandler = createAsyncThunk(
   'user/facebookSignupHandler',
   async (payload, { rejectWithValue }) => {
     const facebookProvider = new FacebookAuthProvider();
-    const { navigation } = payload;
     try {
       const { user } = await signInWithPopup(auth, facebookProvider);
       const docRef = doc(db, 'patients', user.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        navigation();
+        payload();
       } else {
         await setDoc(doc(db, 'patients', user.uid), {
           name: user.displayName.split(' ')[0],
           surname: user.displayName.split(' ')[1],
           email: user.email,
         });
-        navigation();
-        window.location.reload(false);
+        payload();
+        // window.location.reload(false);
       }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
@@ -158,7 +157,7 @@ export const googleSignupHandler = createAsyncThunk(
           email: user.email,
         });
         payload();
-        window.location.reload(false);
+        // window.location.reload(false);
       }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
@@ -247,7 +246,7 @@ export const editProfileHandler = createAsyncThunk(
         });
       }
       navigation();
-      window.location.reload(false);
+      // window.location.reload(false);
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -311,7 +310,7 @@ export const editCounselerHandler = createAsyncThunk(
         });
       }
       navigation();
-      window.location.reload(false);
+      // window.location.reload(false);
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -344,7 +343,7 @@ export const addCard = createAsyncThunk(
         cards: arrayUnion(card),
       });
       navigation();
-      window.location.reload(false);
+      // window.location.reload(false);
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return rejectWithValue(error);
@@ -362,7 +361,7 @@ export const buyTicket = createAsyncThunk(
         tickets: increment(ticket),
       });
       navigation();
-      window.location.reload(false);
+      // window.location.reload(false);
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return rejectWithValue(error);

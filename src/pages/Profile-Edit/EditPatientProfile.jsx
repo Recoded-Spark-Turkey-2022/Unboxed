@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountButtons from '../../components/profile/AccountButtons';
-import { editProfileHandler } from '../../features/user/userSlice';
+import { currentUserHandler, editProfileHandler } from '../../features/user/userSlice';
 import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import { styles } from '../../components/profile/ProfileStyle';
 import img from './user-profile.svg';
+import { auth } from '../../firebaseFile';
 
 
 const EditPatientProfile = () => {
@@ -130,9 +131,9 @@ const EditPatientProfile = () => {
     navigate('/editPatientProfileThanks');
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
-    dispatch(
+   await dispatch(
       editProfileHandler({
         name: editInfo.name,
         surname: editInfo.surname,
@@ -151,6 +152,7 @@ const EditPatientProfile = () => {
         navigation,
       })
     );
+    dispatch(currentUserHandler(auth.currentUser.uid))
   };
 
   return (
