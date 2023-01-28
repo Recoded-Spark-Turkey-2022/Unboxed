@@ -31,7 +31,7 @@ const BlogDetails = () => {
     ));
 
   return (
-    <div className="font-poppins uppercase text-xl sm:text-sm leading-8 font-light space-y-[3%] px-[12%]  overflow-y-scroll">
+    <div className="font-poppins uppercase text-xl sm:text-sm leading-8 font-light space-y-[3%] px-[12%] sm:pt-8">
       {findBlog}
       <div className="space-y-[0.5%] ">
         <h2 className="text-3xl sm:text-lg">Sign Up For The Healing Blog</h2>
