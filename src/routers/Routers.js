@@ -22,35 +22,27 @@ import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
 
 const Routers = () => {
   return (
-    <div>
-      <Routes>
-        <Route path="/Thankyou" element={<Thanks />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="login" element={<Login />} />
-        <Route path="add-new-card" element={<AddNewCard />} />
-        <Route path="add-new-card-thank-you" element={<AddNewCardThankYou />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="signup-thanks" element={<SignupThanks />} />
-        <Route path="blogs/:id" element={<BlogDetails />} />
-        <Route
-          path="counselorRequirements"
-          element={<CounselorRequirements />}
-        />
-        <Route path="CounselorSignup" element={<CounselorSignup />} />
-        <Route
-          path="CounselorSignupThanks"
-          element={<CounselorSignupThanks />}
-        />
-        <Route path="contact" element={<ContactPage />} />
-        <Route path="contact-thank-you" element={<ContactThanks />} />
-        <Route path="about/team" element={<Team />} />
-        <Route path="about/careers" element={<Careers />} />
-        <Route path="about/overview" element={<Overview />} />
-        <Route path="buy-ticket" element={<BuyTickets />} />
-        <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
-        <Route path="payment-methods" element={<PaymentMethods />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/Thankyou" element={<Thanks />} />
+      <Route path="/" element={<Homepage />} />
+      <Route path="login" element={<Login />} />
+      <Route path="add-new-card" element={<AddNewCard />} />
+      <Route path="add-new-card-thank-you" element={<AddNewCardThankYou />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="signup-thanks" element={<SignupThanks />} />
+      <Route path="blogs/:id" element={<BlogDetails />} />
+      <Route path="counselorRequirements" element={<CounselorRequirements />} />
+      <Route path="CounselorSignup" element={<CounselorSignup />} />
+      <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
+      <Route path="contact" element={<ContactPage />} />
+      <Route path="contact-thank-you" element={<ContactThanks />} />
+      <Route path="about/team" element={<Team />} />
+      <Route path="about/careers" element={<Careers />} />
+      <Route path="about/overview" element={<Overview />} />
+      <Route path="buy-ticket" element={<BuyTickets />} />
+      <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
+      <Route path="payment-methods" element={<PaymentMethods />} />
+    </Routes>
   );
 };
 

@@ -20,9 +20,9 @@ function App() {
   return (
     <div data-testid="App" className="h-screen">
       <Navbar />
-      <div className="mt-16">
-        <Routers />
-      </div>
+
+      <Routers />
+
       <Footer />
     </div>
   );
