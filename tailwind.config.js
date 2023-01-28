@@ -14,6 +14,8 @@ module.exports = {
         laptop: '1024px',
         tablet2: { max: '768px' },
         max: '1500px',
+        425: '425px',
+        768: '768px',
       },
       colors: {
         lightBlack: 'rgba(0, 0, 0, 0.5)',
