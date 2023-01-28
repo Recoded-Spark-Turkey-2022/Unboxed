@@ -48,7 +48,7 @@ const SignupForm = () => {
 
   return (
     <form data-testid="signup">
-      <div className="flex flex-col mt-20 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)] tablet2:mt-10">
+      <div className="flex flex-col mt-10 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)] tablet2:mt-10">
         <section className="flex gap-5">
           <input
             type="text"

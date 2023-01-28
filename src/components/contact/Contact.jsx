@@ -5,7 +5,7 @@ import contact from './contactImg.svg';
 
 function Contact() {
   return (
-    <div className="p-[5%] font-poppins h-middle">
+    <div className="p-[5%] font-poppins max:h-middle">
       <div>
         {' '}
         <h1 className="pb-[1%] text-5xl sm:text-xl">SEND US YOUR REQUEST!</h1>

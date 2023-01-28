@@ -36,10 +36,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-eight">
+    <div className="768:h-eight">
       <nav
         data-testid="currentUser"
-        className=" fixed w-full flex justify-between font-poppins bg-[#EAF8F9] items-center pt-1 sm:flex-col pb-1 shadow max:h-eight z-10"
+        className=" fixed w-full flex justify-between font-poppins bg-[#EAF8F9] items-center pt-1 sm:flex-col pb-1 shadow 768:h-eight z-10"
       >
         <div className="flex gap-2 ml-5 items-center">
           <img className="h-[2.5rem]" src={logoImg} alt="Logo" />
