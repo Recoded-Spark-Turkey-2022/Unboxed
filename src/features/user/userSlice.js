@@ -172,6 +172,23 @@ export const addCard = createAsyncThunk(
     }
   }
 );
+export const buyTicket = createAsyncThunk(
+  'user/buyTicket',
+  async (payload, { rejectWithValue }) => {
+    const { navigation, ticket } = payload;
+    try {
+      const myId = auth.currentUser.uid;
+      const ticketInfo = doc(db, 'patients', myId);
+      await updateDoc(ticketInfo, {
+        tickets: ticket,
+      });
+      navigation();
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -285,6 +302,20 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
 
       state.error = action.payload.message;
+    });
+    // Buying Ticket
+    builder.addCase(buyTicket.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(buyTicket.fulfilled, (state, action) => {
+      state.tickets = JSON.parse(action.payload);
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(buyTicket.rejected, (state, action) => {
+      state.tickets = null;
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });
