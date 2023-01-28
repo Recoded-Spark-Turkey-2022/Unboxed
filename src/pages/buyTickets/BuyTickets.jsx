@@ -2,7 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import CardsSlider from '../../components/cardsSlider/CardsSlider';
-import { buyTicket } from '../../features/user/userSlice';
+import { buyTicket, currentUserHandler } from '../../features/user/userSlice';
+import { auth } from '../../firebaseFile';
 
 const BuyTickets = () => {
   const [selected, setSelected] = useState(null);
@@ -17,14 +18,15 @@ const BuyTickets = () => {
   useEffect(() => {
     setTicket(params?.ticket);
   }, []);
-  const handleNavigate = () => {
+  const handleNavigate = async() => {
     if (selected) {
-      dispatch(
+     await dispatch(
         buyTicket({
           ticket,
           navigation,
         })
       );
+      dispatch(currentUserHandler(auth.currentUser.uid))
     }
   };
   return (

@@ -16,9 +16,13 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
+import CounselorEditInfo from '../pages/counselor/CounselorEditInfo';
+import EditPatientProfile from '../pages/Profile-Edit/EditPatientProfile';
+import EditPatientProfileThanks from '../pages/Profile-Edit/EditPatientProfileThanks';
 import BuyTickets from '../pages/buyTickets/BuyTickets';
 import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
+// import buyTicketsPage from '../pages/ticketsPage/buyTicketsPage';
 
 const Routers = () => {
   return (
@@ -27,6 +31,8 @@ const Routers = () => {
         <Route path="/Thankyou" element={<Thanks />} />
         <Route path="/" element={<Homepage />} />
         <Route path="login" element={<Login />} />
+        <Route path="editPatientProfile" element={<EditPatientProfile />} />
+        <Route path="editPatientProfileThanks" element={<EditPatientProfileThanks />} />
         <Route path="add-new-card" element={<AddNewCard />} />
         <Route path="add-new-card-thank-you" element={<AddNewCardThankYou />} />
         <Route path="signup" element={<Signup />} />
@@ -37,16 +43,15 @@ const Routers = () => {
           element={<CounselorRequirements />}
         />
         <Route path="CounselorSignup" element={<CounselorSignup />} />
-        <Route
-          path="CounselorSignupThanks"
-          element={<CounselorSignupThanks />}
-        />
+        <Route path="CounselorEditInfo" element={<CounselorEditInfo />} />
+        <Route path="CounselorSignupThanks" element={<CounselorSignupThanks />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="contact-thank-you" element={<ContactThanks />} />
         <Route path="about/team" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
         <Route path="buy-ticket" element={<BuyTickets />} />
+        {/* <Route path="buyTicketsPage" element={<buyTicketsPage />} /> */}
         <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
         <Route path="payment-methods" element={<PaymentMethods />} />
       </Routes>
