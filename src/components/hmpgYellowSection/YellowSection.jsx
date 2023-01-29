@@ -1,8 +1,9 @@
-import { t } from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import therapistpp from './therapistpp.svg';
 
 const YellowSec = () => {
+  const { t } = useTranslation();
   return (
     <div
       data-testid="YellowSec"
