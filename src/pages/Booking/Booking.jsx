@@ -1,18 +1,10 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
 import { MdArrowBackIos } from 'react-icons/md/index';
 import Data from './Booking-Data';
 
 // import { db } from '../../firebase';
-//  booking page logical path step by step :
-
-// - create state that linked with the data component ,
-// - create state that linked with the design component ,
-// - create functionn two arguments each time i click in the button the state will change , the state will change onClick button , each time we click next button the we will push to the n
-// - create a function that will save the data when we click on a certain button,
-// - create an input that will save the date when we write inside input field inside same ovject ,
-// - create a function that interact with firebase to put the collected object inside firebase on submit .
-// - create a function to reject next button if user didnt choose answer ,
 
 const Booking = () => {
   const [page, setPage] = useState(1);
