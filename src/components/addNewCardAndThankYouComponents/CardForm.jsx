@@ -8,7 +8,7 @@ import { addCard, currentUserHandler } from '../../features/user/userSlice';
 import { auth } from '../../firebaseFile';
 
 const CardForm = () => {
-  const { t } = useTranslation;
+  const { t } = useTranslation();
   const [cardType, setCardType] = useState('');
   const [selectedItem, setSelectedItem] = useState('');
   const [selectedCities, setSelectedCities] = useState([]);

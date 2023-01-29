@@ -53,16 +53,16 @@ function ContactForm() {
 
   return (
     <form
-      className="flex-col space-y-[4%] "
+      className="flex-col space-y-[8%] "
       data-testid="contactForm"
       onSubmit={submitHandler}
     >
       <div>
-        <h1 className="m-[3%] text-2xl sm:text-base font-medium leading-9">
-          {t('typeof')}
+        <h1 className="m-[3%] text-2xl sm:text-xs sm:font-bold font-medium leading-9">
+          Type of contact
         </h1>
       </div>
-      <div className="flex-col space-y-[3%] text-xl sm:text-sm font-normal">
+      <div className="flex-col space-y-[3%] text-xl sm:text-xs font-normal">
         <input
           type="radio"
           name={choosenOption}
@@ -119,12 +119,12 @@ function ContactForm() {
         />
         {t('contact7')}
       </div>
-      <div className="flex-col gap-4 space-y-4 text-xl">
+      <div className="flex-col text-xl sm:text-xs justify-between">
         <label className="drop-shadow-lg" htmlFor="Full Name">
           {t('fullname')}
           <br />
           <input
-            className=" w-11/12"
+            className=" w-11/12 h-14 rounded-md pt-[1%]"
             type="text"
             value={enteredName}
             placeholder={t('fullnameText')}
@@ -136,7 +136,7 @@ function ContactForm() {
           {t('email')}:
           <br />
           <input
-            className=" w-11/12"
+            className=" w-11/12 h-14 rounded-md "
             type="text"
             value={enteredMail}
             placeholder={t('emailText')}
@@ -148,17 +148,18 @@ function ContactForm() {
           {t('details')}
           <br />
           <textarea
-            className=" w-11/12 h-16"
+            className=" w-11/12 h-20
+ rounded-md"
             value={enteredDetails}
             placeholder={t('detailsText')}
             onChange={detailsHandler}
           />
         </label>
       </div>
-      <div>
+      <div className="pt-[2%]">
         <button
           type="submit"
-          className="text-xl w-6/12 h-16 mt-[2%] self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100"
+          className="text-xl sm:text-sm w-6/12 h-16 sm:h-12 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100"
         >
           {t('submit')}
         </button>
