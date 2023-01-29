@@ -235,7 +235,7 @@
   "Trauma and abuse": "Trauma and abuse",
   "Eating disorders": "Eating disorders",
   "b6Title": "What brings you here?",
-  "b6Text": "Please specify (in a few sentences) why you'd like counseling. This will give your counselor a good understanding of where to start.",
+  "b6Text": "Please specify (in a few sentences) why you'd like counseling.This will give your counselor a good understanding of where to start.",
   "start": "you can start writing here ... ",
   "b7Title": "Submit your appointment",
   "b7Text": "Click Submit if you are sure of all your choices.",
@@ -244,5 +244,5 @@
   "b8Title": "your request has been submitted!",
   "text2": "You will receive an email guiding you to book a date and time soon.",
   "request submitted": "request submitted",
-  "text3": "you will receive a confirmation email soon please keep an eye on your mail."
+  "text3": "you will receive a confirmation email soonplease keep an eye on your mail."
 }
