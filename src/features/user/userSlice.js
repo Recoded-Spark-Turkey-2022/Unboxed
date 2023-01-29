@@ -6,9 +6,21 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateEmail,
+  updatePassword,
+  deleteUser,
 } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, arrayUnion } from 'firebase/firestore';
-import { db, auth } from '../../firebaseFile';
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+  deleteDoc,
+  increment,
+} from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { db, auth, storage } from '../../firebaseFile';
 
 const initialState = {
   isLoggedIn: false,
@@ -106,15 +118,21 @@ export const facebookSignupHandler = createAsyncThunk(
   'user/facebookSignupHandler',
   async (payload, { rejectWithValue }) => {
     const facebookProvider = new FacebookAuthProvider();
-    const { navigation } = payload;
     try {
       const { user } = await signInWithPopup(auth, facebookProvider);
-      await setDoc(doc(db, 'patients', user.uid), {
-        name: user.displayName.split(' ')[0],
-        surname: user.displayName.split(' ')[1],
-        email: user.email,
-      });
-      navigation();
+      const docRef = doc(db, 'patients', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        payload();
+      } else {
+        await setDoc(doc(db, 'patients', user.uid), {
+          name: user.displayName.split(' ')[0],
+          surname: user.displayName.split(' ')[1],
+          email: user.email,
+        });
+        payload();
+        // window.location.reload(false);
+      }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -126,15 +144,21 @@ export const googleSignupHandler = createAsyncThunk(
   'user/googleSignupHandler',
   async (payload, { rejectWithValue }) => {
     const googleProvider = new GoogleAuthProvider();
-    const { navigation } = payload;
     try {
       const { user } = await signInWithPopup(auth, googleProvider);
-      await setDoc(doc(db, 'patients', user.uid), {
-        name: user.displayName.split(' ')[0],
-        surname: user.displayName.split(' ')[1],
-        email: user.email,
-      });
-      navigation();
+      const docRef = doc(db, 'patients', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        payload();
+      } else {
+        await setDoc(doc(db, 'patients', user.uid), {
+          name: user.displayName.split(' ')[0],
+          surname: user.displayName.split(' ')[1],
+          email: user.email,
+        });
+        payload();
+        // window.location.reload(false);
+      }
       return JSON.stringify({ ...auth.currentUser });
     } catch (error) {
       return rejectWithValue(error);
@@ -155,6 +179,159 @@ export const signoutHandler = createAsyncThunk(
     }
   }
 );
+
+export const editProfileHandler = createAsyncThunk(
+  'user/editProfileHandler',
+  async (payload, { rejectWithValue }) => {
+    const {
+      navigation,
+      name,
+      surname,
+      educationLevel,
+      hobbies,
+      familySize,
+      gender,
+      birthday,
+      email,
+      phone,
+      ID,
+      password,
+      oldPassword,
+      photo,
+      oldPhoto,
+    } = payload;
+    try {
+      if (password) {
+        await signInWithEmailAndPassword(
+          auth,
+          auth.currentUser.email,
+          oldPassword
+        );
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, password);
+      }
+      const myId = auth.currentUser.uid;
+      const profileInfo = doc(db, 'patients', myId);
+      if (photo !== oldPhoto) {
+        const imageRef = ref(storage, `images/${myId}`);
+        await uploadBytes(imageRef, photo);
+        const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));
+        await updateDoc(profileInfo, {
+          name,
+          surname,
+          educationLevel,
+          hobbies,
+          familySize,
+          gender,
+          birthday,
+          email,
+          phone,
+          ID,
+          password,
+          photo: photoUrl,
+        });
+      } else {
+        await updateDoc(profileInfo, {
+          name,
+          surname,
+          educationLevel,
+          hobbies,
+          familySize,
+          gender,
+          birthday,
+          email,
+          phone,
+          ID,
+          password,
+        });
+      }
+      navigation();
+      // window.location.reload(false);
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const editCounselerHandler = createAsyncThunk(
+  'user/editCounselerHandler',
+  async (payload, { rejectWithValue }) => {
+    const {
+      navigation,
+      name,
+      bio,
+      city,
+      license,
+      birthday,
+      email,
+      phone,
+      password,
+      oldPassword,
+      photo,
+      oldPhoto,
+    } = payload;
+    try {
+      if (password !== oldPassword || email !== auth.currentUser.email) {
+        await signInWithEmailAndPassword(
+          auth,
+          auth.currentUser.email,
+          oldPassword
+        );
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, password);
+      }
+      const myId = auth.currentUser.uid;
+      const profileInfo = doc(db, 'counselors', myId);
+      if (photo !== oldPhoto) {
+        const imageRef = ref(storage, `images/${myId}`);
+        await uploadBytes(imageRef, photo);
+        const photoUrl = await getDownloadURL(ref(storage, `images/${myId}`));
+        await updateDoc(profileInfo, {
+          name,
+          bio,
+          city,
+          license,
+          birthday,
+          email,
+          phone,
+          password,
+          photo: photoUrl,
+        });
+      } else {
+        await updateDoc(profileInfo, {
+          name,
+          bio,
+          city,
+          license,
+          birthday,
+          email,
+          phone,
+          password,
+        });
+      }
+      navigation();
+      // window.location.reload(false);
+      return JSON.stringify({ ...auth.currentUser });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteUserHandler = createAsyncThunk(
+  'user/deleteUserHandler',
+  async (payload) => {
+    const { navigation, collection } = payload;
+    try {
+      await deleteDoc(doc(db, collection, auth.currentUser.uid));
+      await deleteUser(auth.currentUser);
+      navigation();
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return JSON.stringify(error);
+    }
+  }
+);
 export const addCard = createAsyncThunk(
   'user/addCard',
   async (payload, { rejectWithValue }) => {
@@ -166,6 +343,7 @@ export const addCard = createAsyncThunk(
         cards: arrayUnion(card),
       });
       navigation();
+      // window.location.reload(false);
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return rejectWithValue(error);
@@ -180,9 +358,10 @@ export const buyTicket = createAsyncThunk(
       const myId = auth.currentUser.uid;
       const ticketInfo = doc(db, 'patients', myId);
       await updateDoc(ticketInfo, {
-        tickets: ticket,
+        tickets: increment(ticket),
       });
       navigation();
+      // window.location.reload(false);
       return JSON.stringify({ ...initialState });
     } catch (error) {
       return rejectWithValue(error);
@@ -300,7 +479,47 @@ const userSlice = createSlice({
     });
     builder.addCase(counselorsSignupHandler.rejected, (state, action) => {
       state.isLoggedIn = false;
-
+      state.error = action.payload.message;
+    });
+    // Patient Edit Profile
+    builder.addCase(editProfileHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(editProfileHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(editProfileHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // Counselor Edit Profile
+    builder.addCase(editCounselerHandler.pending, (state) => {
+      state.isLoggedIn = false;
+    });
+    builder.addCase(editCounselerHandler.fulfilled, (state, action) => {
+      state.authObject = JSON.parse(action.payload);
+      state.isLoggedIn = true;
+      state.error = null;
+    });
+    builder.addCase(editCounselerHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.message;
+    });
+    // delete User
+    builder.addCase(deleteUserHandler.pending, (state) => {
+      state.isLoggedIn = false;
+      state.error = 'signout in progress';
+    });
+    builder.addCase(deleteUserHandler.fulfilled, (state) => {
+      state.isLoggedIn = false;
+      state.firestoreObject = null;
+      state.authObject = null;
+      state.error = '';
+    });
+    builder.addCase(deleteUserHandler.rejected, (state, action) => {
+      state.isLoggedIn = false;
       state.error = action.payload.message;
     });
     // Buying Ticket

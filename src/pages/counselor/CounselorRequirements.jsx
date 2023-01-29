@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink} from 'react-router-dom';
 import frame from './Frame.svg'
 
 const CounselorRequirements = () => {
@@ -36,7 +37,7 @@ const CounselorRequirements = () => {
               className="rounded text-xl px-7 py-3 relative top-8 sm:text-base font-medium shadow-md bg-[#2DD3E3] transition duration-250  hover:bg-cyan-500"
               type="button"
             >
-              Get Started
+              <NavLink to="/CounselorSignup">Get Started</NavLink>
             </button>
           </div>
         </div>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function TicketCard({ ticketNumber, ticketPrice }) {
+  const user = useSelector((state) => state.user);
+  const { firestoreObject } = user;
   const navigate = useNavigate();
   const handleNavigate = (item) => {
     navigate('/buy-ticket', { state: { ticket: item, price: ticketPrice } });
@@ -18,7 +21,7 @@ function TicketCard({ ticketNumber, ticketPrice }) {
       </div>
       <div>
         <button
-          onClick={() => handleNavigate(ticketNumber)}
+          onClick={() => firestoreObject? handleNavigate(ticketNumber) : navigate("/login")}
           className="tablet:h-16 tablet:w-52 w-26 h-8 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100 text-md px-2 tablet:text-2xl text-center tablet:leading-9 text-black "
           type="button"
         >

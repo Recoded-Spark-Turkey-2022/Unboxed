@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import Input from './Input';
-import { addCard } from '../../features/user/userSlice';
+import { addCard, currentUserHandler } from '../../features/user/userSlice';
+import { auth } from '../../firebaseFile';
 
 const CardForm = () => {
   const [cardType, setCardType] = useState('');
@@ -69,18 +70,19 @@ const CardForm = () => {
     setSelectedCities(newCity);
   }, [selectedItem]);
 
-  const addCardFunction = (e) => {
+  const addCardFunction = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-unused-expressions
     cardType &&
       city &&
       selectedItem &&
-      dispatch(
+      await dispatch(
         addCard({
           card,
           navigation,
         })
       );
+      dispatch(currentUserHandler(auth.currentUser.uid))
   };
   useEffect(() => {
     setCard((prev) => ({
