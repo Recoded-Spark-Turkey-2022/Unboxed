@@ -1,4 +1,5 @@
 import React from 'react';
+
 import background from './background.svg';
 import illustration from './illustration.svg';
 
