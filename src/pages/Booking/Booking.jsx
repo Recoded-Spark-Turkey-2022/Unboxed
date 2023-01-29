@@ -6,8 +6,6 @@ import Data from './Booking-Data';
 // import { db } from '../../firebase';
 //  booking page logical path step by step :
 
-// - create afunction that map the data by ID from other comoponent ,
-// - create a function that map the styles from the design component ,
 // - create state that linked with the data component ,
 // - create state that linked with the design component ,
 // - create functionn two arguments each time i click in the button the state will change , the state will change onClick button , each time we click next button the we will push to the n
