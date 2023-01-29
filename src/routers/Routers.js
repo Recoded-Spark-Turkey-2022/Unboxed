@@ -16,11 +16,20 @@ import ContactThanks from '../components/contact/ContactThanks';
 import Team from '../pages/about/Team';
 import Overview from '../pages/about/Overview';
 import Careers from '../pages/about/Careers';
+<<<<<<< HEAD
+=======
+
+import Booking from '../pages/Booking/Booking';
+
+>>>>>>> fd1bf37fb70cdc18e3ce225672fc595cb2766c0b
 import BuyTickets from '../pages/buyTickets/BuyTickets';
 import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
 
+<<<<<<< HEAD
 import Booking from '../pages/Booking/Booking';
+=======
+>>>>>>> fd1bf37fb70cdc18e3ce225672fc595cb2766c0b
 
 const Routers = () => {
   return (
@@ -54,6 +63,10 @@ const Routers = () => {
         <Route path="buy-ticket" element={<BuyTickets />} />
         <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
         <Route path="payment-methods" element={<PaymentMethods />} />
+<<<<<<< HEAD
+=======
+
+>>>>>>> fd1bf37fb70cdc18e3ce225672fc595cb2766c0b
       </Routes>
     </div>
   );
