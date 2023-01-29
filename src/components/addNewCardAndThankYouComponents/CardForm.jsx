@@ -76,13 +76,13 @@ const CardForm = () => {
     cardType &&
       city &&
       selectedItem &&
-      await dispatch(
+      (await dispatch(
         addCard({
           card,
           navigation,
         })
-      );
-      dispatch(currentUserHandler(auth.currentUser.uid))
+      ));
+    dispatch(currentUserHandler(auth.currentUser.uid));
   };
   useEffect(() => {
     setCard((prev) => ({
