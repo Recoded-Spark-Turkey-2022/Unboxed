@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../../firebaseFile';
 import { useTranslation } from 'react-i18next';
 
 function ContactForm() {
@@ -28,7 +30,8 @@ function ContactForm() {
   };
   // formData contains the returning object for the entered inputs. && I just added console log for eslint error, will delete it later
   /* eslint-disable */
-  const submitHandler = (event) => {
+
+  const submitHandler = async (event) => {
     event.preventDefault();
     const formData = {
       option: choosenOption,
@@ -41,6 +44,10 @@ function ContactForm() {
     setEnteredMail('');
     setEnteredDetails('');
     navigate('/contact-thank-you');
+
+    await addDoc(collection(db, 'contactUs'), {
+      formData,
+    });
   };
   /* eslint-enable */
 

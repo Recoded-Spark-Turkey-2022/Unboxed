@@ -2,18 +2,24 @@
 /* eslint-disable no-nested-ternary */
 import { React, useState } from 'react';
 import { MdArrowBackIos } from 'react-icons/md/index';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Data from './Booking-Data';
+import { addBooking } from '../../features/user/userSlice';
 
 // import { db } from '../../firebase';
 
 const Booking = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [data, setData] = useState({
     BookingData: '',
   });
-  const [selectedData, setSelectedData] = useState('');
+  const [selectedData, setSelectedData] = useState({});
 
   function HandleClick() {
     if (page >= 1 && page <= 6) {
@@ -22,21 +28,23 @@ const Booking = () => {
         return;
       }
     }
-    if (page <= 7) {
+    if (page <= 6) {
       setData({ ...data, [page]: selectedData });
       setPage(page + 1);
     }
+    if (page === 7) {
+      setPage(page + 1);
+      dispatch(
+        addBooking({
+          selectedData,
+        })
+      );
+    }
     if (page === 8) {
-      // await db
-      //   .collection('patients')
-      //   .doc(selectedData.id)
-      //   .set(selectedData)
-      //   .then(() => {
-      //     console.log('Data added successfully!');
-      //   });
-      window.location.href = '/';
+      navigate('/');
     }
   }
+
   // this function will create a parameter to access the data from the data component , and will map the data based on the id of the page
   const filteredData = Data.filter((any) => any.id === page);
 
