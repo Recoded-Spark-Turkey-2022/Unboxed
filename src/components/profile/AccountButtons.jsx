@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { styles } from './ProfileStyle';
 import { deleteUserHandler } from '../../features/user/userSlice';
 
 const AccountButtons = ({ editInfo, handleEdit, collection }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const navigation = () => {
@@ -19,7 +21,7 @@ const AccountButtons = ({ editInfo, handleEdit, collection }) => {
           editInfo.password === editInfo.confirmPassword ? handleEdit : null
         }
       >
-        SAVE CHANGES
+        {t('SAVE CHANGES')}
       </button>
       <button
         className={styles.button}
@@ -28,14 +30,14 @@ const AccountButtons = ({ editInfo, handleEdit, collection }) => {
         }}
         type="button"
       >
-        DELETE ACCOUNT
+        {t('DELETE ACCOUNT')}
       </button>
       <button
         className={styles.button}
         onClick={() => window.location.reload(false)}
         type="button"
       >
-        CANCEL
+        {t('CANCEL')}
       </button>
     </div>
   );

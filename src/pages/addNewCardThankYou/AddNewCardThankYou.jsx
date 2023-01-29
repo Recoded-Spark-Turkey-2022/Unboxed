@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import Title from '../../components/addNewCardAndThankYouComponents/Title';
 import Button from '../../components/addNewCardAndThankYouComponents/Button';
 
 const AddNewCardThankYou = () => {
-  const titleTitle = 'thank you';
-  const textTitle =
-    'Your new payment method is under review, you will receive an email soon when your card is confirmed.Otherwise you will get a notification telling you what went wrong and how to add a new card.';
-  const titleButton = 'back to home';
+  const { t } = useTranslation();
+  const titleTitle = t('thankyou');
+  const textTitle = t('cardThanks');
+  const titleButton = t('backToHome');
   const [navigate, setNavigate] = useState(false);
   const navHome = () => {
     setNavigate(true);

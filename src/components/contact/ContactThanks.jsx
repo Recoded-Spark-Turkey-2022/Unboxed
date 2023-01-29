@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function ContactThanks() {
+  const { t } = useTranslation();
   return (
     <div className="flex font-poppins mx-[6%] 768:px-28 pt-20  gap-16 425:h-middle px-10 mb-4 ">
       <div>
@@ -18,7 +20,7 @@ function ContactThanks() {
               className="text-xl sm:text-xs w-1/4 h-14 sm:h-10 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100 "
               type="button"
             >
-              BACK TO HOME
+              {t('backToHome')}
             </button>
           </Link>
         </div>

@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import img from '../Profile-Edit/user-profile.svg';
 import { styles } from '../../components/profile/ProfileStyle';
 import AccountButtons from '../../components/profile/AccountButtons';
-import { currentUserHandler, editCounselerHandler } from '../../features/user/userSlice';
+import {
+  currentUserHandler,
+  editCounselerHandler,
+} from '../../features/user/userSlice';
 import { auth } from '../../firebaseFile';
 
 const CounselorEditInfo = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -75,7 +80,7 @@ const CounselorEditInfo = () => {
         setEditInfo((prevUser) => ({
           ...prevUser,
           photo: firestoreObject.photo,
-          oldPhoto:firestoreObject.photo
+          oldPhoto: firestoreObject.photo,
         }));
       }
     }
@@ -92,7 +97,7 @@ const CounselorEditInfo = () => {
   };
   const handleEdit = async (e) => {
     e.preventDefault();
-   await dispatch(
+    await dispatch(
       editCounselerHandler({
         name: editInfo.name,
         bio: editInfo.bio,
@@ -108,7 +113,7 @@ const CounselorEditInfo = () => {
         navigation,
       })
     );
-      dispatch(currentUserHandler(auth.currentUser.uid))
+    dispatch(currentUserHandler(auth.currentUser.uid));
   };
   return (
     <div className=" font-poppins">
@@ -132,78 +137,78 @@ const CounselorEditInfo = () => {
           />
         </div>
         <form className={styles.form}>
-          <h1 className={styles.h1Style}>View Info</h1>
+          <h1 className={styles.h1Style}>{t('therapistProfile')}</h1>
           <EditProfileInputs
-            textContent="Name"
+            textContent={t('fullname')}
             name="name"
             value={editInfo.name}
             handleChange={handleChange}
             validation
           />
           <EditProfileInputs
-            textContent="Bio"
+            textContent={t('bio')}
             name="bio"
             value={editInfo.bio}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            textContent="City"
+            textContent={t('city')}
             name="city"
             value={editInfo.city}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            textContent="License number"
+            textContent={t('License number')}
             name="license"
             value={editInfo.license}
             handleChange={handleChange}
             validation
           />
           <EditProfileInputs
-            textContent="BirthDate"
+            textContent={t('Birth Date')}
             name="birthday"
             value={editInfo.birthday}
             handleChange={handleChange}
           />
           <EditProfileInputs
-            textContent="Email"
+            textContent={t('email')}
             name="email"
             value={editInfo.email}
             handleChange={handleChange}
             validation
           />
           <EditProfileInputs
-            textContent="Phone Number"
+            textContent={t('Phone Number')}
             name="phone"
             value={editInfo.phone}
             handleChange={handleChange}
             validation
           />
-          <h1 className={styles.h1Style}>Security</h1>
+          <h1 className={styles.h1Style}>{t('Security')}</h1>
           <div className="mb-7 w-10/12 sm:w-full ">
             <div className={styles.inputRows}>
               {' '}
-              <p className={styles.inputLabel}>Password</p>
+              <p className={styles.inputLabel}>{t('password')}</p>
               <input
                 className={styles.inputs}
                 type="password"
                 name="password"
                 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                 required
-                title="Password should include minimum 8 characters, at least one letter and one number"
+                title={t('must2')}
                 value={editInfo.password}
                 onChange={handleChange}
               />
             </div>
             <div className={styles.inputRows}>
               {' '}
-              <p className={styles.inputLabel}>Confirm Password</p>
+              <p className={styles.inputLabel}>{t('confirmPassword')}</p>
               <input
                 className={styles.inputs}
                 type="password"
                 name="confirmPassword"
                 pattern={editInfo.password}
-                title="Passwords don't match"
+                title={t('must3')}
                 required
                 value={editInfo.confirmPassword}
                 onChange={handleChange}

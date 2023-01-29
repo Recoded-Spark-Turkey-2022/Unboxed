@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import nadim from './TeamMembersPP/nadim.jpg';
 import esra from './TeamMembersPP/esra.jpg';
 import hadi from './TeamMembersPP/hadi.jpg';
@@ -7,6 +8,7 @@ import ysf from './TeamMembersPP/ysf.jpg';
 import mucver from './TeamMembersPP/mucver.jpg';
 
 const TeamM = () => {
+  const { t } = useTranslation();
   return (
     <div
       data-testid="TeamM"
@@ -14,11 +16,9 @@ const TeamM = () => {
     >
       <div className=" flex flex-col items-center my-10 w-2/3 lg:w-5/6">
         <div className=" self-start">
-          <h1 className="text-5xl sm:text-3xl">
-            WE ARE HEALING, NICE TO MEET YOU!
-          </h1>
+          <h1 className="text-5xl sm:text-3xl">{t('teamTitle')}</h1>
           <p className="text-3xl sm:text-xl leading-10 mt-24 sm:mt-16 text-gray-700">
-            Meet the Team!
+            {t('meat')}
           </p>
         </div>
       </div>
@@ -35,7 +35,7 @@ const TeamM = () => {
             Nadim Absi
           </p>
           <p className="text-base leading-normal text-center text-gray-700 mt-8">
-            Front-End WEB Developer
+            {t('jr')}
           </p>
         </div>
         <div className="inline-flex flex-col items-center justify-end w-44 pt-0.5 pb-20 bg-[#EAF8F9] rounded-3xl">
@@ -49,7 +49,7 @@ const TeamM = () => {
             Esra Akbulat
           </p>
           <p className="text-base leading-normal text-center text-gray-700 mt-8">
-            Front-End WEB Developer
+            {t('jr')}
           </p>
         </div>
         <div className="inline-flex flex-col items-center justify-end w-44 pt-0.5 pb-20 bg-[#EAF8F9] rounded-3xl">
@@ -63,7 +63,7 @@ const TeamM = () => {
             Hadi Maleh
           </p>
           <p className="text-base leading-normal text-center text-gray-700 mt-8">
-            Front-End WEB Developer
+            {t('jr')}
           </p>
         </div>
         <div className="inline-flex flex-col items-center justify-end w-44 pt-0.5 pb-20 bg-[#EAF8F9] rounded-3xl">
@@ -77,7 +77,7 @@ const TeamM = () => {
             Pelin Karakoca
           </p>
           <p className="text-base leading-normal text-center text-gray-700 mt-8">
-            Front-End WEB Developer
+            {t('jr')}
           </p>
         </div>
         <div className="inline-flex flex-col items-center justify-end w-44 pt-0.5 pb-20 bg-[#EAF8F9] rounded-3xl">
@@ -91,7 +91,7 @@ const TeamM = () => {
             Yusuf Dumlu
           </p>
           <p className="text-base leading-normal text-center text-gray-700 mt-8 ">
-            Front-End WEB Developer
+            {t('jr')}
           </p>
         </div>
       </div>

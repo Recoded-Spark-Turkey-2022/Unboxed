@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ContactForm from './Forms/ContactForm';
 import ContactPlace from './ContactPlace';
 import contact from './contactImg.svg';
 
 function Contact() {
+  const { t } = useTranslation();
   return (
     <div className="p-[5%] font-poppins max:h-middle">
       <div>

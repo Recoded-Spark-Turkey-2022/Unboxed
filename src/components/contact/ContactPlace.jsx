@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import { t } from 'i18next';
 import React from 'react';
 
 function ContactPlace() {

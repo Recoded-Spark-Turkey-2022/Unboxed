@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import CardsSlider from '../../components/cardsSlider/CardsSlider';
@@ -6,6 +7,7 @@ import { buyTicket, currentUserHandler } from '../../features/user/userSlice';
 import { auth } from '../../firebaseFile';
 
 const BuyTickets = () => {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,36 +20,35 @@ const BuyTickets = () => {
   useEffect(() => {
     setTicket(params?.ticket);
   }, []);
-  const handleNavigate = async() => {
+  const handleNavigate = async () => {
     if (selected) {
-     await dispatch(
+      await dispatch(
         buyTicket({
           ticket,
           navigation,
         })
       );
-      dispatch(currentUserHandler(auth.currentUser.uid))
+      dispatch(currentUserHandler(auth.currentUser.uid));
     }
   };
   return (
     <div className="font-poppins pl-20 pr-20 w-full flex flex-col justify-between pb-24 lg:pl-4 lg:pr-4 max:h-middle pt-10">
       <div className="font-normal not-italic pl-16  mb-24 lg:pl-0 lg:mb-10">
         <p className=" text-5xl text-black  uppercase leading-[75px] lg:text-3xl lg:mt-4">
-          select card
+          {t('select')}
         </p>
         <p className=" text-2xl leading-9 text-justify text-lightBlack lg:text-xl">
-          Please select the card you want to buy the tickets with
+          {t('selectText')}
         </p>
       </div>
 
       <CardsSlider setSelected={setSelected} selected={selected} />
       <div className="font-normal text-4xl not-italic capitalize lg:text-2xl lg:mb-10 mb-4">
-        Click confirm to use the selected card to purchase {params?.ticket}{' '}
-        tickets for {params?.price}$
+        {t('selectInfoText')} {params?.ticket} tickets for {params?.price}$
       </div>
       {selected && (
         <div className="font-normal text-2xl not-italic capitalize lg:text-2xl lg:mb-10">
-          You selected a card
+          {t('selected')}
         </div>
       )}
       <button
@@ -55,7 +56,7 @@ const BuyTickets = () => {
         type="button"
         onClick={handleNavigate}
       >
-        confirm purchase
+        {t('confirm')}
       </button>
     </div>
   );
