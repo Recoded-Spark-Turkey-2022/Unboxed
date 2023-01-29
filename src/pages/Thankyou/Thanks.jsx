@@ -5,7 +5,7 @@ const Thanks = () => {
   return (
     <div>
       <Link to="/Thankyou">
-        <p>thank you for subscitption </p>;
+        <p>thank you for subscitption </p>
       </Link>
     </div>
   );

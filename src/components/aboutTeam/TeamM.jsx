@@ -10,7 +10,7 @@ const TeamM = () => {
   return (
     <div
       data-testid="TeamM"
-      className=" font-poppins flex flex-col items-center "
+      className=" font-poppins flex flex-col items-center max:h-middle justify-center"
     >
       <div className=" flex flex-col items-center my-10 w-2/3 lg:w-5/6">
         <div className=" self-start">
@@ -99,7 +99,7 @@ const TeamM = () => {
         <img
           className="w-full rounded-tl-3xl rounded-tr-3xl"
           src={mucver}
-          alt="funnyclumsy"
+          alt="cat"
         />
         <div className="w-full h-1.5 bg-[#6BD24D]" />
         <p className="text-xl mt-2 leading-relaxed text-center text-gray-700">

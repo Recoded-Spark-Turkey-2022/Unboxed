@@ -368,6 +368,23 @@ export const buyTicket = createAsyncThunk(
     }
   }
 );
+export const addBooking = createAsyncThunk(
+  'user/addBooking',
+  async (payload, { rejectWithValue }) => {
+    const { selectedData } = payload;
+    try {
+      const myId = auth.currentUser.uid;
+      const bookingInfo = doc(db, 'patients', myId);
+      await updateDoc(bookingInfo, {
+        bookings: arrayUnion(selectedData),
+      });
+
+      return JSON.stringify({ ...initialState });
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -533,6 +550,20 @@ const userSlice = createSlice({
     });
     builder.addCase(buyTicket.rejected, (state, action) => {
       state.tickets = null;
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // Adding Booking
+    builder.addCase(addBooking.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addBooking.fulfilled, (state, action) => {
+      state.bookings = JSON.parse(action.payload);
+      state.loading = false;
+      state.error = null;
+    });
+    builder.addCase(addBooking.rejected, (state, action) => {
+      state.bookings = null;
       state.loading = false;
       state.error = action.payload;
     });
