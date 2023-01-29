@@ -36,6 +36,7 @@ const SignupForm = () => {
         surname: userSurname,
         email: userEmail,
         password: userPassword,
+        bookings: [],
         cards: [],
         tickets: 0,
         birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
