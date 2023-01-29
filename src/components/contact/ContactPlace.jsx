@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 
 function ContactPlace() {
@@ -6,9 +7,9 @@ function ContactPlace() {
       <div className="p-[6%]">
         <h6 className="mb-[2%]">Find us at: </h6>
         <p className="leading-9 opacity-50">
-          Nergiz Plaza <br />
-          3rd Floor <br />
-          Bakhtiyari Street 40m <br />
+          Nergiz {t('plaza')} <br />
+          3rd {t('floor')} <br />
+          Bakhtiyari {t('street')} 40m <br />
           Erbil, Iraq <br />
           44001
         </p>

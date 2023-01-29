@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function ContactThanks() {
+  const { t } = useTranslation();
   return (
     <div className="flex font-poppins mx-[6%] ">
       <div>
-        <h1 className="flex-column my-[1%] flex-start text-5xl">THANK YOU!</h1>
+        <h1 className="flex-column my-[1%] flex-start text-5xl">
+          {t('thankyou')}
+        </h1>
         <span className="text-2xl leading-9 opacity-50">
-          Your request has been sent, a member of the support team will get in
-          contact with you through the email you provided as soon as possible.
+          {t('contactThanks')}
         </span>
         <div>
           <Link to="/">
@@ -16,7 +19,7 @@ function ContactThanks() {
               className="text-xl w-[20%] h-16 mt-[2%] self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100 "
               type="button"
             >
-              BACK TO HOME
+              {t('backToHome')}
             </button>
           </Link>
         </div>

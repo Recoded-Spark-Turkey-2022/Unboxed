@@ -1,12 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import LoginForm from '../../components/loginForm/LoginForm';
 import img from './LoginImg.svg';
 
 const Login = () => {
+  const { t } = useTranslation();
   return (
     <div className="font-poppins mt-12">
       <h1 className="text-3xl font-semibold ml-20 sm:ml-0 sm:text-center">
-        LOGIN
+        {t('login2')}
       </h1>
       <div className="flex justify-center gap-5 items-center sm:flex-col sm:items-center ">
         <LoginForm />

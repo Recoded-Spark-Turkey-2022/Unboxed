@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Button from './Button';
@@ -7,6 +8,7 @@ import { addCard, currentUserHandler } from '../../features/user/userSlice';
 import { auth } from '../../firebaseFile';
 
 const CardForm = () => {
+  const { t } = useTranslation;
   const [cardType, setCardType] = useState('');
   const [selectedItem, setSelectedItem] = useState('');
   const [selectedCities, setSelectedCities] = useState([]);
@@ -18,7 +20,7 @@ const CardForm = () => {
   const [city, setCity] = useState('');
   const [address, setAddress] = useState('');
   const [card, setCard] = useState({});
-  const buttonTitle = 'Add Card';
+  const buttonTitle = t('ADD CARD');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const navigation = () => {
@@ -76,13 +78,13 @@ const CardForm = () => {
     cardType &&
       city &&
       selectedItem &&
-      await dispatch(
+      (await dispatch(
         addCard({
           card,
           navigation,
         })
-      );
-      dispatch(currentUserHandler(auth.currentUser.uid))
+      ));
+    dispatch(currentUserHandler(auth.currentUser.uid));
   };
   useEffect(() => {
     setCard((prev) => ({
@@ -115,7 +117,7 @@ const CardForm = () => {
       onSubmit={addCardFunction}
     >
       <div className="text-xl w-2/3 sm:w-full lg:w-4/5">
-        <div className=" text-Clr94AFB6 ">Supported Card types</div>
+        <div className=" text-Clr94AFB6 ">{t('supported')}</div>
         <div className="grid grid-cols-2 divide-Cyan divide-x border border-Cyan  text-Cyan text-center ">
           <button
             className={
@@ -147,7 +149,7 @@ const CardForm = () => {
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
         <label className="text-xl flex flex-col" htmlFor="country">
-          Country
+          {t('country')}
           <select
             data-testid="selectInput"
             className="text-sm border border-Clr94AFB6 h-10"
@@ -157,7 +159,7 @@ const CardForm = () => {
               setSelectedItem(e.target.value);
             }}
           >
-            <option value="">Please choose a country</option>
+            <option value="">{t('choose')}</option>
             {optionCountry?.map((item) => {
               return (
                 <option key={item?.id} value={item?.name} name="Select">
@@ -169,35 +171,35 @@ const CardForm = () => {
         </label>
       </div>
       <Input
-        labelText="Card Number"
-        placeholder="Card Number"
+        labelText={t('cardNumber')}
+        placeholder={t('cardNumber')}
         id="cardNumber"
         type="text"
         pattern="^[0-9]{16}$"
-        title="Card number should include 16 characters, and only numbers!"
+        title={t('must6')}
         func={(e) => setCardNumber(e.target.value)}
       />
       <Input
-        labelText="ZIP Code"
-        placeholder="ZIP Code"
+        labelText={t('zip')}
+        placeholder={t('zip')}
         id="zipCode"
         type="text"
         pattern="^[0-9]{6}$"
-        title="ZIP Code should include 6 characters, and only numbers!"
+        title={t('must7')}
         func={(e) => setZipCode(e.target.value)}
       />
       <div className="flex w-1/2 sm:flex-col sm:w-full">
         <Input
-          labelText="Expiry Date"
-          placeholder="MM / YY"
+          labelText={t('Expiry Date')}
+          placeholder={`${t('mm')} / ${t('yy')}`}
           id="expiryDate"
           type="text"
           pattern="^[0-9]{4,6}$"
-          title="Expiry Date should include min 4 max 6 characters, and only numbers!"
+          title={t('must8')}
           func={(e) => setExpiryDate(e.target.value)}
         />
         <Input
-          labelText="CVV Code"
+          labelText={t('CVV Code')}
           placeholder="***"
           id="cvvCode"
           type="text"
@@ -208,7 +210,7 @@ const CardForm = () => {
       </div>
       <div className="text-Clr94AFB6  w-2/3 sm:w-full lg:w-4/5">
         <label className="text-xl flex flex-col" htmlFor="city">
-          City
+          {t('city')}
           <select
             className="text-sm border border-Clr94AFB6 h-10"
             name="City"
@@ -217,7 +219,7 @@ const CardForm = () => {
               setCity(e.target.value);
             }}
           >
-            <option value="">Please choose a city</option>
+            <option value="">{t('choose2')}</option>
             {selectedCities?.map((item) => {
               return (
                 <option key={item?.id} value={item?.name} name="Select">
@@ -229,21 +231,21 @@ const CardForm = () => {
         </label>
       </div>
       <Input
-        labelText="Name On Card"
-        placeholder="Name On Card"
+        labelText={t('Name on Card')}
+        placeholder={t('Name on Card')}
         id="name"
         type="text"
         pattern="^[a-zA-Z0-9]{1,30}$"
-        title="Name shouldn't include any special character!"
+        title={t('must10')}
         func={(e) => setNameOnCard(e.target.value)}
       />
       <Input
-        labelText="Address"
-        placeholder="Address"
+        labelText={t('Address')}
+        placeholder={t('Address')}
         id="address"
         type="text"
         pattern="^[a-zA-Z0-9]{1,90}$"
-        title="Address shouldn't include any special character!"
+        title={t('must11')}
         func={(e) => setAddress(e.target.value)}
       />
       <Button text={buttonTitle} />

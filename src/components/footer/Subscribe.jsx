@@ -1,5 +1,6 @@
 // import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { collection, addDoc } from 'firebase/firestore';
 import { useState } from 'react';
@@ -9,6 +10,7 @@ function Subscribe() {
   const [Email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleChange = (event) => {
     setEmail(event.target.value);
@@ -39,7 +41,7 @@ function Subscribe() {
         className="  w-[15rem] h-[2.25rem] border flex border-hidden   rounded-sm box-border text-[#718096] text-md "
         name="name"
         data-testid="Subscribe"
-        placeholder="Write your Email"
+        placeholder={t('EnterEmail')}
         type="email"
         value={Email}
         onChange={handleChange}

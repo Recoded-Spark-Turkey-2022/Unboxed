@@ -1,18 +1,18 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ContactForm from './Forms/ContactForm';
 import ContactPlace from './ContactPlace';
 import contact from './contactImg.svg';
 
 function Contact() {
+  const { t } = useTranslation();
   return (
     <div className="m-[5%] font-poppins">
       <div>
         {' '}
-        <h1 className="pb-[1%] text-5xl sm:text-xl">SEND US YOUR REQUEST!</h1>
+        <h1 className="pb-[1%] text-5xl sm:text-xl">{t('contackTitle')}</h1>
         <p className="pb-[1%] text-2xl sm:text-base opacity-50">
-          {`Do you have a question, concern, idea, feedback, or problem? If you
-          need assistance, please fill out the form below and we'd be
-          happy to help!`}
+          {t('contactText')}
         </p>
       </div>
       <div className="flex space-x-24">

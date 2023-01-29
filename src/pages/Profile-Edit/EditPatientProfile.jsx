@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AccountButtons from '../../components/profile/AccountButtons';
-import { currentUserHandler, editProfileHandler } from '../../features/user/userSlice';
+import {
+  currentUserHandler,
+  editProfileHandler,
+} from '../../features/user/userSlice';
 import EditProfileInputs from '../../components/profile/EditProfileInputs';
 import { styles } from '../../components/profile/ProfileStyle';
 import img from './user-profile.svg';
 import { auth } from '../../firebaseFile';
 
-
 const EditPatientProfile = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -115,13 +119,13 @@ const EditPatientProfile = () => {
         setEditInfo((prevUser) => ({
           ...prevUser,
           photo: firestoreObject.photo,
-          oldPhoto:firestoreObject.photo
+          oldPhoto: firestoreObject.photo,
         }));
       }
       if (firestoreObject.tickets) {
         setEditInfo((prevUser) => ({
           ...prevUser,
-          tickets: firestoreObject.tickets
+          tickets: firestoreObject.tickets,
         }));
       }
     }
@@ -133,7 +137,7 @@ const EditPatientProfile = () => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-   await dispatch(
+    await dispatch(
       editProfileHandler({
         name: editInfo.name,
         surname: editInfo.surname,
@@ -152,16 +156,12 @@ const EditPatientProfile = () => {
         navigation,
       })
     );
-    dispatch(currentUserHandler(auth.currentUser.uid))
+    dispatch(currentUserHandler(auth.currentUser.uid));
   };
 
   return (
     <div className="font-poppins">
-      <h1 className="text-[#FF0000] text-center text-xl">
-        {' '}
-        Please fill all the fields with correct and valid details to complete
-        your profile.
-      </h1>
+      <h1 className="text-[#FF0000] text-center text-xl"> {t('please')}</h1>
       <div className={styles.container}>
         <div className=" flex flex-col items-start">
           <img
@@ -182,17 +182,17 @@ const EditPatientProfile = () => {
           />
         </div>
         <form className={styles.form}>
-          <h1 className={styles.h1Style}>Profile Info</h1>
+          <h1 className={styles.h1Style}>{t('editInfo')}</h1>
           <div className="mb-7 w-10/12 sm:w-full ">
             <EditProfileInputs
-              textContent="Name"
+              textContent={t('fullname')}
               name="name"
               value={editInfo.name}
               handleChange={handleChange}
               validation
             />
             <EditProfileInputs
-              textContent="Surname"
+              textContent={t('surname')}
               name="surname"
               value={editInfo.surname}
               handleChange={handleChange}
@@ -200,30 +200,30 @@ const EditPatientProfile = () => {
             />
             <div className={styles.inputRows}>
               {' '}
-              <p className={styles.inputLabel}>Education Level</p>
+              <p className={styles.inputLabel}>{t('Education Level')}</p>
               <select
                 className={styles.inputs}
                 name="educationLevel"
                 value={editInfo.educationLevel}
                 onChange={handleChange}
               >
-                <option value="none">Select an Option</option>
-                <option value="High School">High School</option>
-                <option value="Associate's Degree">Associate Degree</option>
-                <option value="Bacheclor's Degree">Bacheclor Degree</option>
-                <option value="Master's Degree">Master Degree</option>
-                <option value="PHD">PHD</option>
+                <option value="none">{t('select2')}</option>
+                <option value="High School">{t('s1')}</option>
+                <option value="Associate's Degree">{t('s2')}</option>
+                <option value="Bacheclor's Degree">{t('s3')}</option>
+                <option value="Master's Degree">{t('s4')}</option>
+                <option value="PHD">{t('s5')}</option>
               </select>
             </div>
             <EditProfileInputs
-              textContent="Hobbies"
+              textContent={t('Hobbies')}
               name="hobbies"
               value={editInfo.hobbies}
               handleChange={handleChange}
             />
             <div className={styles.inputRows}>
               {' '}
-              <p className={styles.inputLabel}>Family Size</p>
+              <p className={styles.inputLabel}>{t('Family Size')}</p>
               <div className="flex min-w-[60%] gap-5">
                 <input
                   className="border-2 border-gray-200 rounded w-12 text-xl"
@@ -232,26 +232,26 @@ const EditPatientProfile = () => {
                   value={editInfo.familySize}
                   onChange={handleChange}
                 />
-                <p className="text-xl xsm:text-base ">Member(s)</p>
+                <p className="text-xl xsm:text-base ">{t('Member(s)')}</p>
               </div>
             </div>
             <div className={styles.inputRows}>
               {' '}
-              <p className={styles.inputLabel}>Gender</p>
+              <p className={styles.inputLabel}>{t('Gender')}</p>
               <select
                 className={styles.inputs}
                 name="gender"
                 value={editInfo.gender}
                 onChange={handleChange}
               >
-                <option value="none">Select an Option</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="none">{t('select2')}</option>
+                <option value="Male">{t('s7')}</option>
+                <option value="Female">{t('s6')}</option>
+                <option value="Other">{t('s8')}</option>
               </select>
             </div>
             <EditProfileInputs
-              textContent="Birth Date"
+              textContent={t('Birth Date')}
               name="birthday"
               value={editInfo.birthday}
               handleChange={handleChange}
@@ -259,7 +259,7 @@ const EditPatientProfile = () => {
             />
             {editInfo.password ? (
               <EditProfileInputs
-                textContent="Email"
+                textContent={t('email')}
                 name="email"
                 value={editInfo.email}
                 handleChange={handleChange}
@@ -267,45 +267,45 @@ const EditPatientProfile = () => {
               />
             ) : null}
             <EditProfileInputs
-              textContent="Phone Number"
+              textContent={t('Phone Number')}
               name="phone"
               value={editInfo.phone}
               handleChange={handleChange}
             />
             <EditProfileInputs
-              textContent="ID"
+              textContent={t('Upload ID')}
               name="ID"
               value={editInfo.ID}
               handleChange={handleChange}
             />
           </div>
-          <h1 className={styles.h1Style}>Security</h1>
+          <h1 className={styles.h1Style}>{t('Security')}</h1>
           {editInfo.password ? (
             <div>
               <div className="mb-7 w-10/12 sm:w-full ">
                 <div className={styles.inputRows}>
                   {' '}
-                  <p className={styles.inputLabel}>Password</p>
+                  <p className={styles.inputLabel}>{t('password')}</p>
                   <input
                     className={styles.inputs}
                     type="password"
                     name="password"
                     pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                     required
-                    title="Password should include minimum 8 characters, at least one letter and one number"
+                    title={t('must2')}
                     value={editInfo.password}
                     onChange={handleChange}
                   />
                 </div>
                 <div className={styles.inputRows}>
                   {' '}
-                  <p className={styles.inputLabel}>Confirm Password</p>
+                  <p className={styles.inputLabel}>{t('confirmPassword')}</p>
                   <input
                     className={styles.inputs}
                     type="password"
                     name="confirmPassword"
                     pattern={editInfo.password}
-                    title="Passwords don't match"
+                    title={t('must3')}
                     required
                     value={editInfo.confirmPassword}
                     onChange={handleChange}
@@ -319,18 +319,26 @@ const EditPatientProfile = () => {
             handleEdit={handleEdit}
             collection="patients"
           />
-          <h1 className={styles.h1Style}>Payment Methods & Tickets</h1>
+          <h1 className={styles.h1Style}>{t('payment')}</h1>
           <div className="flex gap-6">
             <div>
-              <p>{editInfo.cards} Cards Added</p>
-              <button className={styles.button} onClick={()=> navigate("/payment-methods")} type="button">
-                SHOW CARDS
+              <p>
+                {editInfo.cards} {t('cardsAdded')}
+              </p>
+              <button
+                className={styles.button}
+                onClick={() => navigate('/payment-methods')}
+                type="button"
+              >
+                {t('SHOW CARDS')}
               </button>
             </div>
             <div>
-              <p>{editInfo.tickets} Tickets Remaining</p>
+              <p>
+                {editInfo.tickets} {t('Tickets Remaining')}
+              </p>
               <button className={styles.button} type="button">
-                BUY TICKETS
+                {t('BUY TICKETS')}
               </button>
             </div>
           </div>

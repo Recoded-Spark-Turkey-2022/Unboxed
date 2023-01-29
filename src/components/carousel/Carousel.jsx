@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -8,6 +9,7 @@ import previous from './leftsquare.svg';
 import next from './rightsquare.svg';
 
 function Carousel() {
+  const { t } = useTranslation();
   // this hook is used for make buttons work
   const [sliderRef, setSliderRef] = useState(null);
 
@@ -56,7 +58,7 @@ function Carousel() {
   return (
     <div className="flex flex-col justify-center bg-[#EAF8F9] font-poppins ">
       <h1 className="text-xl font-semibold tablet:text-5xl tablet: py-2 laptop:pl-28 laptop:py-16">
-        RECENT BLOGS
+        {t('recend')}
       </h1>
       <div className="flex flex-row justify-center tablet:pb-10 laptop: pb-28">
         <div className="self-center">

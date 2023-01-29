@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { blogs } from '../../data/blogArticles';
@@ -28,7 +29,7 @@ function RecommendBlog({ clippedId }) {
 
   return (
     <div className="py-[5%] text-3xl sm:text-lg">
-      <h1 className="py-[3%]">Recommended For You</h1>
+      <h1 className="py-[3%]">{t('Recommended')}</h1>
       <div className="flex space-x-[2%] pb-[3%]">{recommends}</div>
     </div>
   );
