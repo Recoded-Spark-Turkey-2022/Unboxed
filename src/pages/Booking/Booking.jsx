@@ -24,11 +24,16 @@ const Booking = () => {
   const [selectedData, setSelectedData] = useState('');
 
   function HandleClick() {
+    if (page >= 1 && page <= 6) {
+      if (!selectedData[page]) {
+        alert('Please choose an answer');
+        return;
+      }
+    }
     if (page <= 7) {
       setData({ ...data, [page]: selectedData });
       setPage(page + 1);
     }
-
     if (page === 8) {
       // await db
       //   .collection('patients')
@@ -37,16 +42,14 @@ const Booking = () => {
       //   .then(() => {
       //     console.log('Data added successfully!');
       //   });
-
       window.location.href = '/';
     }
   }
-
   // this function will create a parameter to access the data from the data component , and will map the data based on the id of the page
   const filteredData = Data.filter((any) => any.id === page);
 
   return (
-    <form className=" flex- col xl:mt-28" data-testid="Booking">
+    <form className=" flex- col xl:mt-10" data-testid="Booking">
       <div className="container bg-white sm:mr-20">
         <div className="flex flex-col h-auto font-poppins xl:ml-28 lg:ml-12 md:ml-10 sm:ml-1">
           {filteredData.map((any) => (
@@ -61,7 +64,7 @@ const Booking = () => {
           ))}
         </div>
 
-        <div className="flex flex-col w-full px-8 py-4 m-5 mx-auto my-16 mt-5 md:max-w-2xl lg:max-w-4xl">
+        <div className="flex flex-col w-full px-8 mx-auto mb-10 md:max-w-2xl lg:max-w-4xl">
           <div
             className="h-auto p-4 bg-white rounded "
             style={{ boxShadow: '0px 4px 12px 0 rgba(0,0,0,0.12)' }}
@@ -117,10 +120,10 @@ const Booking = () => {
                         onClick={(e) => {
                           setSelectedData({
                             ...selectedData,
-                            [page.any]: e.target.value,
+                            [page]: e.target.value,
                           });
                         }}
-                        className=" appearance-none border-1 border-black rounded-md  text-3xl  w-5 h-5 text-black-600 bg-gray-100 focus:outline-black  focus:ring-cyan-200 sm:h-[3rem]   transition-all duration-500 hover:bg-cyan-100  focus:bg-[#2dd3e3]   focus:ring-2  ml-2 font-xl text-black-900 "
+                        className=" appearance-none border-2 border-black-500 rounded-md md:text-3xl   p-2 w-5 h-5  text-black-600 bg-gray-100 focus:outline-black  focus:ring-cyan-200   transition-all duration-500 hover:bg-cyan-100  focus:bg-[#2dd3e3]   focus:ring-2 focus:ring-bg-black ml-2 font-xl text-black-900 "
                       />
                       {any}
                     </div>
@@ -157,12 +160,12 @@ const Booking = () => {
               </div>
             ) : null}
             {filteredData.map((any) => (
-              <div className="ml-[38%] mb-[2%]">
+              <div className="ml-[40%] sm:ml-[25%] md:ml-[30%] mb-[2%]">
                 <button
                   key={any.id}
                   onClick={HandleClick}
                   type="button"
-                  className=" p-auto  mt-20 p-2 sm:mt-20 xl:text-xl     flex items-center  sm:text-sm   sm:h-[3rem]  transition-all duration-500 align-bottom  md:text-xl ml-2  lg:px-6   text-3xl text-center uppercase text-black  xl:h-[60px]  xl:w-[6.5rem] md:h-[50px] md:w-[5rem] justify-center hover:bg-[#27B2C4]  hover:text-black  rounded-md bg-[#2dd3e3]"
+                  className=" p-auto  mt-20 p-2 sm:mt-20 xl:text-2xl     flex items-center  sm:text-sm   sm:h-[3rem]   md:text-base  transition-all duration-500 align-bottom   ml-2  lg:px-6   text-3xl text-center uppercase text-black  xl:h-[3.5rem]  xl:w-[12rem]  md:w-[12rem] md:h-[3.5rem]  justify-center hover:bg-[#27B2C4]  hover:text-black  rounded-md bg-[#2dd3e3]"
                 >
                   {any.Button}
                 </button>

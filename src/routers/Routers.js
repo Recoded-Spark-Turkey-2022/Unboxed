@@ -48,14 +48,12 @@ const Routers = () => {
         <Route path="about/team" element={<Team />} />
         <Route path="about/careers" element={<Careers />} />
         <Route path="about/overview" element={<Overview />} />
-<<<<<<< HEAD
 
         <Route path="Booking" element={<Booking />} />
-=======
+
         <Route path="buy-ticket" element={<BuyTickets />} />
         <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
         <Route path="payment-methods" element={<PaymentMethods />} />
->>>>>>> main
       </Routes>
     </div>
   );
