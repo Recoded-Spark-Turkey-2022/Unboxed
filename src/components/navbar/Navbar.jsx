@@ -8,8 +8,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RxCross2 } from 'react-icons/rx';
 import { signoutHandler } from '../../features/user/userSlice';
 import logoImg from './logo.svg';
+import i18n from '../../translation/i18n';
 
-const Navbar = () => {
+const Navbar = ({ lang, setLang }) => {
   const { t } = useTranslation();
   const user = useSelector((state) => state.user);
   const { firestoreObject } = user;
@@ -17,8 +18,6 @@ const Navbar = () => {
   const [aboutDropdown, setAboutDropdown] = useState(false);
   const [userDropdown, setuserDropdown] = useState(false);
   const [burgerDropdown, setburgerDropdown] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [lang, setLang] = useState('En');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +28,9 @@ const Navbar = () => {
   const handleLogout = async () => {
     dispatch(signoutHandler({ navigation }));
   };
-
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
   const location = useLocation();
   useEffect(() => {}, [location]);
 
