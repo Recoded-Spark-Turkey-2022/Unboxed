@@ -2,8 +2,9 @@ import React from 'react';
 import nadim from './TeamMembersPP/nadim.jpg';
 import esra from './TeamMembersPP/esra.jpg';
 import hadi from './TeamMembersPP/hadi.jpg';
-import pelin from './TeamMembersPP/pelin.jpg';
+import pelin from './TeamMembersPP/pelin2.jpg';
 import ysf from './TeamMembersPP/ysf.jpg';
+import mucver from './TeamMembersPP/mucver.jpg';
 
 const TeamM = () => {
   return (
@@ -93,6 +94,20 @@ const TeamM = () => {
             Front-End WEB Developer
           </p>
         </div>
+      </div>
+      <div className="inline-flex flex-col items-center justify-end w-44 pt-0.5 pb-20 bg-[#EAF8F9] rounded-3xl">
+        <img
+          className="w-full rounded-tl-3xl rounded-tr-3xl"
+          src={mucver}
+          alt="cat"
+        />
+        <div className="w-full h-1.5 bg-[#6BD24D]" />
+        <p className="text-xl mt-2 leading-relaxed text-center text-gray-700">
+          Mucver
+        </p>
+        <p className="text-base leading-normal text-center text-gray-700 mt-4">
+          Front-End Development Intern
+        </p>
       </div>
     </div>
   );
