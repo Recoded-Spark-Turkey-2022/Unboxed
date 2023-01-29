@@ -13,9 +13,7 @@ function App() {
   return (
     <div data-testid="App" className="App">
       <Navbar lang={lang} setLang={setLang} />
-
       <Routers />
-
       <Footer />
     </div>
   );
