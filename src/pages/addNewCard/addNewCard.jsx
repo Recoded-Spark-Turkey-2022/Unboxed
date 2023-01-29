@@ -8,7 +8,7 @@ const AddNewCard = () => {
   const titleTitle = 'add card details';
 
   return (
-    <div className="mx-28 mt-16 sm:mx-4 md:mx-8">
+    <div className="font-poppins pl-20 pr-20 w-full flex flex-col justify-between pb-24 lg:pl-4 lg:pr-4 max:h-middle pt-8 sm:pt-12">
       <Title text={titleText} title={titleTitle} />
       <div className="flex sm:flex-col-reverse sm:mt-4 lg:flex-col-reverse ">
         <CardForm />

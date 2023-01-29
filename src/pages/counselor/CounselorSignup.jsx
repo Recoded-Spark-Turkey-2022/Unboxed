@@ -42,7 +42,7 @@ const CounselorSignup = () => {
   };
 
   return (
-    <div className="font-poppins">
+    <div className="font-poppins max:h-middle pb-20 pt-16 mt-6">
       <form className="flex flex-col ml-10 sm:ml-0 sm:items-center">
         <h1 className="text-3xl font-semibold mb-5">CREATE AN ACCOUNT</h1>
         <div className="mb-7">
