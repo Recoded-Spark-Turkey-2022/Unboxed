@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
 import { blogs } from '../../data/blogArticles';
 import previous from './leftsquare.svg';
 import next from './rightsquare.svg';

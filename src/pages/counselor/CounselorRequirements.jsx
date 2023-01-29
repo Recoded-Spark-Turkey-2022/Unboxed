@@ -6,9 +6,9 @@ import frame from './Frame.svg';
 const CounselorRequirements = () => {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="max:h-middle">
       <img
-        className="laptop:relative laptop:float-right -z-10 laptop:top-24 laptop:mr-16 lg:flex lg:flex-col lg:mx-auto sm:mt-20 sm:w-2/3"
+        className="laptop:relative laptop:float-right -z-10 laptop:top-24 laptop:mr-16 lg:flex lg:flex-col lg:mx-auto sm:mt-20 sm:w-2/3 "
         src={frame}
         alt="illustration"
       />

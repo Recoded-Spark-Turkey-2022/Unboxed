@@ -11,7 +11,9 @@ function App() {
   return (
     <div data-testid="App" className="App">
       <Navbar />
+
       <Routers />
+
       <Footer />
     </div>
   );

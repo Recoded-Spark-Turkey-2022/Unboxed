@@ -32,7 +32,7 @@ const BuyTickets = () => {
     }
   };
   return (
-    <div className="font-poppins pl-20 pr-20 w-full flex flex-col justify-between mb-24 lg:pl-4 lg:pr-4">
+    <div className="font-poppins pl-20 pr-20 w-full flex flex-col justify-between pb-24 lg:pl-4 lg:pr-4 max:h-middle pt-10">
       <div className="font-normal not-italic pl-16  mb-24 lg:pl-0 lg:mb-10">
         <p className=" text-5xl text-black  uppercase leading-[75px] lg:text-3xl lg:mt-4">
           {t('select')}

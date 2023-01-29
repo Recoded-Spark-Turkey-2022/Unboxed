@@ -16,7 +16,7 @@ const AddNewCardThankYou = () => {
   return (
     <div
       data-testid="addNewCardThankYou"
-      className="mx-28 mt-16 flex flex-col gap-6"
+      className="768:px-28 pt-16 flex flex-col gap-16 425:h-middle px-10"
     >
       <Title title={titleTitle} text={textTitle} />
       <Button text={titleButton} func={navHome} />

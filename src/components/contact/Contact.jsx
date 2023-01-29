@@ -7,7 +7,7 @@ import contact from './contactImg.svg';
 function Contact() {
   const { t } = useTranslation();
   return (
-    <div className="m-[5%] font-poppins">
+    <div className="p-[5%] font-poppins max:h-middle">
       <div>
         {' '}
         <h1 className="pb-[1%] text-5xl sm:text-xl">{t('contackTitle')}</h1>

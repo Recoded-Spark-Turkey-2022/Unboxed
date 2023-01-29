@@ -11,7 +11,7 @@ const TeamM = () => {
   return (
     <div
       data-testid="TeamM"
-      className=" font-poppins flex flex-col items-center "
+      className=" font-poppins flex flex-col items-center max:h-middle justify-center"
     >
       <div className=" flex flex-col items-center my-10 w-2/3 lg:w-5/6">
         <div className=" self-start">
