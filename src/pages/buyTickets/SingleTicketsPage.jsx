@@ -1,7 +1,7 @@
 import React from 'react';
 import Ticket from '../../components/ticket/Ticket';
 
-const buyTicketsPage = () => {
+const SingleTicketsPage = () => {
   return (
     <div>
       <Ticket />
@@ -9,4 +9,4 @@ const buyTicketsPage = () => {
   );
 };
 
-export default buyTicketsPage;
+export default SingleTicketsPage;
