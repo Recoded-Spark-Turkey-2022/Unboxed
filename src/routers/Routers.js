@@ -23,6 +23,7 @@ import Booking from '../pages/Booking/Booking';
 import BuyTickets from '../pages/buyTickets/BuyTickets';
 import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
+import BuyTicketsPage from '../pages/ticketsPage/BuyTicketsPage';
 
 const Routers = () => {
   return (
@@ -58,6 +59,7 @@ const Routers = () => {
         <Route path="about/overview" element={<Overview />} />
         <Route path="Booking" element={<Booking />} />
         <Route path="buy-ticket" element={<BuyTickets />} />
+        <Route path="buyTicketsPage" element={<BuyTicketsPage />} />
         <Route path="buy-ticket-thank-you" element={<BuyTicketThankYou />} />
         <Route path="payment-methods" element={<PaymentMethods />} />
       </Routes>

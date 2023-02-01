@@ -164,7 +164,9 @@ const Navbar = ({ lang, setLang }) => {
                   <NavLink to="Booking">{t('Booking Info')}</NavLink>
                 </li>
 
-                <li className={styles.aboutLi}>{t('BUY TICKETS')}</li>
+                <li className={styles.aboutLi}>
+                  <NavLink to="buyTicketsPage">{t('BUY TICKETS')}</NavLink>
+                </li>
                 <li className={styles.aboutLi}>
                   {firestoreObject.license ? (
                     <NavLink to="CounselorEditInfo">{t('View Info')}</NavLink>
