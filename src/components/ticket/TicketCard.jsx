@@ -27,7 +27,7 @@ function TicketCard({ ticketNumber, ticketPrice }) {
           onClick={() =>
             firestoreObject ? handleNavigate(ticketNumber) : navigate('/login')
           }
-          className="tablet:h-16 tablet:w-52 w-26 h-8 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100 text-md px-2 tablet:text-2xl text-center tablet:leading-9 text-black "
+          className="uppercase tablet:h-16 tablet:w-52 w-26 h-8 self-center rounded-md bg-[#2DD3E3] hover:bg-[#3E64E9] hover:text-neutral-100 text-md px-2 tablet:text-2xl text-center tablet:leading-9 text-black "
           type="button"
         >
           {t('Purchase')}
