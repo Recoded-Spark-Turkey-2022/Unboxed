@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import { blogs } from '../../data/blogArticles';
 import previous from './leftsquare.svg';
@@ -56,7 +58,7 @@ function Carousel() {
 
   return (
     <div className="flex flex-col justify-center bg-[#EAF8F9] font-poppins ">
-      <h1 className="text-xl font-semibold tablet:text-5xl tablet: py-2 laptop:pl-28 laptop:py-16">
+      <h1 className="text-xl uppercase font-semibold tablet:text-5xl tablet: py-2 laptop:pl-28 laptop:py-16">
         {t('recend')}
       </h1>
       <div className="flex flex-row justify-center tablet:pb-10 laptop: pb-28">
