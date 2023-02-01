@@ -1,9 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import background from './background.svg';
 import illustration from './illustration.svg';
 
 const HeroSec = () => {
+  const user = useSelector((state) => state.user);
+  const { firestoreObject } = user;
+  const navigate = useNavigate();
   const { t } = useTranslation();
   return (
     <div
@@ -22,6 +27,9 @@ const HeroSec = () => {
           <button
             type="button"
             className="mt-10 sm:ml-8 text-center rounded-md transition duration-250 flex items-center justify-center h-1/4 w-1/2 bg-[#2DD3E3] hover:bg-cyan-500"
+            onClick={() =>
+              firestoreObject ? navigate('/Booking') : navigate('/login')
+            }
           >
             <p className="mx-28 text-2xl lg:text-lg sm:text-lg flex text-center uppercase">
               {t('bookAppointmet')}

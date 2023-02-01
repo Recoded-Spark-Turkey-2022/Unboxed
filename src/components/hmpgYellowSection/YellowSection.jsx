@@ -1,8 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import therapistpp from './therapistpp.svg';
 
 const YellowSec = () => {
+  const user = useSelector((state) => state.user);
+  const { firestoreObject } = user;
+  const navigate = useNavigate();
   const { t } = useTranslation();
   return (
     <div
@@ -25,6 +30,9 @@ const YellowSec = () => {
       </p>
       <button
         type="button"
+        onClick={() =>
+          firestoreObject ? navigate('/Booking') : navigate('/login')
+        }
         className="p-[2rem] sm:ml-10 m-8 mb-16 text-md md:text-lg ml-44 mr-96 max-w-lg min-w-fit rounded-md transition duration-250 flex items-center justify-center h-full px-2 py-3 bg-[#2DD3E3] hover:bg-cyan-500"
       >
         <p className="flex-1 h-full text-2xl text-center uppercase text-ellipsis overflow-hidden">

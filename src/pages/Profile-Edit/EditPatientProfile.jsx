@@ -337,7 +337,11 @@ const EditPatientProfile = () => {
               <p>
                 {editInfo.tickets} {t('Tickets Remaining')}
               </p>
-              <button className={styles.button} type="button">
+              <button
+                className={styles.button}
+                onClick={() => navigate('/buyTicketsPage')}
+                type="button"
+              >
                 {t('BUY TICKETS')}
               </button>
             </div>
