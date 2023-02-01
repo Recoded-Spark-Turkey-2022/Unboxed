@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, NavLink } from 'react-router-dom';
 import LoginButtons from '../google&facebook/LoginButtons';
 import { credentialsSigninHandler } from '../../features/user/userSlice';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
   const user = useSelector((state) => state.user);
   const { error } = user;
@@ -49,7 +51,7 @@ const LoginForm = () => {
           className={`${styles.input} ${error ? 'border-red-300' : 'null'}`}
           data-testid="emailInput"
           type="text"
-          placeholder="Your Email"
+          placeholder={t('yourEmail')}
           name="email"
           value={loginInfo.email}
           onChange={handleChange}
@@ -58,14 +60,14 @@ const LoginForm = () => {
           className={`${styles.input} ${error ? 'border-red-300' : 'null'}`}
           data-testid="passwordInput"
           type="password"
-          placeholder="Your Password"
+          placeholder={t('YourPassword')}
           name="password"
           value={loginInfo.password}
           onChange={handleChange}
         />
         {error ? (
           <p data-testid="loginError" className=" text-red-400 -my-4">
-            Invalid email or password
+            {t('wrong')}
           </p>
         ) : null}
         <div className="flex gap-5 w-full justify-center">
@@ -75,10 +77,10 @@ const LoginForm = () => {
             type="button"
             onClick={handleLogin}
           >
-            Login
+            {t('login2')}
           </button>
           <button className={`${styles.signupButton}`} type="button">
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLink to="/signup">{t('singup')}</NavLink>
           </button>
         </div>
       </form>

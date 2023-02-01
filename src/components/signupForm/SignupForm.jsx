@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { credentialsSignupHandler } from '../../features/user/userSlice';
 import LoginButtons from '../google&facebook/LoginButtons';
 
 const SignupForm = () => {
+  const { t } = useTranslation();
   const [userName, setUserName] = useState('');
   const [userSurname, setUserSurname] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -36,8 +38,9 @@ const SignupForm = () => {
         surname: userSurname,
         email: userEmail,
         password: userPassword,
+        bookings: [],
         cards: [],
-        tickets: [],
+        tickets: 0,
         birthday: moment(userBirthDay, userBirthMonth, userBirthYear).format(
           'DD MM YYYY'
         ),
@@ -48,23 +51,23 @@ const SignupForm = () => {
 
   return (
     <form data-testid="signup">
-      <div className="flex flex-col mt-20 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)] tablet2:mt-10">
+      <div className="flex flex-col mt-10 px-10 py-5 rounded-md shadow-[0px_10px_16px_rgba(0,0,0,0.1)] tablet2:mt-10">
         <section className="flex gap-5">
           <input
             type="text"
             value={userName}
             onChange={handleState(setUserName)}
-            placeholder="Name"
+            placeholder={t('first')}
             className="rounded-md w-1/2 mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
           />
           <input
             type="text"
             value={userSurname}
             onChange={handleState(setUserSurname)}
-            placeholder="Surname"
+            placeholder={t('last')}
             pattern="^[a-zA-Z0-9]{1,30}$"
             required
-            title="Surname shouldn't include any special character!"
+            title={t('must4')}
             className="rounded-md w-1/2 mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
           />
         </section>
@@ -73,7 +76,7 @@ const SignupForm = () => {
           type="email"
           value={userEmail}
           onChange={handleState(setUserEmail)}
-          placeholder="Email"
+          placeholder={t('yourEmail')}
           required
           className="rounded-md mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
         />
@@ -81,9 +84,9 @@ const SignupForm = () => {
           type="email"
           value={userConfirmEmail}
           onChange={handleState(setUserConfirmEmail)}
-          placeholder="Confirm Email"
+          placeholder={t('confirmEmail')}
           pattern={userEmail}
-          title="Emails don't match"
+          title={t('must5')}
           className="rounded-md mb-3 h-12 pl-2 border border-solid border-[#D1DBE3]"
         />
         <section className="flex gap-5 425:flex-col 425:gap-0 tablet2:flex-col tablet2:gap-0">
@@ -91,19 +94,19 @@ const SignupForm = () => {
             type="password"
             value={userPassword}
             onChange={handleState(setUserPassword)}
-            placeholder="Password"
+            placeholder={t('password')}
             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
             required
-            title="Password should include minimum 8 characters, at least one letter and one number"
+            title={t('must2')}
             className="rounded-md mb-3 h-12 w-1/2 425:w-full pl-2 border border-solid border-[#D1DBE3] tablet2:w-full"
           />
           <input
             type="password"
             value={userConfirmPassword}
             onChange={handleState(setUserConfirmPassword)}
-            placeholder="Confirm Password"
+            placeholder={t('confirmPassword')}
             pattern={userPassword}
-            title="Passwords don't match"
+            title={t('must3')}
             required
             className="rounded-md mb-3 h-12 w-1/2 425:w-full pl-2 border border-solid border-[#D1DBE3] tablet2:w-full"
           />
@@ -111,27 +114,27 @@ const SignupForm = () => {
 
         <div className="flex gap-5">
           <p className="rounded-md mb-3 h-12 w-2/5 text-center flex justify-center items-center	">
-            Birth Date
+            {t('Birth Date')}
           </p>
           <input
             type="text"
             value={userBirthDay}
             onChange={handleState(setUserBirthDay)}
-            placeholder="DD"
+            placeholder={t('dd')}
             className="rounded-md mb-3 h-12 w-1/5 pl-2 425:text-center 425:pl-0 border border-solid border-[#D1DBE3] tablet2:text-xs tablet2:pl-0 tablet2:w-2/3"
           />
           <input
             type="text"
             value={userBirthMonth}
             onChange={handleState(setUserBirthMonth)}
-            placeholder="MM"
+            placeholder={t('mm')}
             className="rounded-md mb-3 h-12 w-1/5 pl-2 425:text-center 425:pl-0 border border-solid border-[#D1DBE3] tablet2:text-xs tablet2:pl-0 tablet2:w-2/3"
           />
           <input
             type="text"
             value={userBirthYear}
             onChange={handleState(setUserBirthYear)}
-            placeholder="YYYY"
+            placeholder={t('yy')}
             className="rounded-md mb-3 h-12 w-2/5 pl-2 425:text-center 425:pl-0  border border-solid border-[#D1DBE3] tablet2:text-xs tablet2:pl-0 tablet2:w-full"
           />
         </div>
@@ -140,7 +143,7 @@ const SignupForm = () => {
             type="submit"
             className="h-16 w-1/3	rounded-md border border-solid border-[#2DD3E3] text-2xl text-[#2DD3E3] 425:text-xl tablet2:text-xl tablet2:w-2/3"
           >
-            <NavLink to="/login">To login</NavLink>
+            <NavLink to="/login">{t('login2')}</NavLink>
           </button>
           <button
             type="submit"
@@ -152,7 +155,7 @@ const SignupForm = () => {
                 : null
             }
           >
-            Signup
+            {t('signup')}
           </button>
         </section>
       </div>
