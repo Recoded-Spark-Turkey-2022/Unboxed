@@ -23,7 +23,7 @@ import Booking from '../pages/Booking/Booking';
 import BuyTickets from '../pages/buyTickets/BuyTickets';
 import PaymentMethods from '../pages/paymentMethods/PaymentMethods';
 import BuyTicketThankYou from '../pages/buyTicketThankYou/BuyTicketThankYou';
-import BuyTicketsPage from '../pages/ticketsPage/BuyTicketsPage';
+import BuyTicketsPage from '../pages/ticketsPage/BuyTicketsPage'
 
 const Routers = () => {
   return (
